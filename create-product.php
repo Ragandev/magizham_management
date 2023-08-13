@@ -1,6 +1,7 @@
 <?php
 include('header.php');
 include('menu.php');
+required('db.php');
 ?>
 <div class="main-box">
     <h2 class="mb-3">Create Products</h2>
@@ -35,8 +36,16 @@ include('menu.php');
                 <div class="form-group">
                     <label for="exampleInputStatus">Type</label>
                     <select class="form-control" name="type" id="exampleInputStatus">
-                        <option value=""></option>
-                        
+                <?php
+                $typesql = SELECT * FROM type;
+                $typedata = $pdo-=>query($typesql);
+                
+                foreach ($typedata as $row)
+                echo"
+                <option value='";
+                echo $row['id']."'>";
+                echo $row['name']."</option>";
+                ?>>                        
                     </select>
                 </div>
             </div>
@@ -44,7 +53,17 @@ include('menu.php');
                 <div class="form-group">
                     <label for="exampleInputStatus">Category</label>
                     <select class="form-control" name="category" id="exampleInputStatus">
-                        <option value=""></option>
+
+                    <?php
+                $categorysql = SELECT * FROM category;
+                $categorydata = $pdo-=>query($categorysql);
+                
+                foreach ($categorydata as $row)
+                echo"
+                <option value='";
+                echo $row['id']."'>";
+                echo $row['name']."</option>";
+                ?>>
                         
                     </select>
                 </div>
@@ -62,8 +81,8 @@ include('menu.php');
                 <div class="form-group">
                     <label for="exampleInputStatus">Status</label>
                     <select class="form-control" name="status" id="exampleInputStatus">
-                        <option value="Active">Active</option>
-                        <option value="Inactive">Inactive</option>
+                        <option value="1">Active</option>
+                        <option value="2">Inactive</option>
                     </select>
                 </div>
             </div>
