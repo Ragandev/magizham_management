@@ -115,6 +115,12 @@ $logName = $logUser['name'];
                             <span class="menu-title">products</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="orders.php">
+                            <i class="typcn typcn-device-desktop menu-icon"></i>
+                            <span class="menu-title">Orders</span>
+                        </a>
+                    </li>
                 </ul>
             </nav>
             <div class="main-panel">
