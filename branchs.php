@@ -30,14 +30,18 @@ $logUser = $_SESSION['user'];
             <th>Name</th>
             <th>Address</th>
             <th>phone</th>
+            <th>Status</th>
+
         </tr> </thead>";
 
         foreach ($branchData as $row) {
             echo "<tbody> <tr>";
             echo "<td>" . $row['id'] . "</td>";
-            echo "<td>" . $row['branch'] . "</td>";
+            echo "<td>" . $row['name'] . "</td>";
             echo "<td>" . $row['address'] . "</td>";
             echo "<td>" . $row['phone'] . "</td>";
+            echo "<td>" . $row['status'] . "</td>";
+
             echo "</tr> </tbody>";
         }
 

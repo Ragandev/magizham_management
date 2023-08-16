@@ -9,9 +9,9 @@
 
     
         // Duplicate username check
-        $checkDuplicateQuery = "SELECT COUNT(*) FROM type WHERE typename = :typename";
+        $checkDuplicateQuery = "SELECT COUNT(*) FROM type WHERE name = :name";
         $checkStmt = $pdo->prepare($checkDuplicateQuery);
-        $checkStmt->bindParam(':typename', $typename);
+        $checkStmt->bindParam(':name', $typename);
         $checkStmt->execute();
         $duplicateCount = $checkStmt->fetchColumn();
     
@@ -26,10 +26,10 @@
             exit();
         }
     
-        $sql = "INSERT INTO type ( typename, status) VALUES ( :typename, :status)";
+        $sql = "INSERT INTO type ( name, status) VALUES ( :name, :status)";
         $stmt = $pdo->prepare($sql);
     
-        $stmt->bindParam(':typename', $typename,);
+        $stmt->bindParam(':name', $typename,);
         $stmt->bindParam(':status', $status,);
 
         

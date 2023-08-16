@@ -18,7 +18,7 @@ $logUser = $_SESSION['user'];
             <button class="btn btn-success">Create</button>
         </a>
     </div>
-    <h2 class="mb-3">Categories</h2>
+    <h2 class="mb-3">cuisines</h2>
 
     <?php
 
@@ -34,7 +34,7 @@ $logUser = $_SESSION['user'];
         foreach ($cuisineData as $row) {
             echo "<tbody> <tr>";
             echo "<td>" . $row['id'] . "</td>";
-            echo "<td>" . $row['cuisinename'] . "</td>";
+            echo "<td>" . $row['name'] . "</td>";
             echo "<td>" . $row['status'] . "</td>";
 
             echo "</tr> </tbody>";

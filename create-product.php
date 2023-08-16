@@ -1,6 +1,12 @@
 <?php
 include('header.php');
 include('menu.php');
+require('db.php');
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+
+
 ?>
 <div class="main-box">
     <h2 class="mb-3">Create Products</h2>
@@ -45,8 +51,12 @@ include('menu.php');
                     <label for="exampleInputStatus">Category</label>
                     <select class="form-control" name="category" id="exampleInputStatus">
                         <option value=""></option>
-                        
+                        <?php foreach ($category as $category): ?>
+                            <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
+                        <?php endforeach; ?>
                     </select>
+                    
+
                 </div>
             </div>
             <div class="col-6">

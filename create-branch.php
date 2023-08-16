@@ -30,7 +30,16 @@ include('menu.php');
 
             </div>
           
-
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="exampleInputStatus">Status</label>
+                    <select class="form-control" name="status" id="exampleInputStatus">
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                    </select>
+                </div>
+            </div>
+           
             </div>
             
         <button type="submit" class="btn btn-primary mr-2">Submit</button>

@@ -8,7 +8,7 @@ include('header.php');
 include('menu.php');
 require('db.php');
 
-$userSql = "SELECT * FROM users";
+$userSql = "SELECT * FROM user";
 $userData = $pdo->query($userSql);
 
 $logUser = $_SESSION['user'];

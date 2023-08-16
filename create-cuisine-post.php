@@ -9,9 +9,9 @@
 
     
         // Duplicate username check
-        $checkDuplicateQuery = "SELECT COUNT(*) FROM cuisine WHERE cuisinename = :cuisinename";
+        $checkDuplicateQuery = "SELECT COUNT(*) FROM cuisine WHERE name = :name";
         $checkStmt = $pdo->prepare($checkDuplicateQuery);
-        $checkStmt->bindParam(':cuisinename', $cuisinename);
+        $checkStmt->bindParam(':name', $cuisinename);
         $checkStmt->execute();
         $duplicateCount = $checkStmt->fetchColumn();
     
@@ -26,17 +26,17 @@
             exit();
         }
     
-        $sql = "INSERT INTO cuisine ( cuisinename, status) VALUES ( :cuisinename, :status)";
+        $sql = "INSERT INTO cuisine ( name, status) VALUES ( :name, :status)";
         $stmt = $pdo->prepare($sql);
     
-        $stmt->bindParam(':cuisinename', $cuisinename,);
+        $stmt->bindParam(':name', $cuisinename,);
         $stmt->bindParam(':status', $status,);
 
         
         if (!$stmt->execute()) {
-            echo "category not created";
+            echo "cuisine not created";
         } else {
-            echo "category Created successfully.";
+            echo "cuisine Created successfully.";
         }
     }
 ?>
