@@ -11,7 +11,7 @@
         $role = $_POST['role'];
     
         // Duplicate username check
-        $checkDuplicateQuery = "SELECT COUNT(*) FROM users WHERE username = :username";
+        $checkDuplicateQuery = "SELECT COUNT(*) FROM user WHERE username = :username";
         $checkStmt = $pdo->prepare($checkDuplicateQuery);
         $checkStmt->bindParam(':username', $username);
         $checkStmt->execute();
@@ -28,7 +28,7 @@
             exit();
         }
     
-        $sql = "INSERT INTO users (name, username, password, branch, role) VALUES (:name, :username, :password, :branch, :role)";
+        $sql = "INSERT INTO user (name, username, password, branch, role) VALUES (:name, :username, :password, :branch, :role)";
         $stmt = $pdo->prepare($sql);
     
         $stmt->bindParam(':name', $name);

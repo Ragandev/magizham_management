@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
@@ -38,10 +38,10 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `users`
+-- Dumping data for table `user`
 --
 
-INSERT INTO `users` (`id`, `name`, `username`, `password`, `branch`, `role`, `img`) VALUES
+INSERT INTO `user` (`id`, `name`, `username`, `password`, `branch`, `role`, `img`) VALUES
 (3, 'Ranjith', 'ragan', '123', 'Main Branch', 'Admin', ''),
 (4, 'Keerthana', 'keerthi', '123', 'Main Branch', 'Store Manager', ''),
 (5, 'Indhumathi', 'indhu', '123', 'Branch 1', 'Branch Manager', ''),
@@ -54,7 +54,7 @@ INSERT INTO `users` (`id`, `name`, `username`, `password`, `branch`, `role`, `im
 --
 -- Indexes for table `users`
 --
-ALTER TABLE `users`
+ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -64,7 +64,7 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for table `users`
 --
-ALTER TABLE `users`
+ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 

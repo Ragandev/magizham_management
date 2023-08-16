@@ -9,9 +9,9 @@
 
     
         // Duplicate username check
-        $checkDuplicateQuery = "SELECT COUNT(*) FROM category WHERE categoryname = :categoryname";
+        $checkDuplicateQuery = "SELECT COUNT(*) FROM category WHERE name = :name";
         $checkStmt = $pdo->prepare($checkDuplicateQuery);
-        $checkStmt->bindParam(':categoryname', $categoryname);
+        $checkStmt->bindParam(':name', $categoryname);
         $checkStmt->execute();
         $duplicateCount = $checkStmt->fetchColumn();
     
@@ -26,10 +26,10 @@
             exit();
         }
     
-        $sql = "INSERT INTO category ( categoryname, status) VALUES ( :categoryname, :status)";
+        $sql = "INSERT INTO category ( name, status) VALUES ( :name, :status)";
         $stmt = $pdo->prepare($sql);
     
-        $stmt->bindParam(':categoryname', $categoryname,);
+        $stmt->bindParam(':name', $categoryname,);
         $stmt->bindParam(':status', $status,);
 
         

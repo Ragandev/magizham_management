@@ -6,7 +6,7 @@
         $username = $_POST['username'];
         $pass = $_POST['password'];
         
-        $loginQuery = "SELECT * FROM users WHERE username = :username AND password = :password";
+        $loginQuery = "SELECT * FROM user WHERE username = :username AND password = :password";
         $loginStmt = $pdo->prepare($loginQuery);
         $loginStmt->bindParam(':username', $username);
         $loginStmt->bindParam(':password', $pass);

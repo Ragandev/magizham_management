@@ -1,7 +1,7 @@
 <?php
 include('header.php');
 include('menu.php');
-required('db.php');
+
 ?>
 <div class="main-box">
     <h2 class="mb-3">Create Products</h2>
@@ -54,6 +54,9 @@ required('db.php');
                     <label for="exampleInputStatus">Category</label>
                     <select class="form-control" name="category" id="exampleInputStatus">
 
+                        <option value=""></option>
+
+
                     <?php
                 $categorysql = SELECT * FROM category;
                 $categorydata = $pdo-=>query($categorysql);
@@ -64,8 +67,9 @@ required('db.php');
                 echo $row['id']."'>";
                 echo $row['name']."</option>";
                 ?>>
-                        
-                    </select>
+                </select>
+                    
+
                 </div>
             </div>
             <div class="col-6">

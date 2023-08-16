@@ -34,7 +34,7 @@ $logUser = $_SESSION['user'];
         foreach ($typeData as $row) {
             echo "<tbody> <tr>";
             echo "<td>" . $row['id'] . "</td>";
-            echo "<td>" . $row['typename'] . "</td>";
+            echo "<td>" . $row['name'] . "</td>";
             echo "<td>" . $row['status'] . "</td>";
 
             echo "</tr> </tbody>";

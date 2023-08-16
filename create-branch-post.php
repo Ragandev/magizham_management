@@ -7,11 +7,13 @@
         $branch = $_POST['branch'];
         $address = $_POST['address'];
         $phone = $_POST['phone'];
+        $status = $_POST['status'];
+
     
         // Duplicate username check
-        $checkDuplicateQuery = "SELECT COUNT(*) FROM branch WHERE branch = :branch";
+        $checkDuplicateQuery = "SELECT COUNT(*) FROM branch WHERE name = :name";
         $checkStmt = $pdo->prepare($checkDuplicateQuery);
-        $checkStmt->bindParam(':branch', $branch);
+        $checkStmt->bindParam(':name', $branch);
         $checkStmt->execute();
         $duplicateCount = $checkStmt->fetchColumn();
     
@@ -26,12 +28,14 @@
             exit();
         }
     
-        $sql = "INSERT INTO branch (branch, address, phone) VALUES ( :branch, :address, :phone)";
+        $sql = "INSERT INTO branch (name, address, phone, status) VALUES ( :name, :address, :phone, :status)";
         $stmt = $pdo->prepare($sql);
     
-        $stmt->bindParam(':branch', $branch);
+        $stmt->bindParam(':name', $branch);
         $stmt->bindParam(':address', $address);
         $stmt->bindParam(':phone', $phone);
+        $stmt->bindParam(':status', $status);
+
         
         if (!$stmt->execute()) {
             echo "branch not created";
