@@ -1,11 +1,6 @@
 <?php
 include('header.php');
 include('menu.php');
-require('db.php');
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-
 
 ?>
 <div class="main-box">
@@ -41,8 +36,16 @@ ini_set('display_errors', 1);
                 <div class="form-group">
                     <label for="exampleInputStatus">Type</label>
                     <select class="form-control" name="type" id="exampleInputStatus">
-                        <option value=""></option>
-                        
+                <?php
+                $typesql = SELECT * FROM type;
+                $typedata = $pdo-=>query($typesql);
+                
+                foreach ($typedata as $row)
+                echo"
+                <option value='";
+                echo $row['id']."'>";
+                echo $row['name']."</option>";
+                ?>>                        
                     </select>
                 </div>
             </div>
@@ -50,11 +53,21 @@ ini_set('display_errors', 1);
                 <div class="form-group">
                     <label for="exampleInputStatus">Category</label>
                     <select class="form-control" name="category" id="exampleInputStatus">
+
                         <option value=""></option>
-                        <?php foreach ($category as $category): ?>
-                            <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
-                        <?php endforeach; ?>
-                    </select>
+
+
+                    <?php
+                $categorysql = SELECT * FROM category;
+                $categorydata = $pdo-=>query($categorysql);
+                
+                foreach ($categorydata as $row)
+                echo"
+                <option value='";
+                echo $row['id']."'>";
+                echo $row['name']."</option>";
+                ?>>
+                </select>
                     
 
                 </div>
@@ -72,8 +85,8 @@ ini_set('display_errors', 1);
                 <div class="form-group">
                     <label for="exampleInputStatus">Status</label>
                     <select class="form-control" name="status" id="exampleInputStatus">
-                        <option value="Active">Active</option>
-                        <option value="Inactive">Inactive</option>
+                        <option value="1">Active</option>
+                        <option value="2">Inactive</option>
                     </select>
                 </div>
             </div>
