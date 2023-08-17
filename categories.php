@@ -18,6 +18,23 @@ $logUser = $_SESSION['user'];
             <button class="btn btn-success">Create</button>
         </a>
     </div>
+    <?php if (!empty($_GET['succ'])): ?>
+					  
+                      <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong><?php  echo $_GET['succ'] ?></strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                                        <?php endif ?>
+                                        <?php if (!empty($_GET['err'])): ?>
+                                          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong><?php  echo $_GET['err'] ?></strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>  
+                                        <?php endif ?>
     <h2 class="mb-3">Categories</h2>
 
     <?php

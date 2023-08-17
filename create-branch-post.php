@@ -3,6 +3,8 @@
     require('db.php');
     
     if (isset($_POST)) {
+        $u1 =  "branchs.php?succ=";
+        $u2 = "create-branch.php?err=";
         // User Data 
         $branch = $_POST['branch'];
         $address = $_POST['address'];
@@ -18,13 +20,14 @@
         $duplicateCount = $checkStmt->fetchColumn();
     
         if ($duplicateCount > 0) {
-            echo "Error: Branch ID already exists.";
+            header("Location: " . $u2 . urlencode('Branch already taken'));         
             exit();
         }
     
         // Validation
         if ( empty($branch)  || empty($address) || empty($phone)) {
-            echo "Error: All fields are required.";
+            header("Location: " . $u2 . urlencode('All fields must be filled'));           
+
             exit();
         }
     
@@ -37,10 +40,13 @@
         $stmt->bindParam(':status', $status);
 
         
+         
         if (!$stmt->execute()) {
-            echo "branch not created";
+            header("Location: " . $u2 . urlencode('Something Wrong please try again later'));
+            exit();
         } else {
-            echo "branch Created successfully.";
-        }
+            header("Location: " . $u1 . urlencode('Branch Successfully Created'));
+            exit();      
+          }
     }
 ?>

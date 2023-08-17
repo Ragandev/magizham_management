@@ -3,6 +3,8 @@
     require('db.php');
     
     if (isset($_POST)) {
+        $u1 =  "cuisines.php?succ=";
+        $u2 = "create-cuisine.php?err=";
         // User Data 
         $cuisinename = $_POST['cuisinename'];
         $status = $_POST['status'];
@@ -16,13 +18,13 @@
         $duplicateCount = $checkStmt->fetchColumn();
     
         if ($duplicateCount > 0) {
-            echo "Error: cuisine ID already exists.";
+            header("Location: " . $u2 . urlencode('Branch already taken'));         
             exit();
         }
     
         // Validation
         if ( empty($status) || empty($cuisinename) ) {
-            echo "Error: All fields are required.";
+            header("Location: " . $u2 . urlencode('All fields must be filled'));           
             exit();
         }
     
@@ -34,9 +36,9 @@
 
         
         if (!$stmt->execute()) {
-            echo "cuisine not created";
+            header("Location: " . $u2 . urlencode('Something Wrong please try again later'));
         } else {
-            echo "cuisine Created successfully.";
+            header("Location: " . $u1 . urlencode('cuisine Successfully Created'));
         }
     }
 ?>

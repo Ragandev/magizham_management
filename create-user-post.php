@@ -3,6 +3,8 @@
     require('db.php');
     
     if (isset($_POST)) {
+        $u1 =  "users.php?succ=";
+        $u2 = "create-user.php?err=";
         // User Data 
         $name = $_POST['name'];
         $username = $_POST['username'];
@@ -18,13 +20,13 @@
         $duplicateCount = $checkStmt->fetchColumn();
     
         if ($duplicateCount > 0) {
-            echo "Error: Username already exists.";
+            header("Location: " . $u2 . urlencode('Username already taken'));         
             exit();
         }
     
         // Validation
         if (empty($name) || empty($username) || empty($password) || empty($branch) || empty($role)) {
-            echo "Error: All fields are required.";
+            header("Location: " . $u2 . urlencode('All fields must be filled'));           
             exit();
         }
     
@@ -38,9 +40,11 @@
         $stmt->bindParam(':role', $role);
         
         if (!$stmt->execute()) {
-            echo "User not created";
+            header("Location: " . $u2 . urlencode('Something Wrong please try again later'));
+            exit();
         } else {
-            echo "User Created successfully.";
-        }
+            header("Location: " . $u1 . urlencode('User Successfully Created'));
+            exit();      
+          }
     }
 ?>
