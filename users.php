@@ -1,3 +1,8 @@
+<style>
+  .typcn {
+    font-size: 22px; 
+  }
+</style>
 <?php
 session_start();
 if (!isset($_SESSION['user'])) {
@@ -49,6 +54,8 @@ $logUser = $_SESSION['user'];
             <th>Username</th>
             <th>Branch</th>
             <th>Role</th>
+            <th>Actions</th>
+            
         </tr> </thead>";
 
         foreach ($userData as $row) {
@@ -58,6 +65,10 @@ $logUser = $_SESSION['user'];
             echo "<td>" . $row['username'] . "</td>";
             echo "<td>" . $row['branch'] . "</td>";
             echo "<td>" . $row['role'] . "</td>";
+            echo "<td>
+                <a href='edit-user.php?id=" . $row['id'] . "'><i class=' typcn typcn-edit'></i></a> |
+                <a href='delete-user.php?delete_id=" . $row['id'] . "' class='text-danger' onclick='return confirmDelete()'><i class='  typcn typcn-trash'></i></a>
+                </td>";
             echo "</tr> </tbody>";
         }
 
@@ -73,3 +84,8 @@ $logUser = $_SESSION['user'];
 <?php
 include('footer.php');
 ?>
+<script>
+function confirmDelete() {
+    return confirm("Are you sure you want to delete this order?");
+}
+</script>

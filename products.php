@@ -1,3 +1,8 @@
+<style>
+  .typcn {
+    font-size: 22px; 
+  }
+</style>
 <?php
 session_start();
 if (!isset($_SESSION['user'])) {
@@ -35,7 +40,7 @@ $logUser = $_SESSION['user'];
                     </button>
                   </div>  
                                         <?php endif ?>
-    <h2 class="mb-3">Branches</h2>
+    <h2 class="mb-3">Products</h2>
 
     <?php
 
@@ -53,8 +58,7 @@ $logUser = $_SESSION['user'];
             <th>Category</th>
             <th>Cuisine</th>
             <th>Status</th>
-            <th>Image</th>
-
+            <th>Actions</th>
         </tr> </thead>";
 
         foreach ($productData as $row) {
@@ -75,9 +79,9 @@ $logUser = $_SESSION['user'];
             echo "<td>" . $catee['name']. "</td>";
             echo "<td>" . $cusiee['name']. "</td>";
             echo "<td>" . $row['status'] . "</td>";
-            echo "<td><a href='view-product.php?id=" . $row['id'] . "'>View</a></td>";
-
-
+            echo "<td><a href='view-product.php?id=" . $row['id'] . "'><i class=' typcn typcn-eye '></i></a>";
+            echo "<a href='edit-product.php?id=" . $row['id'] . "'><i class=' typcn typcn-edit'></i></a>";
+            echo "<a href='delete-product.php?id=" . $row['id'] . "' class='text-danger'><i class='  typcn typcn-trash'></a></td>";
             echo "</tr> </tbody>";
         }
 
@@ -93,3 +97,8 @@ $logUser = $_SESSION['user'];
 <?php
 include('footer.php');
 ?>
+<script>
+function confirmDelete() {
+    return confirm("Are you sure you want to delete this order?");
+}
+</script>

@@ -1,6 +1,10 @@
 <?php
 include('header.php');
 include('menu.php');
+require('db.php');
+
+$branchsql = "SELECT * FROM `branch`";
+$branchdata = $pdo->query($branchsql);
 ?>
 <div class="main-box">
     <h2 class="mb-3">Create Orders</h2>
@@ -8,14 +12,18 @@ include('menu.php');
     <form class="forms-sample" method="post" action="create-order-post.php">
         <div class="row">
         
-          
-            <div class="col-6">
-
-<div class="form-group">
-    <label for="exampleInputName1">Product Name  </label>
-    <input type="text" class="form-control" name="product" id="exampleInputName1" placeholder="Name">
-</div>
-</div>
+        <div class="col-6">
+                <div class="form-group">
+                    <label for="exampleInputStatus">Branch</label>
+                    <select class="form-control" name="branch" id="exampleInputStatus">
+       
+                <?php foreach ($branchdata as $row): ?>
+                    <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
+                    <?php endforeach; ?>
+                 
+                    </select>
+                </div>
+            </div>
             <div class="col-6">
     <div class="form-group">
         <label for="exampleInputDate">Order Date</label>
@@ -25,7 +33,7 @@ include('menu.php');
 <div class="col-6">
     <div class="form-group">
         <label for="exampleInputDate">Delivery Date</label>
-        <input type="date" class="form-control" name="orderDate" id="exampleInputDate">
+        <input type="date" class="form-control" name="deliveryDate" id="exampleInputDate">
     </div>
 </div>
 
@@ -35,13 +43,13 @@ include('menu.php');
             <div class="col-6">
                 <div class="form-group">
                     <label for="exampleInputStatus">Priority</label>
-                    <select class="form-control" name="status" id="exampleInputStatus">
-                        <option value="Active">Created</option>
-                        <option value="Inactive">Accepted</option>
-                        <option value="Inactive">Delivered</option>
-                        <option value="Inactive">Received</option>
-                        <option value="Inactive">Cancelled</option>
-                        <option value="Inactive">Rejected</option>
+                    <select class="form-control" name="priority" id="exampleInputStatus">
+                        <option value="Created">Created</option>
+                        <option value="Accepted">Accepted</option>
+                        <option value="Delivered">Delivered</option>
+                        <option value="Received">Received</option>
+                        <option value="Cancelled">Cancelled</option>
+                        <option value="Rejected">Rejected</option>
 
                     </select>
                 </div>

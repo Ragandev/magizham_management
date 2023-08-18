@@ -4,57 +4,53 @@ require('db.php');
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $u1 =  "orders.php?succ=";
+    $u2 = "create-order.php?err=";
     // User Data 
-    $productname = $_POST['product'];
-    $unit = $_POST['unit'];
-    $stock_qty = $_POST['stock_qty'];
+    $branch = $_POST['branch'];
+    $orderdate = $_POST['orderDate'];
+    $deliverydate = $_POST['deliveryDate'];
 
-    $price = $_POST['price'];
-    $typeid = $_POST['type'];
-    $categoryid = $_POST['category'];
-    $cuisineid = $_POST['cuisine'];
+    $priority = $_POST['priority'];
     $status = $_POST['status'];
 
 
     // Duplicate product name check
-    $checkDuplicateQuery = "SELECT COUNT(*) FROM product WHERE name = :name";
+    $checkDuplicateQuery = "SELECT COUNT(*) FROM `order` WHERE status = :status";
     $checkStmt = $pdo->prepare($checkDuplicateQuery);
-    $checkStmt->bindParam(':name', $productname);
+    $checkStmt->bindParam(':status', $status);
     $checkStmt->execute();
     $duplicateCount = $checkStmt->fetchColumn();
 
-    if ($duplicateCount > 0) {
-        echo "Error: Product name already exists.";
-        exit();
-    }
-
-    // Validation
-    // if (empty($status) || empty($productname) || empty($unit) || empty($categoryId)) {
-    //     echo "Error: All fields are required.";
+    // if ($duplicateCount > 0) {
+    //     header("Location: " . $u2 . urlencode('Order already taken'));         
     //     exit();
     // }
 
+    // Validation
+    if (empty($branch) || empty($orderdate) || empty($priority ) || empty($status)) {
+        echo "Error: All fields are required.";
+        exit();
+    }
+
     // Insert data into product table
-    $sql = "INSERT INTO product (name, unit, stock_qty, price, typeid, categoryid, cuisineid, status ) VALUES (:name, :unit, :stock_qty,  :price, :typeid, :categoryid, :cuisineid, :status )";
+    $sql = "INSERT INTO `order` (branchid, orderdate, deliverydate, priority, status ) VALUES (:branchid, :orderdate, :deliverydate,  :priority,  :status )";
     $stmt = $pdo->prepare($sql);
 
-    $stmt->bindParam(':name', $productname);
-    $stmt->bindParam(':unit', $unit);
-    $stmt->bindParam(':stock_qty', $stock_qty);
+    $stmt->bindParam(':branchid', $branch);
+    $stmt->bindParam(':orderdate', $orderdate);
+    $stmt->bindParam(':deliverydate', $deliverydate);
 
-    $stmt->bindParam(':price', $price);
-
-    $stmt->bindParam(':typeid', $typeid);
-
-    $stmt->bindParam(':categoryid', $categoryid);
-    $stmt->bindParam(':cuisineid', $cuisineid);
+    $stmt->bindParam(':priority', $priority);
 
     $stmt->bindParam(':status', $status);
 
+
+
     if (!$stmt->execute()) {
-        echo "Product not created";
+        header("Location: " . $u2 . urlencode('Something Wrong please try again later'));
     } else {
-        echo "Product Created successfully.";
+        header("Location: " . $u1 . urlencode('Order Successfully Created'));
     }
 }
 ?>

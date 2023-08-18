@@ -12,14 +12,14 @@ if (!isset($_SESSION['user'])) {
 include('header.php');
 include('menu.php');
 require('db.php');
-$orderSql = "SELECT * FROM `order`";
-$orderData = $pdo->query($orderSql);
+$wasteSql = "SELECT * FROM `waste`";
+$wasteData = $pdo->query($wasteSql);
 
 $logUser = $_SESSION['user'];
 ?>
 <div class="main-box">
     <div class="d-flex justify-content-end mb-5">
-        <a href="create-order.php">
+        <a href="create-waste.php">
             <button class="btn btn-success">Create</button>
         </a>
     </div>
@@ -40,38 +40,38 @@ $logUser = $_SESSION['user'];
                     </button>
                   </div>  
                                         <?php endif ?>
-    <h2 class="mb-3">Orders</h2>
+    <h2 class="mb-3">Wastes</h2>
 
     <?php
 
-    if ($orderData) {
+    if ($wasteData) {
         echo "<div class='table-responsive'>";
         echo "<table class='table table-hover'>";
         echo "<thead> <tr>
             <th> ID</th>
             <th> Branch</th>
-            <th> Order Date</th>
-            <th> Delivery Date</th>
-            <th>priority</th>
-            <th>Status</th>
+            <th>  Date</th>
+            <th> Waste Qty</th>
+            <th> Waste Amount</th>
+
             <th>Action</th>
         </tr> </thead>";
 
-        foreach ($orderData as $row) {
+        foreach ($wasteData as $row) {
             $branchee = $pdo->query('SELECT name FROM `branch` WHERE id="'.$row["branchid"].'"');
             $branchee = $branchee->fetch(PDO::FETCH_ASSOC);
             echo "<tbody> <tr>";
             echo "<td>" . $row['id'] . "</td>";
             echo "<td>" . $branchee['name']. "</td>";
 
-            echo "<td>" . $row['orderdate'] . "</td>";
-            echo "<td>" . $row['deliverydate'] . "</td>";
-            echo "<td>" . $row['priority'] . "</td>";
-            echo "<td>" . $row['status'] . "</td>";
+            echo "<td>" . $row['date'] . "</td>";
+            echo "<td>" . $row['waste_qty'] . "</td>";
+            echo "<td>" . $row['waste_amount'] . "</td>";
+
             
             echo "<td>
-            <a href='edit-order.php?id=" . $row['id'] . "'><i class=' typcn typcn-edit'></i></a> | 
-            <a href='delete-order.php?delete_id=" . $row['id'] . "' class='text-danger' onclick='return confirmDelete()'><i class='  typcn typcn-trash'></i></a>
+            <a href='edit-waste.php?id=" . $row['id'] . "'><i class=' typcn typcn-edit'></i></a> | 
+            <a href='delete-waste.php?delete_id=" . $row['id'] . "' class='text-danger' onclick='return confirmDelete()'><i class='  typcn typcn-trash'></i></a>
         </td>";
     
 
