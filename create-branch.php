@@ -2,6 +2,7 @@
 include('header.php');
 include('menu.php');
 ?>
+
 <div class="main-box">
     <h2 class="mb-3">Create User</h2>
     <hr>

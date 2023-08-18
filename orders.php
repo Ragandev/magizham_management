@@ -38,7 +38,7 @@ $logUser = $_SESSION['user'];
         foreach ($productData as $row) {
             echo "<tbody> <tr>";
             echo "<td>" . $row['id'] . "</td>";
-            echo "<td>" . $row['product'] . "</td>";
+            echo "<td>" . $row['orderdate'] . "</td>";
             echo "<td>" . $row['unit'] . "</td>";
             echo "<td>" . $row['price'] . "</td>";
             echo "<td>" . $row['type'] . "</td>";
