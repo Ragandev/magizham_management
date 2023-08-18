@@ -74,7 +74,7 @@ $logName = $logUser['name'];
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#user-manane" aria-expanded="false" aria-controls="">
-                            <i class="typcn typcn-briefcase menu-icon"></i>
+                            <i class="  typcn typcn-user-add menu-icon"></i>
                             <span class="menu-title">User & Roles</span>
                             <i class="typcn typcn-chevron-right menu-arrow"></i>
                         </a>
@@ -87,38 +87,50 @@ $logName = $logUser['name'];
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="branchs.php">
-                            <i class="typcn typcn-device-desktop menu-icon"></i>
+                            <i class=" typcn typcn-home-outline menu-icon"></i>
                             <span class="menu-title">Branch</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="types.php">
-                            <i class="typcn typcn-device-desktop menu-icon"></i>
+                            <i class="typcn typcn-th-large menu-icon"></i>
                             <span class="menu-title">Type</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="categories.php">
-                            <i class="typcn typcn-device-desktop menu-icon"></i>
+                            <i class="typcn typcn-th-large menu-icon"></i>
                             <span class="menu-title">Category</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="cuisines.php">
-                            <i class="typcn typcn-device-desktop menu-icon"></i>
+                            <i class=" typcn typcn-media-fast-forward menu-icon"></i>
                             <span class="menu-title">Cuisine</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="products.php">
-                            <i class="typcn typcn-device-desktop menu-icon"></i>
+                            <i class=" typcn typcn-upload menu-icon"></i>
                             <span class="menu-title">products</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="orders.php">
-                            <i class="typcn typcn-device-desktop menu-icon"></i>
+                            <i class=" typcn typcn-th-menu menu-icon"></i>
                             <span class="menu-title">Orders</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="stocks.php">
+                            <i class=" typcn typcn-th-menu menu-icon"></i>
+                            <span class="menu-title">Stocks</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="wastes.php">
+                            <i class=" typcn typcn-th-menu menu-icon"></i>
+                            <span class="menu-title">wastes</span>
                         </a>
                     </li>
                 </ul>

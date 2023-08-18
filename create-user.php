@@ -1,6 +1,9 @@
 <?php
 include('header.php');
 include('menu.php');
+require('db.php');
+$branchsql = "SELECT * FROM `branch`";
+$branchdata = $pdo->query($branchsql);
 ?>
 <?php if (!empty($_GET['succ'])): ?>
 					  
@@ -61,10 +64,10 @@ include('menu.php');
             <div class="form-group">
                     <label for="exampleSelectGender">Branch</label>
                     <select class="form-control" id="exampleSelectGender" name="branch">
-                        <option value="Main Branch">Main Branch</option>
-                        <option value="Branch 1">Branch 1</option>
-                        <option value="Branch 2">Branch 2</option>
-                        <option value="Branch 3">Branch 3</option>
+                        
+                <?php foreach ($branchdata as $row): ?>
+                    <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
+                    <?php endforeach; ?>
                     </select>
                 </div>
             </div>

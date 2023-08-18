@@ -53,7 +53,7 @@ if (!empty($img1FileName)) {
     $duplicateCount = $checkStmt->fetchColumn();
 
     if ($duplicateCount > 0) {
-        header("Location: " . $u2 . urlencode('Branch already taken'));         
+        header("Location: " . $u2 . urlencode('Product already taken'));         
         exit();
     }
 

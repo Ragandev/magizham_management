@@ -12,14 +12,14 @@ if (!isset($_SESSION['user'])) {
 include('header.php');
 include('menu.php');
 require('db.php');
-$orderSql = "SELECT * FROM `order`";
-$orderData = $pdo->query($orderSql);
+$stockSql = "SELECT * FROM `stock`";
+$stockData = $pdo->query($stockSql);
 
 $logUser = $_SESSION['user'];
 ?>
 <div class="main-box">
     <div class="d-flex justify-content-end mb-5">
-        <a href="create-order.php">
+        <a href="create-stock.php">
             <button class="btn btn-success">Create</button>
         </a>
     </div>
@@ -40,38 +40,35 @@ $logUser = $_SESSION['user'];
                     </button>
                   </div>  
                                         <?php endif ?>
-    <h2 class="mb-3">Orders</h2>
+    <h2 class="mb-3">Stocks</h2>
 
     <?php
 
-    if ($orderData) {
+    if ($stockData) {
         echo "<div class='table-responsive'>";
         echo "<table class='table table-hover'>";
         echo "<thead> <tr>
             <th> ID</th>
             <th> Branch</th>
-            <th> Order Date</th>
-            <th> Delivery Date</th>
-            <th>priority</th>
-            <th>Status</th>
+            <th>  Date</th>
+            <th> Stock Qty</th>
             <th>Action</th>
         </tr> </thead>";
 
-        foreach ($orderData as $row) {
+        foreach ($stockData as $row) {
             $branchee = $pdo->query('SELECT name FROM `branch` WHERE id="'.$row["branchid"].'"');
             $branchee = $branchee->fetch(PDO::FETCH_ASSOC);
             echo "<tbody> <tr>";
             echo "<td>" . $row['id'] . "</td>";
             echo "<td>" . $branchee['name']. "</td>";
 
-            echo "<td>" . $row['orderdate'] . "</td>";
-            echo "<td>" . $row['deliverydate'] . "</td>";
-            echo "<td>" . $row['priority'] . "</td>";
-            echo "<td>" . $row['status'] . "</td>";
+            echo "<td>" . $row['date_created'] . "</td>";
+            echo "<td>" . $row['stock_qty'] . "</td>";
+
             
             echo "<td>
-            <a href='edit-order.php?id=" . $row['id'] . "'><i class=' typcn typcn-edit'></i></a> | 
-            <a href='delete-order.php?delete_id=" . $row['id'] . "' class='text-danger' onclick='return confirmDelete()'><i class='  typcn typcn-trash'></i></a>
+            <a href='edit-stock.php?id=" . $row['id'] . "'><i class=' typcn typcn-edit'></i></a> | 
+            <a href='delete-stock.php?delete_id=" . $row['id'] . "' class='text-danger' onclick='return confirmDelete()'><i class='  typcn typcn-trash'></i></a>
         </td>";
     
 

@@ -1,3 +1,8 @@
+<style>
+  .typcn {
+    font-size: 22px; 
+  }
+</style>
 <?php
 session_start();
 if (!isset($_SESSION['user'])) {
@@ -5,7 +10,7 @@ if (!isset($_SESSION['user'])) {
     exit();
 }
 include('header.php');
-include('menu.php');
+include('menu.php');http://localhost/magizh/home.php
 require('db.php');
 $cuisineSql = "SELECT * FROM cuisine";
 $cuisineData = $pdo->query($cuisineSql);
@@ -29,6 +34,8 @@ $logUser = $_SESSION['user'];
             <th>ID</th>
             <th>Name</th>
             <th>Status</th>
+            <th>Action</th>
+
         </tr> </thead>";
 
         foreach ($cuisineData as $row) {
@@ -36,7 +43,10 @@ $logUser = $_SESSION['user'];
             echo "<td>" . $row['id'] . "</td>";
             echo "<td>" . $row['name'] . "</td>";
             echo "<td>" . $row['status'] . "</td>";
-
+            echo "<td>
+            <a href='edit-cuisine.php?id=" . $row['id'] . "'><i class=' typcn typcn-edit'></i></i></a> |
+            <a href='delete-cuisine.php?delete_id=" . $row['id'] . "' class='text-danger' onclick='return confirmDelete()'><i class='  typcn typcn-trash'></i></a>
+        </td>";
             echo "</tr> </tbody>";
         }
 
@@ -52,3 +62,8 @@ $logUser = $_SESSION['user'];
 <?php
 include('footer.php');
 ?>
+<script>
+function confirmDelete() {
+    return confirm("Are you sure you want to delete this order?");
+}
+</script>
