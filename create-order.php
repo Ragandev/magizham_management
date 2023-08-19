@@ -67,11 +67,81 @@ $branchdata = $pdo->query($branchsql);
             </div>
           
 
-            </div>
             
-        <button type="submit" class="btn btn-primary mr-2">Submit</button>
-    </form>
+                        <div class="row mb-4">
+                            <div class="col">
+                                <label for="">Type</label>
+                                <input class="form-control mb-2" name="ty[]">
+                            </div>
+                            <div class="col">
+                                <label for="">Cuisine</label>
+                                <input class="form-control mb-2" name="cu[]">
+                            </div>
+                            <div class="col">
+                                <label for="">Category</label>
+                                <input class="form-control mb-2" name="ca[]">
+                            </div>
+                            <div class="col">
+                                <label for="">Product</label>
+                                <input class="form-control mb-2" name="pro[]">
+                            </div>
+                            <div class="col">
+                                <label for="">Qty</label>
+                                <input class="form-control mb-2" name="qt[]">
+                            </div>
+                          </div>
+            
+                        <div class="pro-box"></div>
+                        <div>
+                             <a class="btn add-btn btn-success">+</a>
+                         </div><br><br><br>
+            
+                        
+                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                </form>
+            </div>
 </div>
+
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+        const addInputButton = document.querySelector('.add-btn');
+        const inputContainer = document.querySelector('.pro-box');
+        
+
+        // let inputCount = 1;
+
+        addInputButton.addEventListener('click', function() {
+        let inputEle = `<div class="row mb-4">
+                <div class="col">
+                    <label for="">Type</label>
+                    <input class="form-control mb-2" name="ty[]">
+                </div>
+                <div class="col">
+                    <label for="">Cuisine</label>
+                    <input class="form-control mb-2" name="cu[]">
+                </div>
+                <div class="col">
+                    <label for="">Category</label>
+                    <input class="form-control mb-2" name="ca[]">
+                </div>
+                <div class="col">
+                    <label for="">Product</label>
+                    <input class="form-control mb-2" name="pro[]">
+                </div>
+                <div class="col">
+                    <label for="">Qty</label>
+                    <input class="form-control mb-2" name="qt[]">
+                </div>
+              </div>`;
+        const newInput = document.createElement('div');
+        newInput.innerHTML = inputEle;
+        inputContainer.appendChild(newInput);
+        // inputCount++;
+        
+  });
+  
+});
+    </script>
 
 <?php
 include('footer.php');
