@@ -24,6 +24,15 @@ include('menu.php');
                     </select>
                 </div>
             </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="exampleInputStatus">Priority</label>
+                    <select class="form-control" name="priority" id="exampleInputStatus">
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                    </select>
+                </div>
+            </div>
            
         <button type="submit" class="btn btn-primary mr-2">Submit</button>
 </div>

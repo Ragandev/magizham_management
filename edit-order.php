@@ -65,18 +65,30 @@ if (isset($_GET['id'])) {
         <div class="col-6">
         <div class="form-group">
             <label for="priority">Priority</label>
-            <input type="text" class="form-control" name="priority" id="priority" value="<?php echo $orderData['priority']; ?>">
-        </div>
+            <select class="form-control" name="priority" id="status">
+                <option value="created" <?php if ($orderData['priority'] === 'created') echo 'selected'; ?>>created</option>
+                <option value="Accepted" <?php if ($orderData['priority'] === 'Accepted') echo 'selected'; ?>>Accepted</option>
+                <option value="Delivered" <?php if ($orderData['priority'] === 'Delivered') echo 'selected'; ?>>Delivered</option>
+                <option value="Received" <?php if ($orderData['priority'] === 'Received') echo 'selected'; ?>>Received</option>
+                <option value="Cancelled" <?php if ($orderData['priority'] === 'Cancelled') echo 'selected'; ?>>Cancelled</option>
+                <option value="Rejected" <?php if ($orderData['priority'] === 'rejected') echo 'selected'; ?>>rejected</option>
+
+            </select>        </div>
         </div>
         <div class="col-6">
         <div class="form-group">
             <label for="status">Status</label>
             <select class="form-control" name="status" id="status">
-                <option value="pending" <?php if ($orderData['status'] === 'pending') echo 'selected'; ?>>Pending</option>
-                <option value="completed" <?php if ($orderData['status'] === 'completed') echo 'selected'; ?>>Completed</option>
+                <option value="Active" <?php if ($orderData['status'] === 'Active') echo 'selected'; ?>>Active</option>
+                <option value="InActive" <?php if ($orderData['status'] === 'InActive') echo 'selected'; ?>>InActive</option>
             </select>
         </div>
         </div>
+        <div class="col-6">
+                    <label for="">Description</label>
+                    <input class="form-control mb-2" name="des">
+                </div>
+                </div>
 
   
          
@@ -127,10 +139,25 @@ if (isset($_GET['id'])) {
                     <label for="">Qty</label>
                     <input class="form-control mb-2" name="qt[]">
                 </div>
-            </div>
+                <div class="col-3">
+        <div class="form-group">
+            <label for="priority">Priority</label>
+            <select class="form-control" name="pr[]" id="status">
+                <option value="created" <?php if ($orderData['priority'] === 'created') echo 'selected'; ?>>created</option>
+                <option value="Accepted" <?php if ($orderData['priority'] === 'Accepted') echo 'selected'; ?>>Accepted</option>
+                <option value="Delivered" <?php if ($orderData['priority'] === 'Delivered') echo 'selected'; ?>>Delivered</option>
+                <option value="Received" <?php if ($orderData['priority'] === 'Received') echo 'selected'; ?>>Received</option>
+                <option value="Cancelled" <?php if ($orderData['priority'] === 'Cancelled') echo 'selected'; ?>>Cancelled</option>
+                <option value="Rejected" <?php if ($orderData['priority'] === 'rejected') echo 'selected'; ?>>rejected</option>
+
+            </select>        </div>
         </div>
+     
+            </div>
+            </div>
+        </div >
         <!-- End of additional product details rows -->
-        <div>
+        <div class="col-3">
             <a class="btn add-btn btn-success" id="addRow">+</a>
         </div><br><br><br>
 

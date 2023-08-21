@@ -11,35 +11,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $deliverydate = $_POST['deliveryDate'];
     $priority = $_POST['priority'];
     $status = $_POST['status'];
+    $des = $_POST['des'];
 
-    // Duplicate status check (adjust the column name if needed)
-    $checkDuplicateQuery = "SELECT COUNT(*) FROM `order` WHERE status = :status";
-    $checkStmt = $pdo->prepare($checkDuplicateQuery);
-    $checkStmt->bindParam(':status', $status);
-    $checkStmt->execute();
-    $duplicateCount = $checkStmt->fetchColumn();
+
+ 
 
     // Validation
-    if (empty($branch) || empty($orderdate) || empty($priority) || empty($status)) {
+    if (empty($branch) || empty($orderdate) || empty($priority) || empty($status) || empty($des)) {
         echo "Error: All fields are required.";
         exit();
     }
 
     // Insert data into the order table
-    $orderSql = "INSERT INTO `order` (branchid, orderdate, deliverydate, priority, status) VALUES (:branchid, :orderdate, :deliverydate, :priority, :status)";
+    $orderSql = "INSERT INTO `order` (branchid, orderdate, deliverydate, priority, status, description) VALUES (:branchid, :orderdate, :deliverydate, :priority, :status, :description)";
     $orderStmt = $pdo->prepare($orderSql);
     $orderStmt->bindParam(':branchid', $branch);
     $orderStmt->bindParam(':orderdate', $orderdate);
     $orderStmt->bindParam(':deliverydate', $deliverydate);
     $orderStmt->bindParam(':priority', $priority);
     $orderStmt->bindParam(':status', $status);
+    $orderStmt->bindParam(':description', $des);
+
 
     if (!$orderStmt->execute()) {
         header("Location: " . $u2 . urlencode('Something went wrong. Please try again later.'));
         exit();
+    }else{
+        $orderID = $pdo->lastInsertId();
     }
-
-    $orderID = $pdo->lastInsertId();
+    
 
     // Insert order item details into the associated table
     for ($i = 0; $i < count($_POST['pro']); $i++) {
@@ -48,13 +48,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $typeID = $_POST['ty'][$i];
         $categoryID = $_POST['ca'][$i];
         $quantity = $_POST['qt'][$i];
+        $priorityy = $_POST['pr'][$i];
 
-        $orderItemSql = "INSERT INTO `orderitem` (productid, cuisineid, typeid, categoryid ) VALUES (:productid, :cuisineid, :typeid, :categoryid)";
+
+        $orderItemSql = "INSERT INTO `orderitem` (order_id, productid, cuisineid, typeid, order_qty, categoryid, priority) VALUES (:order_id, :productid, :cuisineid, :typeid, :order_qty, :categoryid, :priority)";
         $orderItemStmt = $pdo->prepare($orderItemSql);
+        $orderItemStmt->bindParam(':order_id', $orderID);
         $orderItemStmt->bindParam(':productid', $productID);
         $orderItemStmt->bindParam(':cuisineid', $cuisineID);
         $orderItemStmt->bindParam(':typeid', $typeID);
         $orderItemStmt->bindParam(':categoryid', $categoryID);
+        $orderItemStmt->bindParam(':order_qty', $quantity);
+        $orderItemStmt->bindParam(':priority', $priorityy);
 
         $orderItemStmt->execute();
     }
