@@ -2,14 +2,19 @@
 include('header.php');
 include('menu.php');
 require('db.php');
-
 $branchsql = "SELECT * FROM `branch`";
 $branchdata = $pdo->query($branchsql);
+$typedata = $pdo->query("SELECT * FROM `type`")->fetchAll(PDO::FETCH_ASSOC);
+$cuisinedata = $pdo->query("SELECT * FROM `cuisine`")->fetchAll(PDO::FETCH_ASSOC);
+$categorydata = $pdo->query("SELECT * FROM `category`")->fetchAll(PDO::FETCH_ASSOC);
+$productdata = $pdo->query("SELECT * FROM `product`")->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
 <div class="main-box">
     <h2 class="mb-3">Create Orders</h2>
     <hr>
     <form class="forms-sample" method="post" action="create-order-post.php">
+        <!-- Branch, Order Date, Delivery Date, Priority, Status fields ... -->
         <div class="row">
         
         <div class="col-6">
@@ -68,80 +73,94 @@ $branchdata = $pdo->query($branchsql);
           
 
             
-                        <div class="row mb-4">
-                            <div class="col">
-                                <label for="">Type</label>
-                                <input class="form-control mb-2" name="ty[]">
-                            </div>
-                            <div class="col">
-                                <label for="">Cuisine</label>
-                                <input class="form-control mb-2" name="cu[]">
-                            </div>
-                            <div class="col">
-                                <label for="">Category</label>
-                                <input class="form-control mb-2" name="ca[]">
-                            </div>
-                            <div class="col">
-                                <label for="">Product</label>
-                                <input class="form-control mb-2" name="pro[]">
-                            </div>
-                            <div class="col">
-                                <label for="">Qty</label>
-                                <input class="form-control mb-2" name="qt[]">
-                            </div>
-                          </div>
-            
-                        <div class="pro-box"></div>
-                        <div>
-                             <a class="btn add-btn btn-success">+</a>
-                         </div><br><br><br>
-            
-                        
-                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                </form>
-            </div>
-</div>
-
-<script>
-        document.addEventListener('DOMContentLoaded', function() {
-        const addInputButton = document.querySelector('.add-btn');
-        const inputContainer = document.querySelector('.pro-box');
-        
-
-        // let inputCount = 1;
-
-        addInputButton.addEventListener('click', function() {
-        let inputEle = `<div class="row mb-4">
+        <!-- Additional product details rows -->
+        <div class="pro-box">
+            <div class="row mb-4">
                 <div class="col">
-                    <label for="">Type</label>
-                    <input class="form-control mb-2" name="ty[]">
+                    <div class="form-group">
+                        <label for="exampleInputStatus">Type</label>
+                        <select class="form-control mb-2" name="ty[]">
+                            <?php foreach ($typedata as $row): ?>
+                                <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
                 </div>
                 <div class="col">
-                    <label for="">Cuisine</label>
-                    <input class="form-control mb-2" name="cu[]">
+                    <div class="form-group">
+                        <label for="exampleInputStatus">Cuisine</label>
+                        <select class="form-control mb-2" name="cu[]">
+                            <?php foreach ($cuisinedata as $row): ?>
+                                <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
                 </div>
                 <div class="col">
-                    <label for="">Category</label>
-                    <input class="form-control mb-2" name="ca[]">
+                    <div class="form-group">
+                        <label for="exampleInputStatus">Category</label>
+                        <select class="form-control mb-2" name="ca[]">
+                            <?php foreach ($categorydata as $row): ?>
+                                <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
                 </div>
                 <div class="col">
-                    <label for="">Product</label>
-                    <input class="form-control mb-2" name="pro[]">
+                    <div class="form-group">
+                        <label for="exampleInputStatus">Product</label>
+                        <select class="form-control mb-2" name="pro[]">
+                            <?php foreach ($productdata as $row): ?>
+                                <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
                 </div>
                 <div class="col">
                     <label for="">Qty</label>
                     <input class="form-control mb-2" name="qt[]">
                 </div>
-              </div>`;
-        const newInput = document.createElement('div');
-        newInput.innerHTML = inputEle;
-        inputContainer.appendChild(newInput);
-        // inputCount++;
-        
-  });
-  
+            </div>
+        </div>
+        <!-- End of additional product details rows -->
+
+        <div>
+            <a class="btn add-btn btn-success" id="addRow">+</a>
+        </div><br><br><br>
+
+        <button type="submit" class="btn btn-primary mr-2">Submit</button>
+    </form>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const addInputButton = document.getElementById('addRow');
+    const inputContainer = document.querySelector('.pro-box');
+
+    // Initial product data
+    const productDataJSON = <?php echo json_encode($productdata); ?>;
+
+    addInputButton.addEventListener('click', function() {
+        const newRow = inputContainer.querySelector('.row').cloneNode(true);
+
+        // Clear the product dropdown and quantity input in the cloned row
+        newRow.querySelector('[name="pro[]"]').value = "";
+        newRow.querySelector('[name="qt[]"]').value = "";
+
+        // Append the cloned row to the input container
+        inputContainer.appendChild(newRow);
+
+        // Populate the product dropdown in the cloned row
+        const productSelect = newRow.querySelector('[name="pro[]"]');
+        productDataJSON.forEach(function(product) {
+            const option = document.createElement('option');
+            option.value = product.id;
+            option.text = product.name;
+            productSelect.appendChild(option);
+        });
+    });
 });
-    </script>
+</script>
 
 <?php
 include('footer.php');

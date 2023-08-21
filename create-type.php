@@ -15,7 +15,7 @@ include('menu.php');
         <input type="text" class="form-control" name="typename" id="exampleInputName1" placeholder="Enter type Name">
         </div>
         </div>
-        <div class="col-12">
+        <div class="col-6">
                 <div class="form-group">
                     <label for="exampleInputStatus">Status</label>
                     <select class="form-control" name="status" id="exampleInputStatus">
@@ -26,6 +26,7 @@ include('menu.php');
             </div>
            
         <button type="submit" class="btn btn-primary mr-2">Submit</button>
+        </div>
     </form>
 </div>
 

@@ -15,7 +15,7 @@ include('menu.php');
         <input type="text" class="form-control" name="cuisinename" id="exampleInputName1" placeholder="Enter cuisine Name">
         </div>
         </div>
-        <div class="col-12">
+        <div class="col-6">
                 <div class="form-group">
                     <label for="exampleInputStatus">Status</label>
                     <select class="form-control" name="status" id="exampleInputStatus">

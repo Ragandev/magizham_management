@@ -4,7 +4,7 @@ include('menu.php');
 ?>
 
 <div class="main-box">
-    <h2 class="mb-3">Create User</h2>
+    <h2 class="mb-3">Create Branch</h2>
     <hr>
     <form class="forms-sample" method="post" action="create-branch-post.php">
         <div class="row">
