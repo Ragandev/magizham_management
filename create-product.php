@@ -5,6 +5,7 @@ require('db.php');
 
 $typesql = "SELECT * FROM `type`";
 $typedata = $pdo->query($typesql);
+
 $categorysql = "SELECT * FROM `category`";
 $categorydata = $pdo->query($categorysql);
 $cuisinesql = "SELECT * FROM `cuisine`";

@@ -27,11 +27,15 @@ if (isset($_GET['id'])) {
     <h2>Edit Category</h2>
     <hr>
     <form class="forms-sample" method="post" action="update-category.php">
+    <div class="row">
+    <div class="col-6">
         <div class="form-group">
             <input type="hidden" name="categoryId" value="<?php echo $categoryData['id']; ?>">
             <label for="exampleInputName1">Category Name</label>
             <input type="text" class="form-control" name="category" id="exampleInputName1" value="<?php echo $categoryData['name']; ?>">
         </div>
+        </div>
+        <div class="col-6">
         <div class="form-group">
             <label for="exampleInputStatus">Status</label>
             <select class="form-control" name="status" id="exampleInputStatus">
@@ -39,7 +43,9 @@ if (isset($_GET['id'])) {
                 <option value="inactive" <?php if ($categoryData['status'] === 'inactive') echo 'selected'; ?>>Inactive</option>
             </select>
         </div>
+        </div>
         <button type="submit" class="btn btn-primary mr-2">Update</button>
+        </div>
     </form>
 </div>
 

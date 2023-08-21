@@ -72,7 +72,11 @@ $logUser = $_SESSION['user'];
             echo "<td>
             <a href='edit-order.php?id=" . $row['id'] . "'><i class=' typcn typcn-edit'></i></a> | 
             <a href='delete-order.php?delete_id=" . $row['id'] . "' class='text-danger' onclick='return confirmDelete()'><i class='  typcn typcn-trash'></i></a>
+            <a href='view-order.php?id=" . $row['id'] . "'><i class='typcn typcn-eye'></i></a>
         </td>";
+        echo "<td>
+                <a href='print-order.php?id=" . $row['id'] . "' target='_blank'><i class='typcn typcn-print'></i></a>
+            </td>";
     
 
 
