@@ -8,7 +8,6 @@ include('menu.php');
     <form class="forms-sample" method="post" action="create-cuisine-post.php">
         <div class="row">
         
-        <div class="col-6">
 
          <div class="form-group">
          <label for="exampleInputName1">Name</label>

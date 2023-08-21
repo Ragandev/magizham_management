@@ -1,4 +1,7 @@
 <?php 
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
     
 require('db.php');
 
@@ -9,7 +12,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // User Data 
     $branch = $_POST['branch'];
     $date = $_POST['date'];
-    $stock = $_POST['stock'];
+    $type = $_POST['type'];
+
+
+    
+    
 
 
 
@@ -26,18 +33,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // }
 
     // Validation
-    if (empty($branch) || empty( $date ) || empty( $stock)) {
+    if (empty($branch) || empty( $date )) {
         echo "Error: All fields are required.";
         exit();
     }
 
     // Insert data into product table
-    $sql = "INSERT INTO `stock` (branchid, date_created, stock_qty ) VALUES (:branchid, :date_created, :stock_qty)";
+    $sql = "INSERT INTO `stock` (branchid, date_created) VALUES (:branchid, :date_created)";
     $stmt = $pdo->prepare($sql);
 
     $stmt->bindParam(':branchid', $branch);
     $stmt->bindParam(':date_created', $date);
-    $stmt->bindParam(':stock_qty', $stock);
+
+    // $stmt->bindParam(':cuisineid', $cuisine);
+
 
 
 

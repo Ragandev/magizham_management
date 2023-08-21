@@ -68,7 +68,10 @@ $productdata = $pdo->query("SELECT * FROM `product`")->fetchAll(PDO::FETCH_ASSOC
                     </select>
                 </div>
             </div>
-         
+            <div class="col-6">
+                    <label for="">Description</label>
+                    <input class="form-control mb-2" name="des">
+                </div>
             </div>
           
 
@@ -120,6 +123,21 @@ $productdata = $pdo->query("SELECT * FROM `product`")->fetchAll(PDO::FETCH_ASSOC
                     <label for="">Qty</label>
                     <input class="form-control mb-2" name="qt[]">
                 </div>
+                 <div class="col-3">
+                <div class="form-group">
+                    <label for="exampleInputStatus">Priority</label>
+                    <select class="form-control" name="pr[]" id="exampleInputStatus">
+                        <option value="Created">Created</option>
+                        <option value="Accepted">Accepted</option>
+                        <option value="Delivered">Delivered</option>
+                        <option value="Received">Received</option>
+                        <option value="Cancelled">Cancelled</option>
+                        <option value="Rejected">Rejected</option>
+
+                    </select>
+                </div>
+            </div>
+           
             </div>
         </div>
         <!-- End of additional product details rows -->
