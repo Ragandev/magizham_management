@@ -27,10 +27,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bindParam(':priority', $priority);
     $stmt->bindParam(':status', $status);
 
-    if ($stmt->execute()) {
-        header("Location: " . $u1 . urlencode('Order Successfully Updated'));
-    } else {
+    if (!$stmt->execute()) {
         header("Location: " . $u2 . urlencode('Something went wrong. Please try again later'));
+        exit();
     }
+    $oid = $_POST['oid'];
+
+    $deleteDaysQuery = "DELETE FROM orderitem WHERE order_id = :postID";
+    $stmtDelete = $pdo->prepare($deleteDaysQuery);
+    $stmtDelete->bindParam(':postID', $oid);
+    $stmtDelete->execute();
+
+
+    for ($i = 0; $i < count($_POST['pro']); $i++) {
+        $productID = $_POST['pro'][$i];
+        $cuisineID = $_POST['cu'][$i];
+        $typeID = $_POST['ty'][$i];
+        $categoryID = $_POST['ca'][$i];
+        $quantity = $_POST['qt'][$i];
+        $priorityy = $_POST['pr'][$i];
+        
+
+
+        $orderItemSql = "INSERT INTO `orderitem` (order_id, productid, cuisineid, typeid, order_qty, categoryid, priority) VALUES (:order_id, :productid, :cuisineid, :typeid, :order_qty, :categoryid, :priority)";
+        $orderItemStmt = $pdo->prepare($orderItemSql);
+        $orderItemStmt->bindParam(':order_id', $orderID);
+        $orderItemStmt->bindParam(':productid', $productID);
+        $orderItemStmt->bindParam(':cuisineid', $cuisineID);
+        $orderItemStmt->bindParam(':typeid', $typeID);
+        $orderItemStmt->bindParam(':categoryid', $categoryID);
+        $orderItemStmt->bindParam(':order_qty', $quantity);
+        $orderItemStmt->bindParam(':priority', $priorityy);
+
+        $orderItemStmt->execute();
+    }
+
+    header("Location: " . $u1 . urlencode('Order Successfully Updated'));
+    exit();
 }
 ?>
+
+
+

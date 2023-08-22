@@ -166,6 +166,8 @@ if (isset($_GET['id'])) {
             <a class="btn add-btn btn-success" id="addRow">+</a>
         </div><br><br><br>
 
+        <input type="hidden" name="oid" value="<?php echo $orderID ?>">
+
         <button type="submit" class="btn btn-primary">Update Order</button>
         </div>
   </form>
