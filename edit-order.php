@@ -18,7 +18,7 @@ if (isset($_GET['id'])) {
     $orderStmt->execute();
     $orderData = $orderStmt->fetch(PDO::FETCH_ASSOC);
 
-    $oi = $pdo->query("SELECT * FROM orderitem");
+    $oi = $pdo->query("SELECT * FROM orderitem WHERE order_id = ".$orderID."");
     $orderItem =$oi->fetchAll(PDO::FETCH_ASSOC);
 
     $branchSql = "SELECT * FROM `branch`";
@@ -99,13 +99,13 @@ if (isset($_GET['id'])) {
          
         <!-- Additional product details rows -->
         <div class="pro-box">
-            <div class="row mb-4">
-                <div class="col">
+                <?php  foreach($orderItem as $od) { ?>
+                    <div class="row"> <div class="col">
                     <div class="form-group">
                         <label for="exampleInputStatus">Type</label>
                         <select class="form-control mb-2" name="ty[]">
                             <?php foreach ($typedata as $row): ?>
-                                <option value="<?= $row['id'] ?>"<?php if ($orderItem['typeid'] === $row['id']) echo 'selected'; ?>><?= $row['name'] ?></option>
+                                <option value="<?= $row['id'] ?>" <?php if($row['id']=== $od['typeid']){echo 'selected';} ?>><?= $row['name'] ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -144,57 +144,111 @@ if (isset($_GET['id'])) {
                     <label for="">Qty</label>
                     <input class="form-control mb-2" name="qt[]">
                 </div>
-                <div class="col-3">
-        <div class="form-group">
-            <label for="priority">Priority</label>
-            <select class="form-control" name="pr[]" id="status">
-            <option value="High" <?php if ($orderData['priority'] === 'High') echo 'selected'; ?>>High</option>
-                <option value="Low" <?php if ($orderData['priority'] === 'Low') echo 'selected'; ?>>Low</option>
-                <option value="Normal" <?php if ($orderData['priority'] === 'Normal') echo 'selected'; ?>>Normal</option>
-                <option value="Urgent" <?php if ($orderData['priority'] === 'Urgent') echo 'selected'; ?>>Urgent</option>
-            </select>        </div>
-        </div>
-     
+                 <div class="col-3">
+                <div class="form-group">
+                    <label for="exampleInputStatus">Priority</label>
+                    <select class="form-control" name="pr[]" id="exampleInputStatus">
+                    <option value="High">High</option>
+                        <option value="Low">Low</option>
+                        <option value="Normal">Normal</option>
+                        <option value="Urgent">Urgent</option>
+
+
+                    </select>
+                </div>
+                </div>
             </div>
-            </div>
+                <?php } ?>
         </div >
+       
         <!-- End of additional product details rows -->
         <div class="col-3">
             <a class="btn add-btn btn-success" id="addRow">+</a>
         </div><br><br><br>
 
+        <input type="hidden" name="oid" value="<?php echo $orderID ?>">
+
         <button type="submit" class="btn btn-primary">Update Order</button>
         </div>
   </form>
     </div>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const addInputButton = document.getElementById('addRow');
-    const inputContainer = document.querySelector('.pro-box');
+        const addInputButton = document.querySelector('#addRow');
+        const inputContainer = document.querySelector('.pro-box');
+        
 
-    // Initial product data
-    const productDataJSON = <?php echo json_encode($productdata); ?>;
 
-    addInputButton.addEventListener('click', function() {
-        const newRow = inputContainer.querySelector('.row').cloneNode(true);
+        addInputButton.addEventListener('click', function() {
+        let inputCount = inputContainer.children.length;
+        let inputEle = `<div class="row"> <div class="col">
+                    <div class="form-group">
+                        <label for="exampleInputStatus">Type</label>
+                        <select class="form-control mb-2" name="ty[]">
+                            <?php foreach ($typedata as $row): ?>
+                                <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="exampleInputStatus">Cuisine</label>
+                        <select class="form-control mb-2" name="cu[]">
+                            <?php foreach ($cuisinedata as $row): ?>
+                                <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="exampleInputStatus">Category</label>
+                        <select class="form-control mb-2" name="ca[]">
+                            <?php foreach ($categorydata as $row): ?>
+                                <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="exampleInputStatus">Product</label>
+                        <select class="form-control mb-2" name="pro[]">
+                            <?php foreach ($productdata as $row): ?>
+                                <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <label for="">Qty</label>
+                    <input class="form-control mb-2" name="qt[]">
+                </div>
+                 <div class="col-3">
+                <div class="form-group">
+                    <label for="exampleInputStatus">Priority</label>
+                    <select class="form-control" name="pr[]" id="exampleInputStatus">
+                    <option value="High">High</option>
+                        <option value="Low">Low</option>
+                        <option value="Normal">Normal</option>
+                        <option value="Urgent">Urgent</option>
 
-        // Clear the product dropdown and quantity input in the cloned row
-        newRow.querySelector('[name="pro[]"]').value = "";
-        newRow.querySelector('[name="qt[]"]').value = "";
 
-        // Append the cloned row to the input container
-        inputContainer.appendChild(newRow);
-
-        // Populate the product dropdown in the cloned row
-        const productSelect = newRow.querySelector('[name="pro[]"]');
-        productDataJSON.forEach(function(product) {
-            const option = document.createElement('option');
-            option.value = product.id;
-            option.text = product.name;
-            productSelect.appendChild(option);
-        });
-    });
+                    </select>
+                </div>
+                </div>
+            </div>`;
+        const newInput = document.createElement('div');
+        newInput.innerHTML = inputEle;
+        inputContainer.appendChild(newInput);
+        
+  });
+  
 });
+
 </script>
+
 
 <?php include('footer.php'); ?>
