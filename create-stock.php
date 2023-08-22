@@ -97,11 +97,11 @@ $productdata = $pdo->query("SELECT * FROM `product`")->fetchAll(PDO::FETCH_ASSOC
         <div>
             <a class="btn add-btn btn-success" id="addRow">+</a>
         </div><br><br><br>
+        <button type="submit" class="btn btn-primary mr-2">Submit</button>
 
             </div>
             
             
-        <button type="submit" class="btn btn-primary mr-2">Submit</button>
     </form>
 </div>
 <script>
