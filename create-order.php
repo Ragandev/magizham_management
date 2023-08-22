@@ -49,12 +49,10 @@ $productdata = $pdo->query("SELECT * FROM `product`")->fetchAll(PDO::FETCH_ASSOC
                 <div class="form-group">
                     <label for="exampleInputStatus">Priority</label>
                     <select class="form-control" name="priority" id="exampleInputStatus">
-                        <option value="Created">Created</option>
-                        <option value="Accepted">Accepted</option>
-                        <option value="Delivered">Delivered</option>
-                        <option value="Received">Received</option>
-                        <option value="Cancelled">Cancelled</option>
-                        <option value="Rejected">Rejected</option>
+                        <option value="High">High</option>
+                        <option value="Low">Low</option>
+                        <option value="Normal">Normal</option>
+                        <option value="Urgent">Urgent</option>
 
                     </select>
                 </div>
@@ -63,8 +61,12 @@ $productdata = $pdo->query("SELECT * FROM `product`")->fetchAll(PDO::FETCH_ASSOC
                 <div class="form-group">
                     <label for="exampleInputStatus">Status</label>
                     <select class="form-control" name="status" id="exampleInputStatus">
-                        <option value="Active">Active</option>
-                        <option value="Inactive">Inactive</option>
+                    <option value="Created">Created</option>
+                        <option value="Accepted">Accepted</option>
+                        <option value="Delivered">Delivered</option>
+                        <option value="Received">Received</option>
+                        <option value="Cancelled">Cancelled</option>
+                        <option value="Rejected">Rejected</option>
                     </select>
                 </div>
             </div>
@@ -127,12 +129,11 @@ $productdata = $pdo->query("SELECT * FROM `product`")->fetchAll(PDO::FETCH_ASSOC
                 <div class="form-group">
                     <label for="exampleInputStatus">Priority</label>
                     <select class="form-control" name="pr[]" id="exampleInputStatus">
-                        <option value="Created">Created</option>
-                        <option value="Accepted">Accepted</option>
-                        <option value="Delivered">Delivered</option>
-                        <option value="Received">Received</option>
-                        <option value="Cancelled">Cancelled</option>
-                        <option value="Rejected">Rejected</option>
+                    <option value="High">High</option>
+                        <option value="Low">Low</option>
+                        <option value="Normal">Normal</option>
+                        <option value="Urgent">Urgent</option>
+
 
                     </select>
                 </div>

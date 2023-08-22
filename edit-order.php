@@ -18,7 +18,10 @@ if (isset($_GET['id'])) {
     $orderStmt->execute();
     $orderData = $orderStmt->fetch(PDO::FETCH_ASSOC);
 
-    $branchSql = "SELECT * FROM branch";
+    $oi = $pdo->query("SELECT * FROM orderitem");
+    $orderItem =$oi->fetchAll(PDO::FETCH_ASSOC);
+
+    $branchSql = "SELECT * FROM `branch`";
     $branchData = $pdo->query($branchSql);
     $typedata = $pdo->query("SELECT * FROM `type`")->fetchAll(PDO::FETCH_ASSOC);
     $cuisinedata = $pdo->query("SELECT * FROM `cuisine`")->fetchAll(PDO::FETCH_ASSOC);
@@ -66,27 +69,29 @@ if (isset($_GET['id'])) {
         <div class="form-group">
             <label for="priority">Priority</label>
             <select class="form-control" name="priority" id="status">
-                <option value="created" <?php if ($orderData['priority'] === 'created') echo 'selected'; ?>>created</option>
-                <option value="Accepted" <?php if ($orderData['priority'] === 'Accepted') echo 'selected'; ?>>Accepted</option>
-                <option value="Delivered" <?php if ($orderData['priority'] === 'Delivered') echo 'selected'; ?>>Delivered</option>
-                <option value="Received" <?php if ($orderData['priority'] === 'Received') echo 'selected'; ?>>Received</option>
-                <option value="Cancelled" <?php if ($orderData['priority'] === 'Cancelled') echo 'selected'; ?>>Cancelled</option>
-                <option value="Rejected" <?php if ($orderData['priority'] === 'rejected') echo 'selected'; ?>>rejected</option>
+                <option value="High" <?php if ($orderData['priority'] === 'High') echo 'selected'; ?>>High</option>
+                <option value="Low" <?php if ($orderData['priority'] === 'Low') echo 'selected'; ?>>Low</option>
+                <option value="Normal" <?php if ($orderData['priority'] === 'Normal') echo 'selected'; ?>>Normal</option>
+                <option value="Urgent" <?php if ($orderData['priority'] === 'Urgent') echo 'selected'; ?>>Urgent</option>
 
             </select>        </div>
         </div>
         <div class="col-6">
-        <div class="form-group">
-            <label for="status">Status</label>
-            <select class="form-control" name="status" id="status">
-                <option value="Active" <?php if ($orderData['status'] === 'Active') echo 'selected'; ?>>Active</option>
-                <option value="InActive" <?php if ($orderData['status'] === 'InActive') echo 'selected'; ?>>InActive</option>
-            </select>
-        </div>
-        </div>
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select class="form-control" name="status" id="status">
+                        <option value="created" <?php if ($orderData['status'] === 'Created') echo 'selected'; ?>>Created</option>
+                        <option value="Accepted" <?php if ($orderData['status'] === 'Accepted') echo 'selected'; ?>>Accepted</option>
+                        <option value="Delivered" <?php if ($orderData['status'] === 'Delivered') echo 'selected'; ?>>Delivered</option>
+                        <option value="Received" <?php if ($orderData['status'] === 'Received') echo 'selected'; ?>>Received</option>
+                        <option value="Cancelled" <?php if ($orderData['status'] === 'Cancelled') echo 'selected'; ?>>Cancelled</option>
+                        <option value="Rejected" <?php if ($orderData['status'] === 'Rejected') echo 'selected'; ?>>Rejected</option>
+                    </select>
+                </div>
+            </div>
         <div class="col-6">
                     <label for="">Description</label>
-                    <input class="form-control mb-2" name="des">
+                    <input class="form-control mb-2" name="des" >
                 </div>
                 </div>
 
@@ -100,7 +105,7 @@ if (isset($_GET['id'])) {
                         <label for="exampleInputStatus">Type</label>
                         <select class="form-control mb-2" name="ty[]">
                             <?php foreach ($typedata as $row): ?>
-                                <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
+                                <option value="<?= $row['id'] ?>"<?php if ($orderItem['typeid'] === $row['id']) echo 'selected'; ?>><?= $row['name'] ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -143,13 +148,10 @@ if (isset($_GET['id'])) {
         <div class="form-group">
             <label for="priority">Priority</label>
             <select class="form-control" name="pr[]" id="status">
-                <option value="created" <?php if ($orderData['priority'] === 'created') echo 'selected'; ?>>created</option>
-                <option value="Accepted" <?php if ($orderData['priority'] === 'Accepted') echo 'selected'; ?>>Accepted</option>
-                <option value="Delivered" <?php if ($orderData['priority'] === 'Delivered') echo 'selected'; ?>>Delivered</option>
-                <option value="Received" <?php if ($orderData['priority'] === 'Received') echo 'selected'; ?>>Received</option>
-                <option value="Cancelled" <?php if ($orderData['priority'] === 'Cancelled') echo 'selected'; ?>>Cancelled</option>
-                <option value="Rejected" <?php if ($orderData['priority'] === 'rejected') echo 'selected'; ?>>rejected</option>
-
+            <option value="High" <?php if ($orderData['priority'] === 'High') echo 'selected'; ?>>High</option>
+                <option value="Low" <?php if ($orderData['priority'] === 'Low') echo 'selected'; ?>>Low</option>
+                <option value="Normal" <?php if ($orderData['priority'] === 'Normal') echo 'selected'; ?>>Normal</option>
+                <option value="Urgent" <?php if ($orderData['priority'] === 'Urgent') echo 'selected'; ?>>Urgent</option>
             </select>        </div>
         </div>
      

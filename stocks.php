@@ -51,19 +51,18 @@ $logUser = $_SESSION['user'];
             <th> ID</th>
             <th> Branch</th>
             <th>  Date</th>
-            <th> Stock Qty</th>
             <th>Action</th>
         </tr> </thead>";
 
         foreach ($stockData as $row) {
             $branchee = $pdo->query('SELECT name FROM `branch` WHERE id="'.$row["branchid"].'"');
             $branchee = $branchee->fetch(PDO::FETCH_ASSOC);
+            
             echo "<tbody> <tr>";
             echo "<td>" . $row['id'] . "</td>";
             echo "<td>" . $branchee['name']. "</td>";
 
             echo "<td>" . $row['date_created'] . "</td>";
-            echo "<td>" . $row['stock_qty'] . "</td>";
 
             
             echo "<td>

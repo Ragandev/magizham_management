@@ -21,6 +21,10 @@ if (isset($_GET['id'])) {
     // Retrieve branch data for dropdown
     $branchSql = "SELECT * FROM branch";
     $branchData = $pdo->query($branchSql);
+    $typedata = $pdo->query("SELECT * FROM `type`")->fetchAll(PDO::FETCH_ASSOC);
+$cuisinedata = $pdo->query("SELECT * FROM `cuisine`")->fetchAll(PDO::FETCH_ASSOC);
+$categorydata = $pdo->query("SELECT * FROM `category`")->fetchAll(PDO::FETCH_ASSOC);
+$productdata = $pdo->query("SELECT * FROM `product`")->fetchAll(PDO::FETCH_ASSOC);
 } else {
     header("Location: wastes.php");
     exit();
@@ -51,20 +55,74 @@ if (isset($_GET['id'])) {
             <input type="date" class="form-control" id="date" name="date" value="<?php echo $wasteData['date']; ?>">
         </div>
 
-        <!-- Waste Quantity -->
-        <div class="form-group">
-            <label for="waste_qty">Waste Quantity</label>
-            <input type="number" class="form-control" id="waste_qty" name="waste_qty" value="<?php echo $wasteData['waste_qty']; ?>">
-        </div>
-
         <!-- Waste Amount -->
         <div class="form-group">
             <label for="waste_amount">Waste Amount</label>
             <input type="number" class="form-control" id="waste_amount" name="waste_amount" value="<?php echo $wasteData['waste_amount']; ?>">
         </div>
 
-        <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary">Update Waste</button>
+         <!-- Additional product details rows -->
+       <div class="pro-box">
+            <div class="row mb-4">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="exampleInputStatus">Type</label>
+                        <select class="form-control mb-2" name="ty[]">
+                            <?php foreach ($typedata as $row): ?>
+                                <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="exampleInputStatus">Cuisine</label>
+                        <select class="form-control mb-2" name="cu[]">
+                            <?php foreach ($cuisinedata as $row): ?>
+                                <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="exampleInputStatus">Category</label>
+                        <select class="form-control mb-2" name="ca[]">
+                            <?php foreach ($categorydata as $row): ?>
+                                <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="exampleInputStatus">Product</label>
+                        <select class="form-control mb-2" name="pro[]">
+                            <?php foreach ($productdata as $row): ?>
+                                <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <label for="">Qty</label>
+                    <input class="form-control mb-2" name="qt[]">
+                </div>
+             
+           
+            </div>
+        </div>
+        <!-- End of additional product details rows -->
+
+        <div>
+            <a class="btn add-btn btn-success" id="addRow">+</a>
+        </div><br><br><br>
+        <button type="submit" class="btn btn-primary mr-2">Submit</button>
+
+            </div>
+
+          </div>
+            
     </form>
 </div>
 
