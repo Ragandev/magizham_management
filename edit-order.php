@@ -151,10 +151,10 @@ if (isset($_GET['id'])) {
     <div class="form-group">
         <label for="exampleInputStatus">Priority</label>
         <select class="form-control" name="pr[]">
-            <option value="High" <?php if ($od['pr[]'] === 'High') echo 'selected'; ?>>High</option>
-            <option value="Low" <?php if ($od['pr[]'] === 'Low') echo 'selected'; ?>>Low</option>
-            <option value="Normal" <?php if ($od['pr[]'] === 'Normal') echo 'selected'; ?>>Normal</option>
-            <option value="Urgent" <?php if ($od['pr[]'] === 'Urgent') echo 'selected'; ?>>Urgent</option>
+            <option value="High" <?php if ($od['priority'] === 'High') echo 'selected'; ?>>High</option>
+            <option value="Low" <?php if ($od['priority'] === 'Low') echo 'selected'; ?>>Low</option>
+            <option value="Normal" <?php if ($od['priority'] === 'Normal') echo 'selected'; ?>>Normal</option>
+            <option value="Urgent" <?php if ($od['priority'] === 'Urgent') echo 'selected'; ?>>Urgent</option>
         </select>
 
 
