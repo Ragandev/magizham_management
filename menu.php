@@ -7,6 +7,21 @@ if (!isset($_SESSION['user'])) {
 $logUser = $_SESSION['user'];
 $logName = $logUser['name'];
 ?>
+
+<style>
+    .user-icon{
+        display: flex;
+        justify-content: center;align-items: center;
+    }
+    .user-icon span{
+        font-size: 18px;
+    }
+    .user-icon p{
+        margin-top: 25px;
+        font-weight: bold;
+    }
+</style>
+
 <body>
     <div class="container-scroller">
         <!-- partial:partials/_navbar.html -->
@@ -22,12 +37,14 @@ $logName = $logUser['name'];
                 <ul class="navbar-nav navbar-nav-right">
                     <li class="nav-item nav-profile dropdown">
                         <a class="nav-link dropdown-toggle  pl-0 pr-0" href="#" data-toggle="dropdown" id="profileDropdown">
-                            <i class="typcn typcn-user-outline mr-0"></i>
-                            <span class="nav-profile-name"><?php echo $logName ?></span>
+                            <div class="user-icon">
+                            <span class="typcn typcn-user-outline mr-0"></span>
+                            <div><p><?php echo $logName ?></p></div>
+                            </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
                             <a class="dropdown-item">
-                                <i class="typcn typcn-cog text-primary"></i>
+                                <span class="typcn typcn-cog text-primary"></span>
                                 Settings
                             </a>
                             <a class="dropdown-item">
@@ -117,13 +134,13 @@ $logName = $logUser['name'];
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="orders.php">
-                            <i class=" typcn typcn-th-menu menu-icon"></i>
+                            <i class=" typcn typcn-media-eject-outline menu menu-icon"></i>
                             <span class="menu-title">Orders</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="stocks.php">
-                            <i class=" typcn typcn-th-menu menu-icon"></i>
+                            <i class=" typcn typcn-folder-add menu-icon"></i>
                             <span class="menu-title">Stocks</span>
                         </a>
                     </li>
@@ -132,6 +149,20 @@ $logName = $logUser['name'];
                             <i class=" typcn typcn-th-menu menu-icon"></i>
                             <span class="menu-title">wastes</span>
                         </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#user-manane" aria-expanded="false" aria-controls="">
+                            <i class="  typcn typcn-folder-open menu-icon"></i>
+                            <span class="menu-title">Reports</span>
+                            <i class="typcn typcn-chevron-right menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="user-manane">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" href="order-report.php">Order Reports</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="">Stock Reports</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="">Waste Reports</a></li>
+                            </ul>
+                        </div>
                     </li>
                 </ul>
             </nav>
