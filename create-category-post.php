@@ -7,6 +7,8 @@
         $u2 = "create-category.php?err=";
         // User Data 
         $categoryname = $_POST['categoryname'];
+        $typeid = $_POST['type'];
+
         $status = $_POST['status'];
 
     
@@ -28,10 +30,11 @@
             exit();
         }
     
-        $sql = "INSERT INTO category ( name, status) VALUES ( :name, :status)";
+        $sql = "INSERT INTO category ( name, typeid, status) VALUES ( :name, :typeid, :status)";
         $stmt = $pdo->prepare($sql);
     
         $stmt->bindParam(':name', $categoryname,);
+        $stmt->bindParam(':typeid', $typeid);
         $stmt->bindParam(':status', $status,);
 
         

@@ -1,6 +1,10 @@
 <?php
 include('header.php');
 include('menu.php');
+require('db.php');
+
+$typesql = "SELECT * FROM `type`";
+$typedata = $pdo->query($typesql);
 ?>
 <div class="main-box">
     <h2 class="mb-3">Create Category</h2>
@@ -18,6 +22,18 @@ include('menu.php');
         </div>
         <div class="col-6">
                 <div class="form-group">
+                    <label for="exampleInputStatus">Type</label>
+                    <select class="form-control" name="type" id="exampleInputStatus">
+       
+                <?php foreach ($typedata as $row): ?>
+                    <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
+                    <?php endforeach; ?>
+                 
+                    </select>
+                </div>
+            </div>
+        <div class="col-6">
+                <div class="form-group">
                     <label for="exampleInputStatus">Status</label>
                     <select class="form-control" name="status" id="exampleInputStatus">
                         <option value="Active">Active</option>
@@ -25,16 +41,7 @@ include('menu.php');
                     </select>
                 </div>
             </div>
-            <div class="col-6">
-                <div class="form-group">
-                    <label for="exampleInputStatus">Priority</label>
-                    <select class="form-control" name="priority" id="exampleInputStatus">
-                        <option value="Active">Active</option>
-                        <option value="Inactive">Inactive</option>
-                    </select>
-                </div>
-            </div>
-            <div>
+        
 
         <button type="submit" class="btn btn-primary mr-2">Submit</button>
 </div>

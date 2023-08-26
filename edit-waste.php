@@ -182,19 +182,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <label for="">Qty</label>
                     <input class="form-control mb-2" name="qt[]">
                 </div>
-                 <div class="col-3">
-                <div class="form-group">
-                    <label for="exampleInputStatus">Priority</label>
-                    <select class="form-control" name="pr[]" id="exampleInputStatus">
-                    <option value="High">High</option>
-                        <option value="Low">Low</option>
-                        <option value="Normal">Normal</option>
-                        <option value="Urgent">Urgent</option>
-
-
-                    </select>
-                </div>
-                </div>
+         
             </div>`;
         const newInput = document.createElement('div');
         newInput.innerHTML = inputEle;
