@@ -51,7 +51,6 @@ $logUser = $_SESSION['user'];
             <th> ID</th>
             <th> Branch</th>
             <th>  Date</th>
-            <th> Waste Qty</th>
             <th> Waste Amount</th>
 
             <th>Action</th>
@@ -65,11 +64,11 @@ $logUser = $_SESSION['user'];
             echo "<td>" . $branchee['name']. "</td>";
 
             echo "<td>" . $row['date'] . "</td>";
-            echo "<td>" . $row['waste_qty'] . "</td>";
             echo "<td>" . $row['waste_amount'] . "</td>";
 
             
             echo "<td>
+            <a href='view-waste.php?id=" . $row['id'] . "'><i class='typcn typcn-eye'></i></a> | 
             <a href='edit-waste.php?id=" . $row['id'] . "'><i class=' typcn typcn-edit'></i></a> | 
             <a href='delete-waste.php?delete_id=" . $row['id'] . "' class='text-danger' onclick='return confirmDelete()'><i class='  typcn typcn-trash'></i></a>
         </td>";

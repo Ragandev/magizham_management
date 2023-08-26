@@ -15,6 +15,7 @@ include('menu.php');
         <input type="text" class="form-control" name="categoryname" id="exampleInputName1" placeholder="Enter category Name">
         </div>
         </div>
+        </div>
         <div class="col-6">
                 <div class="form-group">
                     <label for="exampleInputStatus">Status</label>
@@ -33,9 +34,11 @@ include('menu.php');
                     </select>
                 </div>
             </div>
-           
+            <div>
+
         <button type="submit" class="btn btn-primary mr-2">Submit</button>
 </div>
+
     </form>
 </div>
 

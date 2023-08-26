@@ -18,44 +18,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
 
     // Update data in waste table
-    $updateSql = "UPDATE `waste` SET branchid = :branchid, date = :date, waste_qty = :waste_qty, waste_amount = :waste_amount WHERE id = :id";
+    $updateSql = "UPDATE `waste` SET branchid = :branchid, date = :date,  waste_amount = :waste_amount WHERE id = :id";
     $stmt = $pdo->prepare($updateSql);
     $stmt->bindParam(':id', $wasteID);
     $stmt->bindParam(':branchid', $branch);
     $stmt->bindParam(':date', $date);
-    $stmt->bindParam(':waste_qty', $wasteQty);
     $stmt->bindParam(':waste_amount', $wasteAmount);
 
-    if ($stmt->execute()) {
-        header("Location: " . $u1 . urlencode('Waste Successfully Updated'));
-    } else {
-        header("Location: " . $u2 . urlencode('Something went wrong. Please try again later'));
+    if ($stmt === false) {
+        // Error handling for preparing the statement
+        die("Error preparing statement: " . $pdo->errorInfo()[2]);
     }
-      // Update waste item details
-      for ($i = 0; $i < count($_POST['pro']); $i++) {
-        // Get waste item details from the form
-        $wasteItemID = $_POST['item_id'][$i];
+    
+    if ($stmt->execute()) {
+        // The execution was successful, handle it accordingly
+    } else {
+        // Execution failed, handle the error
+        header("Location: " . $u2 . urlencode('Something went wrong. Please try again later'));
+        exit();
+    }
+    $oid = $_POST['oid'];
+    
+    $deleteDaysQuery = "DELETE FROM wasteitem WHERE waste_id = :postID";
+    $stmtDelete = $pdo->prepare($deleteDaysQuery);
+    $stmtDelete->bindParam(':postID', $oid);
+    $stmtDelete->execute();
+
+    for ($i = 0; $i < count($_POST['pro']); $i++) {
         $productID = $_POST['pro'][$i];
         $cuisineID = $_POST['cu'][$i];
         $typeID = $_POST['ty'][$i];
         $categoryID = $_POST['ca'][$i];
         $quantity = $_POST['qt'][$i];
+        
 
-        // Update waste item details in the database
-        $updateWasteItemSql = "UPDATE `wasteitem` SET product_id = :product_id, cuisine_id = :cuisine_id, type_id = :type_id, category_id = :category_id, qty = :qty WHERE id = :item_id";
-        $updateWasteItemStmt = $pdo->prepare($updateWasteItemSql);
-        $updateWasteItemStmt->bindParam(':item_id', $wasteItemID);
-        $updateWasteItemStmt->bindParam(':product_id', $productID);
-        $updateWasteItemStmt->bindParam(':cuisine_id', $cuisineID);
-        $updateWasteItemStmt->bindParam(':type_id', $typeID);
-        $updateWasteItemStmt->bindParam(':category_id', $categoryID);
-        $updateWasteItemStmt->bindParam(':qty', $quantity);
 
-        $updateWasteItemStmt->execute();
+        $wasteItemSql = "INSERT INTO `wasteitem` (waste_id, product_id, cuisine_id, type_id, qty, category_id) VALUES (:waste_id, :product_id, :cuisine_id, :type_id, :qty, :category_id)";
+        $wasteItemStmt = $pdo->prepare($wasteItemSql);
+        $wasteItemStmt->bindParam(':waste_id', $wasteID);
+        $wasteItemStmt->bindParam(':product_id', $productID);
+        $wasteItemStmt->bindParam(':cuisine_id', $cuisineID);
+        $wasteItemStmt->bindParam(':type_id', $typeID);
+        $wasteItemStmt->bindParam(':category_id', $categoryID);
+        $wasteItemStmt->bindParam(':qty', $quantity);
+
+        $wasteItemStmt->execute();
     }
 
-    // Redirect to the "Edit Waste" page with a success message
-    header("Location: wastes.php?id=" . $wasteID . "&success=update_successful");
+    header("Location: " . $u1 . urlencode('Waste Successfully Updated'));
     exit();
 }
 ?>

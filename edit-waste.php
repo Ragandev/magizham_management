@@ -18,6 +18,8 @@ if (isset($_GET['id'])) {
     $wasteStmt->execute();
     $wasteData = $wasteStmt->fetch(PDO::FETCH_ASSOC);
 
+    $oi = $pdo->query("SELECT * FROM wasteitem WHERE waste_id = ".$wasteID."");
+    $wasteItem =$oi->fetchAll(PDO::FETCH_ASSOC);
     // Retrieve branch data for dropdown
     $branchSql = "SELECT * FROM branch";
     $branchData = $pdo->query($branchSql);
@@ -35,9 +37,11 @@ $productdata = $pdo->query("SELECT * FROM `product`")->fetchAll(PDO::FETCH_ASSOC
     <h2>Edit Waste</h2>
     <hr>
     <form class="forms-sample" method="post" action="update-waste.php">
+    <div class="row">
         <input type="hidden" name="id" value="<?php echo $wasteData['id']; ?>">
 
         <!-- Branch -->
+        <div class="col-6">
         <div class="form-group">
             <label for="branch">Branch</label>
             <select class="form-control" id="branch" name="branch">
@@ -48,23 +52,93 @@ $productdata = $pdo->query("SELECT * FROM `product`")->fetchAll(PDO::FETCH_ASSOC
                 <?php endforeach; ?>
             </select>
         </div>
-
+        </div>
         <!-- Date -->
+        <div class="col-6">
         <div class="form-group">
             <label for="date">Date</label>
             <input type="date" class="form-control" id="date" name="date" value="<?php echo $wasteData['date']; ?>">
         </div>
-
+        </div>
         <!-- Waste Amount -->
+        <div class="col-6">
         <div class="form-group">
             <label for="waste_amount">Waste Amount</label>
             <input type="number" class="form-control" id="waste_amount" name="waste_amount" value="<?php echo $wasteData['waste_amount']; ?>">
         </div>
-
-         <!-- Additional product details rows -->
-       <div class="pro-box">
-            <div class="row mb-4">
+        </div>
+<!-- Additional product details rows -->
+<div class="pro-box">
+                <?php  foreach($wasteItem as $od) { ?>
+                    <div class="row"> <div class="col">
+                    <div class="form-group">
+                        <label for="exampleInputStatus">Type</label>
+                        <select class="form-control mb-2" name="ty[]">
+                            <?php foreach ($typedata as $row): ?>
+                                <option value="<?= $row['id'] ?>" <?php if($row['id']=== $od['type_id']){echo 'selected';} ?>><?= $row['name'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
                 <div class="col">
+                    <div class="form-group">
+                        <label for="exampleInputStatus">Cuisine</label>
+                        <select class="form-control mb-2" name="cu[]">
+                            <?php foreach ($cuisinedata as $row): ?>
+                                <option value="<?= $row['id'] ?>"<?php if($row['id']=== $od['cuisine_id']){echo 'selected';} ?>><?= $row['name'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="exampleInputStatus">Category</label>
+                        <select class="form-control mb-2" name="ca[]">
+                            <?php foreach ($categorydata as $row): ?>
+                                <option value="<?= $row['id'] ?>"<?php if($row['id']=== $od['category_id']){echo 'selected';} ?>><?= $row['name'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="exampleInputStatus">Product</label>
+                        <select class="form-control mb-2" name="pro[]">
+                            <?php foreach ($productdata as $row): ?>
+                                <option value="<?= $row['id'] ?>"<?php if($row['id']=== $od['product_id']){echo 'selected';} ?>><?= $row['name'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <label for="">Qty</label>
+                    <input class="form-control mb-2" name="qt[]" value="<?php echo $od['qty']; ?>">
+                </div>
+             
+            </div>
+                <?php } ?>
+        </div >
+        <!-- End of additional product details rows -->
+        <div class="col-3">
+            <a class="btn add-btn btn-success" id="addRow">+</a>
+        </div><br><br><br>
+        <input type="hidden" name="oid" value="<?php echo $wasteID ?>">
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Update waste</button>
+        </div>
+    </form>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+        const addInputButton = document.querySelector('#addRow');
+        const inputContainer = document.querySelector('.pro-box');
+        
+
+
+        addInputButton.addEventListener('click', function() {
+        let inputCount = inputContainer.children.length;
+        let inputEle = `<div class="row"> <div class="col">
                     <div class="form-group">
                         <label for="exampleInputStatus">Type</label>
                         <select class="form-control mb-2" name="ty[]">
@@ -108,22 +182,27 @@ $productdata = $pdo->query("SELECT * FROM `product`")->fetchAll(PDO::FETCH_ASSOC
                     <label for="">Qty</label>
                     <input class="form-control mb-2" name="qt[]">
                 </div>
-             
-           
-            </div>
-        </div>
-        <!-- End of additional product details rows -->
+                 <div class="col-3">
+                <div class="form-group">
+                    <label for="exampleInputStatus">Priority</label>
+                    <select class="form-control" name="pr[]" id="exampleInputStatus">
+                    <option value="High">High</option>
+                        <option value="Low">Low</option>
+                        <option value="Normal">Normal</option>
+                        <option value="Urgent">Urgent</option>
 
-        <div>
-            <a class="btn add-btn btn-success" id="addRow">+</a>
-        </div><br><br><br>
-        <button type="submit" class="btn btn-primary mr-2">Submit</button>
 
-            </div>
+                    </select>
+                </div>
+                </div>
+            </div>`;
+        const newInput = document.createElement('div');
+        newInput.innerHTML = inputEle;
+        inputContainer.appendChild(newInput);
+        
+ 
+    }); 
+});
 
-          </div>
-            
-    </form>
-</div>
-
+</script>
 <?php include('footer.php'); ?>

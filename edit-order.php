@@ -91,7 +91,7 @@ if (isset($_GET['id'])) {
             </div>
         <div class="col-6">
                     <label for="">Description</label>
-                    <input class="form-control mb-2" name="des" >
+                    <input class="form-control mb-2" name="des" value="<?php echo $orderData['description']; ?>" >
                 </div>
                 </div>
 
@@ -115,7 +115,8 @@ if (isset($_GET['id'])) {
                         <label for="exampleInputStatus">Cuisine</label>
                         <select class="form-control mb-2" name="cu[]">
                             <?php foreach ($cuisinedata as $row): ?>
-                                <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
+                                <option value="<?= $row['id'] ?>"<?php if($row['id']=== $od['cuisineid']){echo 'selected';} ?>>
+                                <?= $row['name'] ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -125,7 +126,8 @@ if (isset($_GET['id'])) {
                         <label for="exampleInputStatus">Category</label>
                         <select class="form-control mb-2" name="ca[]">
                             <?php foreach ($categorydata as $row): ?>
-                                <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
+                                <option value="<?= $row['id'] ?>"<?php if($row['id']=== $od['categoryid']){echo 'selected';} ?>>
+                                <?= $row['name'] ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -135,28 +137,31 @@ if (isset($_GET['id'])) {
                         <label for="exampleInputStatus">Product</label>
                         <select class="form-control mb-2" name="pro[]">
                             <?php foreach ($productdata as $row): ?>
-                                <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
+                                <option value="<?= $row['id'] ?>"<?php if($row['id']=== $od['productid']){echo 'selected';} ?>>
+                                <?= $row['name'] ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
                 </div>
                 <div class="col">
                     <label for="">Qty</label>
-                    <input class="form-control mb-2" name="qt[]">
+                    <input class="form-control mb-2" name="qt[]"  value="<?php echo $od['order_qty']; ?>">
                 </div>
-                 <div class="col-3">
-                <div class="form-group">
-                    <label for="exampleInputStatus">Priority</label>
-                    <select class="form-control" name="pr[]" id="exampleInputStatus">
-                    <option value="High">High</option>
-                        <option value="Low">Low</option>
-                        <option value="Normal">Normal</option>
-                        <option value="Urgent">Urgent</option>
+                <div class="col-3">
+    <div class="form-group">
+        <label for="exampleInputStatus">Priority</label>
+        <select class="form-control" name="pr[]">
+            <option value="High" <?php if ($od['pr[]'] === 'High') echo 'selected'; ?>>High</option>
+            <option value="Low" <?php if ($od['pr[]'] === 'Low') echo 'selected'; ?>>Low</option>
+            <option value="Normal" <?php if ($od['pr[]'] === 'Normal') echo 'selected'; ?>>Normal</option>
+            <option value="Urgent" <?php if ($od['pr[]'] === 'Urgent') echo 'selected'; ?>>Urgent</option>
+        </select>
 
 
-                    </select>
-                </div>
-                </div>
+
+    </div>
+</div>
+
             </div>
                 <?php } ?>
         </div >
