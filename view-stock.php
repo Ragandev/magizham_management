@@ -5,6 +5,7 @@ if (!isset($_SESSION['user'])) {
     exit();
 }
 include('header.php');
+include('menu.php');
 require('db.php');
 
 // Get the stock ID from the query string
@@ -107,7 +108,6 @@ table {
     border-collapse: collapse;
     width: 100%;
     margin-bottom: 20px;
-    border: 1px solid #ccc;
 }
 
 table th, table td {
@@ -126,7 +126,5 @@ table th {
 }
 
 /* Style for the Print button */
-#printButton {
-    margin-top: 20px;
-}
+
 </style>

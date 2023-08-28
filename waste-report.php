@@ -1,7 +1,7 @@
 <?php
-include('./header.php');
-include('./menu.php');
-require('../db.php');
+include('header.php');
+include('menu.php');
+require('db.php');
 
 $branchsql = "SELECT * FROM `branch`";
 $branchdata = $pdo->query($branchsql);
@@ -11,9 +11,9 @@ $categorydata = $pdo->query("SELECT * FROM `category`")->fetchAll(PDO::FETCH_ASS
 ?>
 
 <div class="main-box">
-    <h2>Order Report</h2>
+    <h2>Waste Report</h2>
     <hr>
-    <form class="forms-sample" method="post" action="generate-report.php">
+    <form class="forms-sample" method="post" action="generate-waste-report.php">
         <div class="col-6">
             <div class="form-group">
                 <label for="inputStartDate">Start Date</label>
@@ -50,11 +50,12 @@ $categorydata = $pdo->query("SELECT * FROM `category`")->fetchAll(PDO::FETCH_ASS
                     <?php endforeach; ?>
                 </select>
             </div>
+       
         </div>
         <button type="submit" class="btn btn-primary mr-2">Generate Report</button>
     </form>
 </div>
 
 <?php
-include('../footer.php');
+include('footer.php');
 ?>
