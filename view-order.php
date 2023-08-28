@@ -5,6 +5,8 @@ if (!isset($_SESSION['user'])) {
     exit();
 }
 include('header.php');
+include('menu.php');
+
 require('db.php');
 
 
@@ -108,7 +110,6 @@ document.getElementById("printButton").addEventListener("click", function() {
     border-collapse: collapse;
     width: 100%;
     margin-bottom: 20px;
-    border: 1px solid #ccc;
 }
 
 table th, table td {

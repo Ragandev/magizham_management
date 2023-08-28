@@ -178,6 +178,7 @@ document.addEventListener('DOMContentLoaded', function() {
             productSelect.appendChild(option);
         });
     });
+    
 });
 </script>
 

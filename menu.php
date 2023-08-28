@@ -84,7 +84,7 @@ $logName = $logUser['name'];
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="home.php">
+                        <a class="nav-link" href="dashboard1.php">
                             <i class="typcn typcn-device-desktop menu-icon"></i>
                             <span class="menu-title">Dashboard</span>
                         </a>
@@ -159,8 +159,8 @@ $logName = $logUser['name'];
                         <div class="collapse" id="user-manane">
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"> <a class="nav-link" href="order-report.php">Order Reports</a></li>
-                                <li class="nav-item"> <a class="nav-link" href="">Stock Reports</a></li>
-                                <li class="nav-item"> <a class="nav-link" href="">Waste Reports</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="stock-report.php">Stock Reports</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="waste-report.php">Waste Reports</a></li>
                             </ul>
                         </div>
                     </li>
