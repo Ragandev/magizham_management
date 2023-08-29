@@ -29,13 +29,13 @@ if (isset($_GET['id'])) {
     <form class="forms-sample" method="post" action="update-type.php">
         <div class="row">
             <input type="hidden" name="typeID" value="<?php echo $typeData['id']; ?>">
-            <div class="col-6">
+            <div class="col-12 col-md-6 col-lg-3">
                 <div class="form-group">
                     <label for="exampleInputName1">Type Name</label>
                     <input type="text" class="form-control" name="type" id="exampleInputName1" value="<?php echo $typeData['name']; ?>">
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-12 col-md-6 col-lg-3">
                 <div class="form-group">
                     <label for="exampleInputStatus">Status</label>
                     <select class="form-control" name="status" id="exampleInputStatus">

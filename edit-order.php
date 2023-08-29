@@ -40,7 +40,7 @@ if (isset($_GET['id'])) {
     <div class="row">
 
         <input type="hidden" name="orderID" value="<?php echo $orderData['id']; ?>">
-        <div class="col-6">
+        <div class="col-12 col-md-6 col-lg-3">
 
         <div class="form-group">
             <label for="branch">Branch</label>
@@ -53,19 +53,19 @@ if (isset($_GET['id'])) {
             </select>
         </div>
         </div>
-        <div class="col-6">
+        <div class="col-12 col-md-6 col-lg-3">
         <div class="form-group">
             <label for="orderdate">Order Date</label>
             <input type="date" class="form-control" name="orderdate" id="orderdate" value="<?php echo $orderData['orderdate']; ?>">
         </div>
         </div>
-        <div class="col-6">
+        <div class="col-12 col-md-6 col-lg-3">
         <div class="form-group">
             <label for="deliverydate">Delivery Date</label>
             <input type="date" class="form-control" name="deliverydate" id="deliverydate" value="<?php echo $orderData['deliverydate']; ?>">
         </div>
         </div>
-        <div class="col-6">
+        <div class="col-12 col-md-6 col-lg-3">
         <div class="form-group">
             <label for="priority">Priority</label>
             <select class="form-control" name="priority" id="status">
@@ -76,7 +76,7 @@ if (isset($_GET['id'])) {
 
             </select>        </div>
         </div>
-        <div class="col-6">
+        <div class="col-12 col-md-6 col-lg-3">
                 <div class="form-group">
                     <label for="status">Status</label>
                     <select class="form-control" name="status" id="status">
@@ -89,18 +89,19 @@ if (isset($_GET['id'])) {
                     </select>
                 </div>
             </div>
-        <div class="col-6">
+            <div class="col-12 col-md-6 col-lg-3">
                     <label for="">Description</label>
                     <input class="form-control mb-2" name="des" value="<?php echo $orderData['description']; ?>" >
                 </div>
                 </div>
 
-  
+
          
         <!-- Additional product details rows -->
         <div class="pro-box">
                 <?php  foreach($orderItem as $od) { ?>
-                    <div class="row"> <div class="col">
+                    <div class="row">
+                    <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
                         <label for="exampleInputStatus">Type</label>
                         <select class="form-control mb-2" name="ty[]">
@@ -110,7 +111,7 @@ if (isset($_GET['id'])) {
                         </select>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
                         <label for="exampleInputStatus">Cuisine</label>
                         <select class="form-control mb-2" name="cu[]">
@@ -121,7 +122,7 @@ if (isset($_GET['id'])) {
                         </select>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
                         <label for="exampleInputStatus">Category</label>
                         <select class="form-control mb-2" name="ca[]">
@@ -132,7 +133,7 @@ if (isset($_GET['id'])) {
                         </select>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
                         <label for="exampleInputStatus">Product</label>
                         <select class="form-control mb-2" name="pro[]">
@@ -143,11 +144,11 @@ if (isset($_GET['id'])) {
                         </select>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6 col-lg-2">
                     <label for="">Qty</label>
                     <input class="form-control mb-2" name="qt[]"  value="<?php echo $od['order_qty']; ?>">
                 </div>
-                <div class="col-3">
+                <div class="col-12 col-md-6 col-lg-2">
     <div class="form-group">
         <label for="exampleInputStatus">Priority</label>
         <select class="form-control" name="pr[]">
@@ -167,7 +168,7 @@ if (isset($_GET['id'])) {
         </div >
        
         <!-- End of additional product details rows -->
-        <div class="col-3">
+        <div class="col-12 col-md-6 col-lg-2">
             <a class="btn add-btn btn-success" id="addRow">+</a>
         </div><br><br><br>
 
@@ -187,7 +188,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         addInputButton.addEventListener('click', function() {
         let inputCount = inputContainer.children.length;
-        let inputEle = `<div class="row"> <div class="col">
+        let inputEle = `<div class="row"> 
+        <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
                         <label for="exampleInputStatus">Type</label>
                         <select class="form-control mb-2" name="ty[]">
@@ -197,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         </select>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
                         <label for="exampleInputStatus">Cuisine</label>
                         <select class="form-control mb-2" name="cu[]">
@@ -207,7 +209,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         </select>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
                         <label for="exampleInputStatus">Category</label>
                         <select class="form-control mb-2" name="ca[]">
@@ -217,7 +219,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         </select>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
                         <label for="exampleInputStatus">Product</label>
                         <select class="form-control mb-2" name="pro[]">
@@ -227,11 +229,11 @@ document.addEventListener('DOMContentLoaded', function() {
                         </select>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6 col-lg-2">
                     <label for="">Qty</label>
                     <input class="form-control mb-2" name="qt[]">
                 </div>
-                 <div class="col-3">
+                <div class="col-12 col-md-6 col-lg-2">
                 <div class="form-group">
                     <label for="exampleInputStatus">Priority</label>
                     <select class="form-control" name="pr[]" id="exampleInputStatus">

@@ -14,7 +14,7 @@ $categorydata = $pdo->query("SELECT * FROM `category`")->fetchAll(PDO::FETCH_ASS
     <h2>Waste Report</h2>
     <hr>
     <form class="forms-sample" method="post" action="generate-waste-report.php">
-        <div class="col-6">
+    <div class="col-12 col-md-6 col-lg-3">
             <div class="form-group">
                 <label for="inputStartDate">Start Date</label>
                 <input type="date" class="form-control" name="startDate" id="inputStartDate">

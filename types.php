@@ -62,8 +62,7 @@ $logUser = $_SESSION['user'];
             echo "<td>" . $row['status'] . "</td>";
             echo "<td>
             <a href='edit-type.php?id=" . $row['id'] . "'><i class=' typcn typcn-edit'></i></a> |
-        
- 
+
             <a href='delete-type.php?delete_id=" . $row['id'] . "' class='text-danger' onclick='return confirmDelete()'><i class='  typcn typcn-trash'></i></a>
 </td>";
 

@@ -31,7 +31,7 @@ if (isset($_GET['id'])) {
     <form class="forms-sample" method="post" action="update-branch.php">
     <div class="row">
 
-    <div class="col-6">
+    <div class="col-12 col-md-6 col-lg-3">
 
         <div class="form-group">
             <input type="hidden" name="branchID" value="<?php echo $branchData['id']; ?>">
@@ -39,19 +39,19 @@ if (isset($_GET['id'])) {
             <input type="text" class="form-control" name="name" id="exampleInputName" value="<?php echo $branchData['name']; ?>">
         </div>
         </div>
-        <div class="col-6">
+        <div class="col-12 col-md-6 col-lg-3">
         <div class="form-group">
             <label for="exampleInputAddress">Address</label>
             <input type="text" class="form-control" name="address" id="exampleInputAddress" value="<?php echo $branchData['address']; ?>">
         </div>
         </div>
-        <div class="col-6">
+        <div class="col-12 col-md-6 col-lg-3">
         <div class="form-group">
             <label for="exampleInputPhone">Phone</label>
             <input type="text" class="form-control" name="phone" id="exampleInputPhone" value="<?php echo $branchData['phone']; ?>">
         </div>
         </div>     
-           <div class="col-6">
+        <div class="col-12 col-md-6 col-lg-3">
         <div class="form-group">
             <label for="exampleInputStatus">Status</label>
             <select class="form-control" name="status" id="exampleInputStatus">
@@ -59,8 +59,10 @@ if (isset($_GET['id'])) {
                 <option value="inactive" <?php if ($branchData['status'] === 'inactive') echo 'selected'; ?>>Inactive</option>
             </select>
         </div>
-        </div>     
+        </div>
+        <div class="col-12 col-md-6 col-lg-3">
         <button type="submit" class="btn btn-primary mr-2">Update</button>
+        </div>
         </div>
     </form>
 </div>

@@ -1,6 +1,6 @@
 <style>
   .typcn {
-    font-size: 22px; 
+    font-size: 18px; 
   }
 </style>
 <?php
