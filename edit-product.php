@@ -31,13 +31,13 @@ if (isset($_GET['id'])) {
     <form class="forms-sample" method="post" action="update-product.php" enctype="multipart/form-data">
         <div class="row">
             <input type="hidden" name="productID" value="<?php echo $productData['id']; ?>">
-            <div class="col-6">
+            <div class="col-12 col-md-6 col-lg-3">
                 <div class="form-group">
                     <label for="exampleInputName1">Product Name</label>
                     <input type="text" class="form-control" name="product" id="exampleInputName1" value="<?php echo $productData['name']; ?>">
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-12 col-md-6 col-lg-3">
                 <div class="form-group">
                     <label for="exampleInputStatus">Unit</label>
                     <select class="form-control" name="unit" id="exampleInputStatus">
@@ -46,19 +46,19 @@ if (isset($_GET['id'])) {
                     </select>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-12 col-md-6 col-lg-3">
                 <div class="form-group">
                     <label for="exampleInputStockQty">Stock Qty</label>
                     <input type="text" class="form-control" name="stock_qty" id="exampleInputStockQty" value="<?php echo $productData['stock_qty']; ?>">
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-12 col-md-6 col-lg-3">
                 <div class="form-group">
                     <label for="exampleInputPrice">Price</label>
                     <input type="text" class="form-control" name="price" id="exampleInputPrice" value="<?php echo $productData['price']; ?>">
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-12 col-md-6 col-lg-3">
                 <div class="form-group">
                     <label for="exampleInputType">Type</label>
                     <select class="form-control" name="type" id="exampleInputType">
@@ -68,7 +68,7 @@ if (isset($_GET['id'])) {
                     </select>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-12 col-md-6 col-lg-3">
             <div class="form-group">
                     <label for="exampleInputCategory">Category</label>
                     <select class="form-control" name="category" id="exampleInputCategory">
@@ -77,7 +77,7 @@ if (isset($_GET['id'])) {
                         <?php endforeach; ?>
                     </select>
                 </div>            </div>
-                <div class="col-6">
+                <div class="col-12 col-md-6 col-lg-3">
                 <div class="form-group">
                     <label for="exampleInputCuisine">Cuisine</label>
                     <select class="form-control" name="cuisine" id="exampleInputCuisine">
@@ -87,7 +87,7 @@ if (isset($_GET['id'])) {
                     </select>
                 </div>
             </div> 
-            <div class="col-6">
+            <div class="col-12 col-md-6 col-lg-3">
                 <div class="form-group">
                     <label for="exampleInputStatus">Status</label>
                     <select class="form-control" name="status" id="exampleInputStatus">
@@ -96,7 +96,7 @@ if (isset($_GET['id'])) {
                     </select>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-12 col-md-6 col-lg-3">
                 <div class="form-group">
                     <label for="exampleInputImage">Image</label>
                     <label for="exampleInputImage">Image</label>

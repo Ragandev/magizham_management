@@ -28,8 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validation
     if (empty($branch) || empty( $date ) || empty( $amount)) {
-        echo "Error: All fields are required.";
-        exit();
+        header("Location: " . $u2 . urlencode('All Fields Are Required'));
+    exit();
     }
 
     // Insert data into product table

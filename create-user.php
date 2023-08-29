@@ -27,28 +27,28 @@ $branchdata = $pdo->query($branchsql);
     <hr>
     <form class="forms-sample" method="post" action="create-user-post.php">
         <div class="row">
-            <div class="col-6">
+            <div class="col-12 col-md-6 col-lg-3">
 
                 <div class="form-group">
                     <label for="exampleInputName1">Name</label>
                     <input type="text" class="form-control" name="name" id="exampleInputName1" placeholder="Name">
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-12 col-md-6 col-lg-3">
                 <div class="form-group">
                     <label for="exampleInputEmail3">Username</label>
                     <input type="text" class="form-control" name="username" id="exampleInputEmail3" placeholder="Username">
                 </div>
 
             </div>
-            <div class="col-12">
+            <div class="col-12 col-md-6 col-lg-3">
                 <div class="form-group">
                     <label for="exampleInputPassword4">Password</label>
                     <input type="password" class="form-control" name="password" id="exampleInputPassword4" placeholder="Password">
                 </div>
 
             </div>
-            <div class="col-6">
+            <div class="col-12 col-md-6 col-lg-3">
                 <div class="form-group">
                     <label for="exampleSelectGender">Role</label>
                     <select class="form-control" id="exampleSelectGender" name="role">
@@ -60,7 +60,7 @@ $branchdata = $pdo->query($branchsql);
                 </div>
 
             </div>
-            <div class="col-6">
+            <div class="col-12 col-md-6 col-lg-3">
             <div class="form-group">
                     <label for="exampleSelectGender">Branch</label>
                     <select class="form-control" id="exampleSelectGender" name="branch">

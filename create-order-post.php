@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  
 
     // Validation
-    if (empty($branch) || empty($orderdate) || empty($priority) || empty($status) || empty($des)) {
+    if (empty($branch) || empty($orderdate) || empty($priority) || empty($status)) {
         echo "Error: All fields are required.";
         exit();
     }

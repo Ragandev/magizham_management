@@ -32,16 +32,14 @@ $productdata = $pdo->query("SELECT * FROM `product`")->fetchAll(PDO::FETCH_ASSOC
     exit();
 }
 ?>
-
 <div class="main-box">
     <h2>Edit Waste</h2>
     <hr>
     <form class="forms-sample" method="post" action="update-waste.php">
     <div class="row">
         <input type="hidden" name="id" value="<?php echo $wasteData['id']; ?>">
-
         <!-- Branch -->
-        <div class="col-6">
+        <div class="col-12 col-md-6 col-lg-3">
         <div class="form-group">
             <label for="branch">Branch</label>
             <select class="form-control" id="branch" name="branch">
@@ -54,14 +52,14 @@ $productdata = $pdo->query("SELECT * FROM `product`")->fetchAll(PDO::FETCH_ASSOC
         </div>
         </div>
         <!-- Date -->
-        <div class="col-6">
+        <div class="col-12 col-md-6 col-lg-3">
         <div class="form-group">
             <label for="date">Date</label>
             <input type="date" class="form-control" id="date" name="date" value="<?php echo $wasteData['date']; ?>">
         </div>
         </div>
         <!-- Waste Amount -->
-        <div class="col-6">
+        <div class="col-12 col-md-6 col-lg-3">
         <div class="form-group">
             <label for="waste_amount">Waste Amount</label>
             <input type="number" class="form-control" id="waste_amount" name="waste_amount" value="<?php echo $wasteData['waste_amount']; ?>">
@@ -70,7 +68,8 @@ $productdata = $pdo->query("SELECT * FROM `product`")->fetchAll(PDO::FETCH_ASSOC
 <!-- Additional product details rows -->
 <div class="pro-box">
                 <?php  foreach($wasteItem as $od) { ?>
-                    <div class="row"> <div class="col">
+                    <div class="row mb-4">
+                    <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
                         <label for="exampleInputStatus">Type</label>
                         <select class="form-control mb-2" name="ty[]">
@@ -80,7 +79,7 @@ $productdata = $pdo->query("SELECT * FROM `product`")->fetchAll(PDO::FETCH_ASSOC
                         </select>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
                         <label for="exampleInputStatus">Cuisine</label>
                         <select class="form-control mb-2" name="cu[]">
@@ -90,7 +89,7 @@ $productdata = $pdo->query("SELECT * FROM `product`")->fetchAll(PDO::FETCH_ASSOC
                         </select>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
                         <label for="exampleInputStatus">Category</label>
                         <select class="form-control mb-2" name="ca[]">
@@ -100,7 +99,7 @@ $productdata = $pdo->query("SELECT * FROM `product`")->fetchAll(PDO::FETCH_ASSOC
                         </select>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
                         <label for="exampleInputStatus">Product</label>
                         <select class="form-control mb-2" name="pro[]">
@@ -110,7 +109,7 @@ $productdata = $pdo->query("SELECT * FROM `product`")->fetchAll(PDO::FETCH_ASSOC
                         </select>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6 col-lg-2">
                     <label for="">Qty</label>
                     <input class="form-control mb-2" name="qt[]" value="<?php echo $od['qty']; ?>">
                 </div>
@@ -119,12 +118,13 @@ $productdata = $pdo->query("SELECT * FROM `product`")->fetchAll(PDO::FETCH_ASSOC
                 <?php } ?>
         </div >
         <!-- End of additional product details rows -->
-        <div class="col-3">
+        <div class="col-12">
             <a class="btn add-btn btn-success" id="addRow">+</a>
         </div><br><br><br>
         <input type="hidden" name="oid" value="<?php echo $wasteID ?>">
-
+        <br><br><br>
         <!-- Submit Button -->
+        <div>
         <button type="submit" class="btn btn-primary">Update waste</button>
         </div>
     </form>
@@ -138,7 +138,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         addInputButton.addEventListener('click', function() {
         let inputCount = inputContainer.children.length;
-        let inputEle = `<div class="row"> <div class="col">
+        let inputEle = `<div class="row"> 
+        <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
                         <label for="exampleInputStatus">Type</label>
                         <select class="form-control mb-2" name="ty[]">
@@ -148,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         </select>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
                         <label for="exampleInputStatus">Cuisine</label>
                         <select class="form-control mb-2" name="cu[]">
@@ -158,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         </select>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
                         <label for="exampleInputStatus">Category</label>
                         <select class="form-control mb-2" name="ca[]">
@@ -168,7 +169,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         </select>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
                         <label for="exampleInputStatus">Product</label>
                         <select class="form-control mb-2" name="pro[]">
@@ -178,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         </select>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6 col-lg-2">
                     <label for="">Qty</label>
                     <input class="form-control mb-2" name="qt[]">
                 </div>

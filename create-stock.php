@@ -15,8 +15,8 @@ $productdata = $pdo->query("SELECT * FROM `product`")->fetchAll(PDO::FETCH_ASSOC
     <hr>
     <form class="forms-sample" method="post" action="create-stock-post.php">
         <div class="row">
-        
-        <div class="col-6">
+
+        <div class="col-12 col-md-6 col-lg-3">
                 <div class="form-group">
                     <label for="exampleInputStatus">Branch</label>
                     <select class="form-control" name="branch" id="exampleInputStatus">
@@ -28,23 +28,19 @@ $productdata = $pdo->query("SELECT * FROM `product`")->fetchAll(PDO::FETCH_ASSOC
                     </select>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-12 col-md-6 col-lg-3">
     <div class="form-group">
         <label for="exampleInputDate">Date</label>
         <input type="date" class="form-control" name="date" id="exampleInputDate">
     </div>
 </div>
-
-
-
-        
-         
+ 
             </div>
               
         <!-- Additional product details rows -->
         <div class="pro-box">
             <div class="row mb-4">
-                <div class="col">
+            <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
                         <label for="exampleInputStatus">Type</label>
                         <select class="form-control mb-2" name="ty[]">
@@ -54,7 +50,7 @@ $productdata = $pdo->query("SELECT * FROM `product`")->fetchAll(PDO::FETCH_ASSOC
                         </select>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
                         <label for="exampleInputStatus">Cuisine</label>
                         <select class="form-control mb-2" name="cu[]">
@@ -64,7 +60,7 @@ $productdata = $pdo->query("SELECT * FROM `product`")->fetchAll(PDO::FETCH_ASSOC
                         </select>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
                         <label for="exampleInputStatus">Category</label>
                         <select class="form-control mb-2" name="ca[]">
@@ -74,7 +70,7 @@ $productdata = $pdo->query("SELECT * FROM `product`")->fetchAll(PDO::FETCH_ASSOC
                         </select>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
                         <label for="exampleInputStatus">Product</label>
                         <select class="form-control mb-2" name="pro[]">
@@ -84,7 +80,7 @@ $productdata = $pdo->query("SELECT * FROM `product`")->fetchAll(PDO::FETCH_ASSOC
                         </select>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6 col-lg-2">
                     <label for="">Qty</label>
                     <input class="form-control mb-2" name="qt[]">
                 </div>

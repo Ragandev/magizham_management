@@ -31,19 +31,19 @@ $branchdata = $pdo->query($branchsql);
     <form class="forms-sample" method="post" action="update-user.php">
         <div class="row">
             <input type="hidden" name="userID" value="<?php echo $userData['id']; ?>">
-            <div class="col-6">
+            <div class="col-12 col-md-6 col-lg-3">
                 <div class="form-group">
                     <label for="exampleInputName">Name</label>
                     <input type="text" class="form-control" name="name" id="exampleInputName" value="<?php echo $userData['name']; ?>">
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-12 col-md-6 col-lg-3">
                 <div class="form-group">
                     <label for="exampleInputUsername">Username</label>
                     <input type="text" class="form-control" name="username" id="exampleInputUsername" value="<?php echo $userData['username']; ?>">
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-12 col-md-6 col-lg-3">
             <div class="form-group">
                     <label for="exampleSelectGender">Branch</label>
                     <select class="form-control" id="exampleSelectGender" name="branch">
@@ -54,7 +54,7 @@ $branchdata = $pdo->query($branchsql);
                     </select>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-12 col-md-6 col-lg-3">
                 <div class="form-group">
                     <label for="exampleInputRole">Role</label>
                     <input type="text" class="form-control" name="role" id="exampleInputRole" value="<?php echo $userData['role']; ?>">
