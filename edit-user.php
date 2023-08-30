@@ -21,7 +21,7 @@ if (isset($_GET['id'])) {
     header("Location: users.php");
     exit();
 }
-$branchsql = "SELECT * FROM `branch`";
+$branchsql = "SELECT * FROM `branch` WHERE status = 'Active'";
 $branchdata = $pdo->query($branchsql);
 ?>
 

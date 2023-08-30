@@ -13,11 +13,11 @@ if (isset($_GET['id'])) {
     $productStmt->execute();
     $productData = $productStmt->fetch(PDO::FETCH_ASSOC);
 
-    $typesql = "SELECT * FROM `type`";
+    $typesql = "SELECT * FROM `type`  WHERE status = 'Active'";
     $typedata = $pdo->query($typesql);
-    $categorysql = "SELECT * FROM `category`";
+    $categorysql = "SELECT * FROM `category`  WHERE status = 'Active'";
     $categorydata = $pdo->query($categorysql);
-    $cuisinesql = "SELECT * FROM `cuisine`";
+    $cuisinesql = "SELECT * FROM `cuisine` WHERE status = 'Active'";
     $cuisinedata = $pdo->query($cuisinesql);
 } else {
     header("Location: products.php");
@@ -41,20 +41,16 @@ if (isset($_GET['id'])) {
                 <div class="form-group">
                     <label for="exampleInputStatus">Unit</label>
                     <select class="form-control" name="unit" id="exampleInputStatus">
+                    <option value="kg" <?php if ($productData['unit'] === 'g') echo 'selected'; ?>>g</option>
                         <option value="kg" <?php if ($productData['unit'] === 'kg') echo 'selected'; ?>>kg</option>
                         <option value="Ltr" <?php if ($productData['unit'] === 'Ltr') echo 'selected'; ?>>Ltr</option>
                     </select>
                 </div>
             </div>
+          
             <div class="col-12 col-md-6 col-lg-3">
                 <div class="form-group">
-                    <label for="exampleInputStockQty">Stock Qty</label>
-                    <input type="text" class="form-control" name="stock_qty" id="exampleInputStockQty" value="<?php echo $productData['stock_qty']; ?>">
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="form-group">
-                    <label for="exampleInputPrice">Price</label>
+                    <label for="exampleInputPrice">Price (Per Unit)</label>
                     <input type="text" class="form-control" name="price" id="exampleInputPrice" value="<?php echo $productData['price']; ?>">
                 </div>
             </div>

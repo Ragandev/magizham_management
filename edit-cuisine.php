@@ -39,8 +39,8 @@ if (isset($_GET['id'])) {
         <div class="form-group">
             <label for="status">Status</label>
             <select class="form-control" id="status" name="status">
-                <option value="active" <?php if ($cuisineData['status'] === 'active') echo 'selected'; ?>>Active</option>
-                <option value="inactive" <?php if ($cuisineData['status'] === 'inactive') echo 'selected'; ?>>Inactive</option>
+                <option value="Active" <?php if ($cuisineData['status'] === 'Active') echo 'selected'; ?>>Active</option>
+                <option value="Inactive" <?php if ($cuisineData['status'] === 'Inactive') echo 'selected'; ?>>Inactive</option>
             </select>
         </div>
         </div>

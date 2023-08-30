@@ -3,7 +3,7 @@ include('header.php');
 include('menu.php');
 require('db.php');
 
-$typesql = "SELECT * FROM `type`";
+$typesql = "SELECT * FROM `type`WHERE status = 'Active'";
 $typedata = $pdo->query($typesql);
 ?>
 <div class="main-box">

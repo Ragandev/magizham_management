@@ -28,5 +28,8 @@
       background-color: #fff;
       border-radius: 10px;
     }
+   .form-control{
+      height: 47px;
+    }
   </style>
 </head>

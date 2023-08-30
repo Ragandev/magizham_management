@@ -26,7 +26,7 @@ include('menu.php');
             <div class="col-12 col-md-6 col-lg-3">
                 <div class="form-group">
                     <label for="exampleInputPassword4">phone</label>
-                    <input type="password" class="form-control" name="phone" id="exampleInputPassword4" placeholder="Phone">
+                    <input type="text" class="form-control" name="phone" id="exampleInputPassword4" placeholder="Phone">
                 </div>
 
             </div>
