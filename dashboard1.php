@@ -5,7 +5,7 @@
         width: 100%;
         padding: 20px;
         box-sizing: border-box;
-        border-radius: 30px;
+        border-radius: 20px;
         box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
         font-size: 1em;
     }
@@ -24,40 +24,40 @@
         color: #000000;
     }
 
-    .fas {
-        color: black;
+    .fas,
+    .fa-solid {
+        color: #fff;
+        filter: drop-shadow(0 0 5px rgba(0,0,0,0.1));
     }
 
-    .fa-solid {
-        color: black;
-    }
     .violet{
-        background-color: skyblue;
+        background-color: #D89216;
     }
     .pink{
-        background-color: #fdb44b;
+        background-color: #46B5D1;
     }
     .red{
-        background-color: #f76b8a; 
+        background-color: #C62A88; 
     }
     .green{
-        background-color: #66bfbf;   
+        background-color: #511845;   
     }
     .blue{
-        background-color: #edb1f1;   
+        background-color: #E43F5A;   
     }
     .orange{
-        background-color: #9cd3d3;       
+        background-color: #590995;590995       
     }
     .black{
-        background-color: #dde0ab;       
+        background-color: #00337C;       
     }
     .yellow{
-        background-color: #c4c1e0;       
+        background-color: #FF5733;       
     }
     .inner{
         display: flex;
         gap: 1px;
+        color: #fff;
     }
     .fa-shopping-cart{
         size: 100px;
@@ -77,6 +77,11 @@
 
 .dashboard-item .icon {
     margin-left: 10px; 
+}
+.inner p{
+    font-weight: bold;
+    font-size: 30px;
+    margin-top: 20px;
 }
 </style>
 <?php
@@ -144,7 +149,7 @@ include('menu.php'); // Include your menu file
     <h3>Total's</h3><br>
         <div class="row">
               
-            <div class="col-md-4">
+            <div class="col-md-4 mb-3">
                 <div class="dashboard-item violet">
                     <div class="inner">
                         <div>
@@ -164,7 +169,7 @@ include('menu.php'); // Include your menu file
                 </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4 mb-3">
                 <div class="dashboard-item pink">
                     <div class="inner">
                         <div><h3> Total Stocks</h3>
@@ -197,9 +202,9 @@ include('menu.php'); // Include your menu file
         </div>
         <br><br>
         <h3>Today's</h3><br>
-        <div class="row">
+        <div class="row mb-5">
             <!-- <div class="col-1"></div> -->
-            <div class="col-md-4">
+            <div class="col-md-4 mb-3">
                 <div class="dashboard-item green ">
                     <div class="inner">
                         <div>
@@ -218,7 +223,7 @@ include('menu.php'); // Include your menu file
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mb-3">
                 <div class="dashboard-item blue">
                     <div class="inner">
                         <div>
@@ -236,7 +241,7 @@ include('menu.php'); // Include your menu file
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mb-3">
                 <div class="dashboard-item orange">
                     <div class="inner">
                         <div>
@@ -253,7 +258,7 @@ include('menu.php'); // Include your menu file
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mb-3">
                 <div class="dashboard-item yellow">
                     <div class="inner">
                         <div>
@@ -304,6 +309,7 @@ include('menu.php'); // Include your menu file
                             <canvas id="todayOrdersPieChart" width="250" height="250"></canvas>
                         </div>
                     </div>
+                    <br><br>
                     <div class="col-md-12">
 
                         <div class="chart-container">
@@ -322,7 +328,7 @@ include('menu.php'); // Include your menu file
                                 labels: ['Total Orders', 'Total Stocks', 'Total Wastes'],
                                 datasets: [{
                                     data: [<?= $totalOrders ?>, <?= $totalStocks ?>, <?= $totalWastes ?>],
-                                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+                                    backgroundColor: ['#DF204A', '#4ADF20', '#204ADF']
                                 }]
                             },
                             options: {
@@ -353,7 +359,7 @@ include('menu.php'); // Include your menu file
                                 datasets: [{
                                     label: 'Today\'s Details',
                                     data: [<?= $todayTotalOrders ?>, <?= $todayTotalStocks ?>, <?= $todayTotalWastes ?>, 0],
-                                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+                                    backgroundColor: ['#FF6384', '#FF5733', '#C70039'],
                                     borderWidth: 1
                                 }]
                             },
