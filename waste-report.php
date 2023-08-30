@@ -3,7 +3,7 @@ include('header.php');
 include('menu.php');
 require('db.php');
 
-$branchsql = "SELECT * FROM `branch`";
+$branchsql = "SELECT * FROM `branch` WHERE status = 'Active'";
 $branchdata = $pdo->query($branchsql);
 
 $typedata = $pdo->query("SELECT * FROM `type`")->fetchAll(PDO::FETCH_ASSOC);

@@ -21,12 +21,12 @@ if (isset($_GET['id'])) {
     $oi = $pdo->query("SELECT * FROM wasteitem WHERE waste_id = ".$wasteID."");
     $wasteItem =$oi->fetchAll(PDO::FETCH_ASSOC);
     // Retrieve branch data for dropdown
-    $branchSql = "SELECT * FROM branch";
+    $branchSql = "SELECT * FROM branch WHERE status = 'Active'";
     $branchData = $pdo->query($branchSql);
-    $typedata = $pdo->query("SELECT * FROM `type`")->fetchAll(PDO::FETCH_ASSOC);
-$cuisinedata = $pdo->query("SELECT * FROM `cuisine`")->fetchAll(PDO::FETCH_ASSOC);
-$categorydata = $pdo->query("SELECT * FROM `category`")->fetchAll(PDO::FETCH_ASSOC);
-$productdata = $pdo->query("SELECT * FROM `product`")->fetchAll(PDO::FETCH_ASSOC);
+    $typedata = $pdo->query("SELECT * FROM `type`WHERE status = 'Active'")->fetchAll(PDO::FETCH_ASSOC);
+$cuisinedata = $pdo->query("SELECT * FROM `cuisine`WHERE status = 'Active'")->fetchAll(PDO::FETCH_ASSOC);
+$categorydata = $pdo->query("SELECT * FROM `category`WHERE status = 'Active'")->fetchAll(PDO::FETCH_ASSOC);
+$productdata = $pdo->query("SELECT * FROM `product`WHERE status = 'Active'")->fetchAll(PDO::FETCH_ASSOC);
 } else {
     header("Location: wastes.php");
     exit();

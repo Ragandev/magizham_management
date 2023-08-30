@@ -3,12 +3,12 @@ include('header.php');
 include('menu.php');
 require('db.php');
 
-$typesql = "SELECT * FROM `type`";
+$typesql = "SELECT * FROM `type`  WHERE status = 'Active'";
 $typedata = $pdo->query($typesql);
 
-$categorysql = "SELECT * FROM `category`";
+$categorysql = "SELECT * FROM `category`  WHERE status = 'Active'";
 $categorydata = $pdo->query($categorysql);
-$cuisinesql = "SELECT * FROM `cuisine`";
+$cuisinesql = "SELECT * FROM `cuisine` WHERE status = 'Active' ";
 $cuisinedata = $pdo->query($cuisinesql);
                 
 ?>
@@ -29,20 +29,16 @@ $cuisinedata = $pdo->query($cuisinesql);
                 <div class="form-group">
                     <label for="exampleInputStatus">Unit</label>
                     <select class="form-control" name="unit" id="exampleInputStatus">
+                    <option value="kg">g</option>
                         <option value="kg">kg</option>
                         <option value="Ltr">Ltr</option>
                     </select>
                 </div>
             </div>
-            <div class="col-12 col-md-6 col-lg-3">
-            <div class="form-group">
-    <label for="exampleInputName1">Stock_qty</label>
-    <input type="text" class="form-control" name="stock_qty" id="exampleInputName1" placeholder="Enter qty">
-</div>
-</div>
+        
 <div class="col-12 col-md-6 col-lg-3">
 <div class="form-group">
-    <label for="exampleInputName1">Price</label>
+    <label for="exampleInputName1">Price (Per Unit)</label>
     <input type="text" class="form-control" name="price" id="exampleInputName1" placeholder="price">
 </div>
 </div>
@@ -50,7 +46,8 @@ $cuisinedata = $pdo->query($cuisinesql);
                 <div class="form-group">
                     <label for="exampleInputStatus">Type</label>
                     <select class="form-control" name="type" id="exampleInputStatus">
-       
+                    <option value=""></option>
+
                 <?php foreach ($typedata as $row): ?>
                     <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
                     <?php endforeach; ?>
@@ -89,6 +86,7 @@ $cuisinedata = $pdo->query($cuisinesql);
                 <div class="form-group">
                     <label for="exampleInputStatus">Status</label>
                     <select class="form-control" name="status" id="exampleInputStatus">
+                    <option value=""></option>
                         <option value="active">Active</option>
                         <option value="inactive">Inactive</option>
                     </select>

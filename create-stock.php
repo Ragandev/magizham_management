@@ -3,12 +3,12 @@ include('header.php');
 include('menu.php');
 require('db.php');
 
-$branchsql = "SELECT * FROM `branch`";
+$branchsql = "SELECT * FROM `branch`WHERE status = 'Active'";
 $branchdata = $pdo->query($branchsql);
-$typedata = $pdo->query("SELECT * FROM `type`")->fetchAll(PDO::FETCH_ASSOC);
-$cuisinedata = $pdo->query("SELECT * FROM `cuisine`")->fetchAll(PDO::FETCH_ASSOC);
-$categorydata = $pdo->query("SELECT * FROM `category`")->fetchAll(PDO::FETCH_ASSOC);
-$productdata = $pdo->query("SELECT * FROM `product`")->fetchAll(PDO::FETCH_ASSOC);
+$typedata = $pdo->query("SELECT * FROM `type`WHERE status = 'Active'")->fetchAll(PDO::FETCH_ASSOC);
+$cuisinedata = $pdo->query("SELECT * FROM `cuisine`WHERE status = 'Active'")->fetchAll(PDO::FETCH_ASSOC);
+$categorydata = $pdo->query("SELECT * FROM `category`WHERE status = 'Active'")->fetchAll(PDO::FETCH_ASSOC);
+$productdata = $pdo->query("SELECT * FROM `product`WHERE status = 'Active'")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <div class="main-box">
     <h2 class="mb-3">Create Stock</h2>
@@ -115,17 +115,18 @@ document.addEventListener('DOMContentLoaded', function() {
         newRow.querySelector('[name="pro[]"]').value = "";
         newRow.querySelector('[name="qt[]"]').value = "";
 
-        // Append the cloned row to the input container
-        inputContainer.appendChild(newRow);
-
         // Populate the product dropdown in the cloned row
         const productSelect = newRow.querySelector('[name="pro[]"]');
+        productSelect.innerHTML = ''; // Clear existing options before populating
         productDataJSON.forEach(function(product) {
             const option = document.createElement('option');
             option.value = product.id;
             option.text = product.name;
             productSelect.appendChild(option);
         });
+
+        // Append the cloned row to the input container
+        inputContainer.appendChild(newRow);
     });
 });
 </script>

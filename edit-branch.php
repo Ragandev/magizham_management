@@ -52,14 +52,14 @@ if (isset($_GET['id'])) {
         </div>
         </div>     
         <div class="col-12 col-md-6 col-lg-3">
-        <div class="form-group">
-            <label for="exampleInputStatus">Status</label>
-            <select class="form-control" name="status" id="exampleInputStatus">
-                <option value="active" <?php if ($branchData['status'] === 'active') echo 'selected'; ?>>Active</option>
-                <option value="inactive" <?php if ($branchData['status'] === 'inactive') echo 'selected'; ?>>Inactive</option>
-            </select>
-        </div>
-        </div>
+                <div class="form-group">
+                    <label for="exampleInputStatus">Status</label>
+                    <select class="form-control" name="status" id="exampleInputStatus">
+                        <option value="Active" <?php if ($branchData['status'] === 'Active') echo 'selected'; ?>>Active</option>
+                        <option value="Inactive" <?php if ($branchData['status'] === 'Inactive') echo 'selected'; ?>>Inactive</option>
+                    </select>
+                </div>
+            </div>
         <div class="col-12 col-md-6 col-lg-3">
         <button type="submit" class="btn btn-primary mr-2">Update</button>
         </div>

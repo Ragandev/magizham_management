@@ -17,6 +17,8 @@ if (isset($_GET['id'])) {
     $categoryStmt->bindParam(':id', $categoryId);
     $categoryStmt->execute();
     $categoryData = $categoryStmt->fetch(PDO::FETCH_ASSOC);
+    $typesql = "SELECT * FROM `type`WHERE status = 'Active'";
+$typedata = $pdo->query($typesql);
 } else {
     header("Location: categories.php");
     exit();
@@ -36,13 +38,24 @@ if (isset($_GET['id'])) {
         </div>
         </div>
         <div class="col-12 col-md-6 col-lg-3">
-        <div class="form-group">
-            <label for="exampleInputStatus">Status</label>
-            <select class="form-control" name="status" id="exampleInputStatus">
-                <option value="active" <?php if ($categoryData['status'] === 'active') echo 'selected'; ?>>Active</option>
-                <option value="inactive" <?php if ($categoryData['status'] === 'inactive') echo 'selected'; ?>>Inactive</option>
-            </select>
-        </div>
+                <div class="form-group">
+                    <label for="exampleInputType">Type</label>
+                    <select class="form-control" name="type" id="exampleInputType">
+                        <?php foreach ($typedata as $row): ?>
+                            <option value="<?= $row['id'] ?>" <?php if ($categoryData['typeid'] === $row['id']) echo 'selected'; ?>><?= $row['name'] ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+        <div class="col-12 col-md-6 col-lg-3">
+                <div class="form-group">
+                    <label for="exampleInputStatus">Status</label>
+                    <select class="form-control" name="status" id="exampleInputStatus">
+                        <option value="Active" <?php if ($categoryData['status'] === 'Active') echo 'selected'; ?>>Active</option>
+                        <option value="Inactive" <?php if ($categoryData['status'] === 'Inactive') echo 'selected'; ?>>Inactive</option>
+                    </select>
+                </div>
+            </div>
         </div>
         </div>
         <button type="submit" class="btn btn-primary mr-2">Update</button>

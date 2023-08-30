@@ -51,9 +51,9 @@ $logUser = $_SESSION['user'];
             <th> ID</th>
             <th>product </th>
             <th>Unit</th>
-            <th>Stock_qty</th>
 
-            <th>Price</th>
+            <th>Price
+            (Per Unit)</th>
             <th>Type</th>
             <th>Category</th>
             <th>Cuisine</th>
