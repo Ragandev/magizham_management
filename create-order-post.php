@@ -39,7 +39,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }else{
         $orderID = $pdo->lastInsertId();
     }
+    // Deduct ordered quantities from stock items
+for ($i = 0; $i < count($_POST['pro']); $i++) {
+    $productID = $_POST['pro'][$i];
+    $quantity = $_POST['qt'][$i];
     
+    // Update stock item quantity
+    $updateStockSql = "UPDATE `stockitem` SET qty = qty - :order_qty WHERE product_id = :product_id AND stock_id = :stock_id";
+    $updateStockStmt = $pdo->prepare($updateStockSql);
+    $updateStockStmt->bindParam(':order_qty', $quantity);
+    $updateStockStmt->bindParam(':product_id', $productID);
+    $updateStockStmt->bindParam(':stock_id', $stockID);
+    $updateStockStmt->execute();
+}
 
     // Insert order item details into the associated table
     for ($i = 0; $i < count($_POST['pro']); $i++) {
