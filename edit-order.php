@@ -191,7 +191,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let inputEle = `<div class="row"> 
         <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
-                        <label for="exampleInputStatus">Type</label>
+                        <label for="exampleInputStatus"></label>
                         <select class="form-control mb-2" name="ty[]">
                             <?php foreach ($typedata as $row): ?>
                                 <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
                 <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
-                        <label for="exampleInputStatus">Cuisine</label>
+                        <label for="exampleInputStatus"></label>
                         <select class="form-control mb-2" name="cu[]">
                             <?php foreach ($cuisinedata as $row): ?>
                                 <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
@@ -211,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
                 <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
-                        <label for="exampleInputStatus">Category</label>
+                        <label for="exampleInputStatus"></label>
                         <select class="form-control mb-2" name="ca[]">
                             <?php foreach ($categorydata as $row): ?>
                                 <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
                 <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
-                        <label for="exampleInputStatus">Product</label>
+                        <label for="exampleInputStatus"></label>
                         <select class="form-control mb-2" name="pro[]">
                             <?php foreach ($productdata as $row): ?>
                                 <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
@@ -230,7 +230,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
                 <div class="col-12 col-md-6 col-lg-2">
-                    <label for="">Qty</label>
+                    <label for=""></label>
                     <input class="form-control mb-2" name="qt[]">
                 </div>
                 <div class="col-12 col-md-6 col-lg-2">

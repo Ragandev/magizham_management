@@ -114,6 +114,13 @@ document.addEventListener('DOMContentLoaded', function() {
         // Clear the product dropdown and quantity input in the cloned row
         newRow.querySelector('[name="pro[]"]').value = "";
         newRow.querySelector('[name="qt[]"]').value = "";
+        
+        // Hide labels in the cloned row
+        const labels = newRow.querySelectorAll('label');
+        labels.forEach(function(label) {
+            label.style.display = 'none';
+        });
+
 
         // Populate the product dropdown in the cloned row
         const productSelect = newRow.querySelector('[name="pro[]"]');
