@@ -11,9 +11,9 @@ $categorydata = $pdo->query("SELECT * FROM `category`WHERE status = 'Active'")->
 $productdata = $pdo->query("SELECT * FROM `product`WHERE status = 'Active'")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <div class="main-box">
-    <h2 class="mb-3">Create Stock</h2>
+    <h2 class="mb-3">Create Consumption</h2>
     <hr>
-    <form class="forms-sample" method="post" action="create-stock-post.php">
+    <form class="forms-sample" method="post" action="create-consumption-post.php">
         <div class="row">
 
         <div class="col-12 col-md-6 col-lg-3">
@@ -81,7 +81,7 @@ $productdata = $pdo->query("SELECT * FROM `product`WHERE status = 'Active'")->fe
                     </div>
                 </div>
                 <div class="col-12 col-md-6 col-lg-2">
-                    <label for="">Stock-Qty</label>
+                    <label for="">Used-Qty</label>
                     <input class="form-control mb-2" name="qt[]">
                 </div>
              

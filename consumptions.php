@@ -1,6 +1,6 @@
 <style>
   .typcn {
-    font-size: 18px; 
+    font-size: 22px; 
   }
 </style>
 <?php
@@ -12,14 +12,14 @@ if (!isset($_SESSION['user'])) {
 include('header.php');
 include('menu.php');
 require('db.php');
-$productSql = "SELECT * FROM product";
-$productData = $pdo->query($productSql);
+$consumptionSql = "SELECT * FROM `consumption`";
+$consumptionData = $pdo->query($consumptionSql);
 
 $logUser = $_SESSION['user'];
 ?>
 <div class="main-box">
     <div class="d-flex justify-content-end mb-5">
-        <a href="create-product.php">
+        <a href="create-consumption.php">
             <button class="btn btn-success">Create</button>
         </a>
     </div>
@@ -40,46 +40,40 @@ $logUser = $_SESSION['user'];
                     </button>
                   </div>  
                                         <?php endif ?>
-    <h2 class="mb-3">Products</h2>
+    <h2 class="mb-3">Consumptions</h2>
 
     <?php
 
-    if ($productData) {
+    if ($consumptionData) {
         echo "<div class='table-responsive'>";
         echo "<table class='table table-hover'>";
         echo "<thead> <tr>
             <th> ID</th>
-            <th>product </th>
-            <th>Unit</th>
-            <th>Price
-            (Per Unit)</th>
-            <th>Type</th>
-            <th>Category</th>
-            <th>Cuisine</th>
-            <th>Status</th>
-            <th>Actions</th>
+            <th> Branch</th>
+            <th>  Date</th>
+            <th>Action</th>
         </tr> </thead>";
 
-        foreach ($productData as $row) {
-            $typee = $pdo->query('SELECT name FROM `type` WHERE id="'.$row["typeid"].'"');
-            $typee = $typee->fetch(PDO::FETCH_ASSOC);
-            $catee = $pdo->query('SELECT name FROM `category` WHERE id="'.$row["categoryid"].'"');
-            $catee = $catee->fetch(PDO::FETCH_ASSOC);
-            $cusiee = $pdo->query('SELECT name FROM `cuisine` WHERE id="'.$row["cuisineid"].'"');
-            $cusiee = $cusiee->fetch(PDO::FETCH_ASSOC);
+        foreach ($consumptionData as $row) {
+            $branchee = $pdo->query('SELECT name FROM `branch` WHERE id="'.$row["branchid"].'"');
+            $branchee = $branchee->fetch(PDO::FETCH_ASSOC);
+            
             echo "<tbody> <tr>";
             echo "<td>" . $row['id'] . "</td>";
-            echo "<td>" . $row['name'] . "</td>";
-            echo "<td>" . $row['unit'] . "</td>";
+            echo "<td>" . $branchee['name']. "</td>";
 
-            echo "<td>" . $row['price'] . "</td>";
-            echo "<td>" . $typee['name']. "</td>";
-            echo "<td>" . $catee['name']. "</td>";
-            echo "<td>" . $cusiee['name']. "</td>";
-            echo "<td>" . $row['status'] . "</td>";
-            echo "<td><a href='view-product.php?id=" . $row['id'] . "'><i class=' typcn typcn-eye '></i></a>";
-            echo "<a href='edit-product.php?id=" . $row['id'] . "'><i class=' typcn typcn-edit'></i></a>";
-            echo "<a href='delete-product.php?id=" . $row['id'] . "' class='text-danger'><i class='  typcn typcn-trash'></a></td>";
+            echo "<td>" . $row['date_created'] . "</td>";
+
+            
+            echo "<td>
+            <a href='view-consumption.php?id=" . $row['id'] ."'><i class='typcn typcn-eye'></i></a> |
+            <a href='edit-consumption.php?id=" . $row['id'] . "'><i class=' typcn typcn-edit'></i></a> | 
+            <a href='delete-consumption.php?delete_id=" . $row['id'] . "' class='text-danger' onclick='return confirmDelete()'><i class='  typcn typcn-trash'></i></a>
+        </td>";
+    
+
+
+
             echo "</tr> </tbody>";
         }
 
