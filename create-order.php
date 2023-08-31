@@ -30,11 +30,11 @@ $productdata = $pdo->query("SELECT * FROM `product`WHERE status = 'Active'")->fe
                 </div>
             </div>
             <div class="col-12 col-md-6 col-lg-3">
-    <div class="form-group">
-        <label for="exampleInputDate">Order Date</label>
-        <input type="date" class="form-control" name="orderDate" id="exampleInputDate">
-    </div>
-</div>
+                <div class="form-group">
+                    <label for="exampleInputDate">Order Date</label>
+                    <input type="date" class="form-control" name="orderDate" id="exampleInputDate">
+                </div>
+            </div>
 <div class="col-12 col-md-6 col-lg-3">
     <div class="form-group">
         <label for="exampleInputDate">Delivery Date</label>
@@ -164,6 +164,12 @@ document.addEventListener('DOMContentLoaded', function() {
         // Clear the product dropdown and quantity input in the cloned row
         newRow.querySelector('[name="pro[]"]').value = "";
         newRow.querySelector('[name="qt[]"]').value = "";
+        // Hide labels in the cloned row
+        const labels = newRow.querySelectorAll('label');
+        labels.forEach(function(label) {
+            label.style.display = 'none';
+        });
+
 
         // Populate the product dropdown in the cloned row
         const productSelect = newRow.querySelector('[name="pro[]"]');
@@ -177,6 +183,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Append the cloned row to the input container
         inputContainer.appendChild(newRow);
+    });
+    // Set the current date for the "Order Date" field
+    const orderDateInput = document.querySelector('[name="orderDate"]');
+    const currentDate = new Date();
+    const formattedCurrentDate = currentDate.toISOString().split('T')[0];
+    orderDateInput.value = formattedCurrentDate;
+
+    addInputButton.addEventListener('click', function() {
+        // ... rest of your code ...
     });
 });
 </script>
