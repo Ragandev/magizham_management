@@ -98,7 +98,7 @@ $logName = $logUser['name'];
                         <div class="collapse" id="user-manane">
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"> <a class="nav-link" href="users.php">Users</a></li>
-                                <li class="nav-item"> <a class="nav-link" href="">Roles</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="role.php">Roles</a></li>
                             </ul>
                         </div>
                     </li>
