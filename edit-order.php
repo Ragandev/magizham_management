@@ -103,10 +103,32 @@ if (isset($_GET['id'])) {
                     <div class="row">
                     <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
+                        <label for="exampleInputStatus">Product</label>
+                        <select class="form-control mb-2" name="pro[]">
+                            <?php foreach ($productdata as $row): ?>
+                                <option value="<?= $row['id'] ?>"<?php if($row['id']=== $od['productid']){echo 'selected';} ?>>
+                                <?= $row['name'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                    <div class="col-12 col-md-6 col-lg-2">
+                    <div class="form-group">
                         <label for="exampleInputStatus">Type</label>
                         <select class="form-control mb-2" name="ty[]">
                             <?php foreach ($typedata as $row): ?>
                                 <option value="<?= $row['id'] ?>" <?php if($row['id']=== $od['typeid']){echo 'selected';} ?>><?= $row['name'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                 <div class="col-12 col-md-6 col-lg-2">
+                    <div class="form-group">
+                        <label for="exampleInputStatus">Category</label>
+                        <select class="form-control mb-2" name="ca[]">
+                            <?php foreach ($categorydata as $row): ?>
+                                <option value="<?= $row['id'] ?>"<?php if($row['id']=== $od['categoryid']){echo 'selected';} ?>>
+                                <?= $row['name'] ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -122,32 +144,7 @@ if (isset($_GET['id'])) {
                         </select>
                     </div>
                 </div>
-                <div class="col-12 col-md-6 col-lg-2">
-                    <div class="form-group">
-                        <label for="exampleInputStatus">Category</label>
-                        <select class="form-control mb-2" name="ca[]">
-                            <?php foreach ($categorydata as $row): ?>
-                                <option value="<?= $row['id'] ?>"<?php if($row['id']=== $od['categoryid']){echo 'selected';} ?>>
-                                <?= $row['name'] ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-2">
-                    <div class="form-group">
-                        <label for="exampleInputStatus">Product</label>
-                        <select class="form-control mb-2" name="pro[]">
-                            <?php foreach ($productdata as $row): ?>
-                                <option value="<?= $row['id'] ?>"<?php if($row['id']=== $od['productid']){echo 'selected';} ?>>
-                                <?= $row['name'] ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-2">
-                    <label for="">Qty</label>
-                    <input class="form-control mb-2" name="qt[]"  value="<?php echo $od['order_qty']; ?>">
-                </div>
+               
                 <div class="col-12 col-md-6 col-lg-2">
     <div class="form-group">
         <label for="exampleInputStatus">Priority</label>
@@ -159,9 +156,13 @@ if (isset($_GET['id'])) {
         </select>
 
 
+        </div>
 
     </div>
-</div>
+    <div class="col-12 col-md-6 col-lg-2">
+                    <label for="">Qty</label>
+                    <input class="form-control mb-2" name="qt[]"  value="<?php echo $od['order_qty']; ?>">
+                </div>
 
             </div>
                 <?php } ?>
@@ -192,18 +193,18 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
                         <label for="exampleInputStatus"></label>
-                        <select class="form-control mb-2" name="ty[]">
-                            <?php foreach ($typedata as $row): ?>
+                        <select class="form-control mb-2" name="pro[]">
+                            <?php foreach ($productdata as $row): ?>
                                 <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
                 </div>
-                <div class="col-12 col-md-6 col-lg-2">
+        <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
                         <label for="exampleInputStatus"></label>
-                        <select class="form-control mb-2" name="cu[]">
-                            <?php foreach ($cuisinedata as $row): ?>
+                        <select class="form-control mb-2" name="ty[]">
+                            <?php foreach ($typedata as $row): ?>
                                 <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
                             <?php endforeach; ?>
                         </select>
@@ -222,20 +223,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
                         <label for="exampleInputStatus"></label>
-                        <select class="form-control mb-2" name="pro[]">
-                            <?php foreach ($productdata as $row): ?>
+                        <select class="form-control mb-2" name="cu[]">
+                            <?php foreach ($cuisinedata as $row): ?>
                                 <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
                 </div>
-                <div class="col-12 col-md-6 col-lg-2">
-                    <label for=""></label>
-                    <input class="form-control mb-2" name="qt[]">
-                </div>
+                  
                 <div class="col-12 col-md-6 col-lg-2">
                 <div class="form-group">
-                    <label for="exampleInputStatus">Priority</label>
+                    <label for="exampleInputStatus"></label>
                     <select class="form-control" name="pr[]" id="exampleInputStatus">
                     <option value="High">High</option>
                         <option value="Low">Low</option>
@@ -245,6 +243,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     </select>
                 </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-2">
+                    <label for=""></label>
+                    <input class="form-control mb-2" name="qt[]">
                 </div>
             </div>`;
         const newInput = document.createElement('div');

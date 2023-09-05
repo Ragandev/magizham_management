@@ -82,19 +82,19 @@ $productdata = $pdo->query("SELECT * FROM `product`WHERE status = 'Active'")->fe
             <div class="row mb-4">
             <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
-                        <label for="exampleInputStatus">Type</label>
-                        <select class="form-control mb-2" name="ty[]">
-                            <?php foreach ($typedata as $row): ?>
+                        <label for="exampleInputStatus">Product</label>
+                        <select class="form-control mb-2" name="pro[]">
+                            <?php foreach ($productdata as $row): ?>
                                 <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
                 </div>
-                <div class="col-12 col-md-6 col-lg-2">
+            <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
-                        <label for="exampleInputStatus">Cuisine</label>
-                        <select class="form-control mb-2" name="cu[]">
-                            <?php foreach ($cuisinedata as $row): ?>
+                        <label for="exampleInputStatus">Type</label>
+                        <select class="form-control mb-2" name="ty[]">
+                            <?php foreach ($typedata as $row): ?>
                                 <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
                             <?php endforeach; ?>
                         </select>
@@ -112,18 +112,17 @@ $productdata = $pdo->query("SELECT * FROM `product`WHERE status = 'Active'")->fe
                 </div>
                 <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
-                        <label for="exampleInputStatus">Product</label>
-                        <select class="form-control mb-2" name="pro[]">
-                            <?php foreach ($productdata as $row): ?>
+                        <label for="exampleInputStatus">Cuisine</label>
+                        <select class="form-control mb-2" name="cu[]">
+                            <?php foreach ($cuisinedata as $row): ?>
                                 <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
                 </div>
-                <div class="col-12 col-md-6 col-lg-2">
-                    <label for="">Qty</label>
-                    <input class="form-control mb-2" name="qt[]">
-                </div>
+             
+              
+                
                 <div class="col-12 col-md-6 col-lg-2">
                 <div class="form-group">
                     <label for="exampleInputStatus">Priority</label>
@@ -137,7 +136,10 @@ $productdata = $pdo->query("SELECT * FROM `product`WHERE status = 'Active'")->fe
                     </select>
                 </div>
             </div>
-           
+            <div class="col-12 col-md-6 col-lg-2">
+                    <label for="">Qty</label>
+                    <input class="form-control mb-2" name="qt[]">
+                </div>
             </div>
         </div>
         <!-- End of additional product details rows -->
