@@ -71,20 +71,20 @@ $productdata = $pdo->query("SELECT * FROM `product`WHERE status = 'Active'")->fe
                     <div class="row mb-4">
                     <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
-                        <label for="exampleInputStatus">Type</label>
-                        <select class="form-control mb-2" name="ty[]">
-                            <?php foreach ($typedata as $row): ?>
-                                <option value="<?= $row['id'] ?>" <?php if($row['id']=== $od['type_id']){echo 'selected';} ?>><?= $row['name'] ?></option>
+                        <label for="exampleInputStatus">Product</label>
+                        <select class="form-control mb-2" name="pro[]">
+                            <?php foreach ($productdata as $row): ?>
+                                <option value="<?= $row['id'] ?>"<?php if($row['id']=== $od['product_id']){echo 'selected';} ?>><?= $row['name'] ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
                 </div>
-                <div class="col-12 col-md-6 col-lg-2">
+                    <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
-                        <label for="exampleInputStatus">Cuisine</label>
-                        <select class="form-control mb-2" name="cu[]">
-                            <?php foreach ($cuisinedata as $row): ?>
-                                <option value="<?= $row['id'] ?>"<?php if($row['id']=== $od['cuisine_id']){echo 'selected';} ?>><?= $row['name'] ?></option>
+                        <label for="exampleInputStatus">Type</label>
+                        <select class="form-control mb-2" name="ty[]">
+                            <?php foreach ($typedata as $row): ?>
+                                <option value="<?= $row['id'] ?>" <?php if($row['id']=== $od['type_id']){echo 'selected';} ?>><?= $row['name'] ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -101,14 +101,16 @@ $productdata = $pdo->query("SELECT * FROM `product`WHERE status = 'Active'")->fe
                 </div>
                 <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
-                        <label for="exampleInputStatus">Product</label>
-                        <select class="form-control mb-2" name="pro[]">
-                            <?php foreach ($productdata as $row): ?>
-                                <option value="<?= $row['id'] ?>"<?php if($row['id']=== $od['product_id']){echo 'selected';} ?>><?= $row['name'] ?></option>
+                        <label for="exampleInputStatus">Cuisine</label>
+                        <select class="form-control mb-2" name="cu[]">
+                            <?php foreach ($cuisinedata as $row): ?>
+                                <option value="<?= $row['id'] ?>"<?php if($row['id']=== $od['cuisine_id']){echo 'selected';} ?>><?= $row['name'] ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
                 </div>
+                
+               
                 <div class="col-12 col-md-6 col-lg-2">
                     <label for="">Qty</label>
                     <input class="form-control mb-2" name="qt[]" value="<?php echo $od['qty']; ?>">
