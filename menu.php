@@ -41,7 +41,7 @@ $logName = $logUser['name'];
                             <span class="typcn typcn-user-outline mr-0"></span>
                             <div><p><?php echo $logName ?></p></div>
                             </div>
-                        </a>
+                        </a>                        
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
                             <a class="dropdown-item">
                                 <span class="typcn typcn-cog text-primary"></span>
