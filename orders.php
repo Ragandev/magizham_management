@@ -93,6 +93,8 @@ $logUser = $_SESSION['user'];
 
 </div>
 
+
+
 <?php
 include('footer.php');
 ?>
