@@ -50,10 +50,10 @@ $logUser = $_SESSION['user'];
 
     <?php
 
-    if ($counterData) {
-        echo "<div class='table-responsive'>";
-        echo "<table class='table table-hover'>";
-        echo "<thead> <tr>
+    if ($counterData) { ?>
+        <div class='table-responsive'>
+        <table class='table table-hover'>
+        <thead> <tr>
             <th>ID</th>
             <th>Date</th>
             <th>Branch</th>
@@ -63,27 +63,27 @@ $logUser = $_SESSION['user'];
             <th>Status</th>
             <th>Action</th>
 
-        </tr> </thead>";
-
-        foreach ($counterData as $row) {
-            echo "<tbody> <tr>";
-            echo "<td>" . $row['id'] . "</td>";
-            echo "<td>" . $row['date'] . "</td>";
-            echo "<td>" . $row['branch'] . "</td>";
-            echo "<td>" . $row['shortage'] . "</td>";
-            echo "<td>" . $row['excess'] . "</td>";
-            echo "<td>" . $row['acc_dep'] . "</td>";
-            echo "<td>" . $row['status'] . "</td>";
-            echo "<td>
-            <a href='counter_edit.php?id=" . $row['id'] . "'><i class=' typcn typcn-edit'></i></i></a> |
-            <a href='counter_delete.php?delete_id=" . $row['id'] . "' class='text-danger' onclick='return confirmDelete()'><i class='  typcn typcn-trash'></i></a>
-        </td>";
-            echo "</tr> </tbody>";
-        }
-
-        echo "</table>";
-        echo "</div>";
-    } else {
+        </tr> </thead>
+        <tbody>
+        <?php foreach ($counterData as $row) { ?>
+             <tr>
+            <td><?php echo $row['id'] ?> </td>
+            <td><?php echo $row['date'] ?> </td>
+            <td><?php echo $row['branch'] ?> </td>
+            <td><?php echo $row['shortage'] ?> </td>
+            <td><?php echo $row['excess'] ?> </td>
+            <td><?php echo $row['acc_dep'] ?> </td>
+            <td><?php echo $row['status'] ?> </td>
+            <td>
+            <a href='counter_edit.php?id=<?php $row["id"]?> '><i class=' typcn typcn-edit'></i></i></a>
+            <a href='counter_delete.php?delete_id=<?php $row["id"]?> ' class='text-danger' onclick='return confirmDelete()'><i class='  typcn typcn-trash'></i></a>
+        </td>
+        </tr> 
+        <?php } ?>
+        </tbody>
+       </table>
+        </div>
+    <?php } else {
         echo "Error fetching data";
     }
     ?>

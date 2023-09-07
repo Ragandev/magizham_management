@@ -4,6 +4,10 @@ include('menu.php');
 require('db.php');
 $branchsql = "SELECT * FROM `branch` WHERE status = 'Active'";
 $branchdata = $pdo->query($branchsql);
+
+// Roles Data 
+// $roleSql = "SELECT * FROM `role`";
+// $roleData = $pdo->query($roleSql);
 ?>
 <?php if (!empty($_GET['succ'])): ?>
 					  
@@ -52,10 +56,9 @@ $branchdata = $pdo->query($branchsql);
                 <div class="form-group">
                     <label for="exampleSelectGender">Role</label>
                     <select class="form-control" id="exampleSelectGender" name="role">
-                        <option value="Admin">Admin</option>
-                        <option value="Branch Manager">Branch Manager</option>
-                        <option value="Store Manager">Store Manager</option>
-                        <option value="Kitchen Manager">Kitchen Manager</option>
+                        <!-- <?php foreach ($roleData as $r ) { ?>
+                            <option value="<?php echo $r['role_id'] ?>"><?php echo $r['role_name'] ?></option>
+                        <?php } ?> -->
                     </select>
                 </div>
 

@@ -55,6 +55,7 @@ $logUser = $_SESSION['user'];
             <th>priority</th>
             <th>Status</th>
             <th>Action</th>
+            <th></th>
         </tr> </thead>";
 
         foreach ($orderData as $row) {

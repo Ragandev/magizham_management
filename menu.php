@@ -9,18 +9,22 @@ $logName = $logUser['name'];
 ?>
 
 <style>
-    .user-icon{
+    .user-icon {
         display: flex;
-        justify-content: center;align-items: center;
+        justify-content: center;
+        align-items: center;
     }
-    .user-icon span{
+
+    .user-icon span {
         font-size: 18px;
     }
-    .user-icon p{
+
+    .user-icon p {
         margin-top: 25px;
         font-weight: bold;
     }
-    .user-box{
+
+    .user-box {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -33,31 +37,40 @@ $logName = $logUser['name'];
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                <a class="" href="index.html"><img src="images/Magizham Logo.png" alt="logo" height="30"/></a>
-                <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/Magizham_Logo.svg" alt="logo" /></a>
-                <button class="navbar-toggler navbar-toggler align-self-center d-none d-lg-flex" type="button" data-toggle="minimize">
+                <a class="" href="index.html"><img src="images/Magizham Logo.png" alt="logo" height="30" /></a>
+                <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/Magizham_Logo.svg"
+                        alt="logo" /></a>
+                <button class="navbar-toggler navbar-toggler align-self-center d-none d-lg-flex" type="button"
+                    data-toggle="minimize">
                     <span class="typcn typcn-th-menu"></span>
                 </button>
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
                 <ul class="navbar-nav navbar-nav-right">
                     <li class="nav-item nav-profile dropdown">
-                        <a class="nav-link dropdown-toggle  pl-0 pr-0" href="#" data-toggle="dropdown" id="profileDropdown">
+                        <a class="nav-link dropdown-toggle  pl-0 pr-0" href="#" data-toggle="dropdown"
+                            id="profileDropdown">
                             <div class="user-icon">
-                            <span class="typcn typcn-user-outline mr-0"></span>
-                            <div><p><?php echo $logName ?></p></div>
+                                <span class="typcn typcn-user-outline mr-0"></span>
+                                <div>
+                                    <p>
+                                        <?php echo $logName ?>
+                                    </p>
+                                </div>
                             </div>
-                        </a>                        
-                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
+                            aria-labelledby="profileDropdown">
                             <div class="user-box">
-                            <form action="logout.php" method="get">
-                                <button class="btn btn-danger" type="submit">Logout</button>
-                            </form>
+                                <form action="logout.php" method="get">
+                                    <button class="btn btn-danger" type="submit">Logout</button>
+                                </form>
                             </div>
                         </div>
                     </li>
                 </ul>
-                <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+                <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+                    data-toggle="offcanvas">
                     <span class="typcn typcn-th-menu"></span>
                 </button>
             </div>
@@ -73,12 +86,12 @@ $logName = $logUser['name'];
                     <li class="nav-item">
                         <div class="d-flex sidebar-profile">
                             <div class="sidebar-profile-image">
-                                <img src="images/user.jpg" alt="image">
+                                <img src="images/user.png" alt="image">
                                 <span class="sidebar-status-indicator"></span>
                             </div>
                             <div class="sidebar-profile-name">
                                 <p class="sidebar-name">
-                                    Admin
+                                    <?php echo $logName ?>
                                 </p>
                                 <p class="sidebar-designation">
                                     Welcome
@@ -138,7 +151,8 @@ $logName = $logUser['name'];
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#user-manane" aria-expanded="false" aria-controls="">
+                        <a class="nav-link" data-toggle="collapse" href="#user-manane" aria-expanded="false"
+                            aria-controls="">
                             <i class="  typcn typcn-user-add menu-icon"></i>
                             <span class="menu-title">User & Roles</span>
                             <i class="typcn typcn-chevron-right menu-arrow"></i>
@@ -156,9 +170,10 @@ $logName = $logUser['name'];
                             <span class="menu-title">Branch</span>
                         </a>
                     </li>
-                     
+
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#manane" aria-expanded="false" aria-controls="">
+                        <a class="nav-link" data-toggle="collapse" href="#manane" aria-expanded="false"
+                            aria-controls="">
                             <i class="  typcn typcn-folder-open menu-icon"></i>
                             <span class="menu-title">Reports</span>
                             <i class="typcn typcn-chevron-right menu-arrow"></i>
