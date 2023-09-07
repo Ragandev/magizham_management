@@ -20,6 +20,12 @@ $logName = $logUser['name'];
         margin-top: 25px;
         font-weight: bold;
     }
+    .user-box{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5px;
+    }
 </style>
 
 <body>
@@ -43,14 +49,11 @@ $logName = $logUser['name'];
                             </div>
                         </a>                        
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-                            <a class="dropdown-item">
-                                <span class="typcn typcn-cog text-primary"></span>
-                                Settings
-                            </a>
-                            <a class="dropdown-item">
-                                <i class="typcn typcn-power text-primary"></i>
-                                Logout
-                            </a>
+                            <div class="user-box">
+                            <form action="logout.php" method="get">
+                                <button class="btn btn-danger" type="submit">Logout</button>
+                            </form>
+                            </div>
                         </div>
                     </li>
                 </ul>
