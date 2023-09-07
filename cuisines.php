@@ -10,7 +10,7 @@ if (!isset($_SESSION['user'])) {
     exit();
 }
 include('header.php');
-include('menu.php');http://localhost/magizh/home.php
+include('menu.php');
 require('db.php');
 $cuisineSql = "SELECT * FROM cuisine";
 $cuisineData = $pdo->query($cuisineSql);

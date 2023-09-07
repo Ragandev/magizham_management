@@ -1,3 +1,8 @@
+<style>
+  .typcn {
+    font-size: 22px; 
+  }
+</style>
 <?php
 session_start();
 if (!isset($_SESSION['user'])) {
@@ -7,18 +12,15 @@ if (!isset($_SESSION['user'])) {
 include('header.php');
 include('menu.php');
 require('db.php');
-$consumptionSql = "SELECT * FROM `consumption`";
-$consumptionData = $pdo->query($consumptionSql);
+
+$counterSql = "SELECT * FROM counter";
+$counterData = $pdo->query($counterSql);
+
 $logUser = $_SESSION['user'];
-
-// Branch Data 
-$b_sql = "SELECT * FROM `branch` WHERE status = 'Active' ORDER BY id";
-$b_data = $pdo->query($b_sql);
 ?>
-
 <div class="main-box">
     <div class="d-flex justify-content-end mb-5">
-        <a href="create-consumption.php">
+        <a href="counter_create.php">
             <button class="btn btn-success">Create</button>
         </a>
     </div>
@@ -45,387 +47,54 @@ $b_data = $pdo->query($b_sql);
     <?php endif ?>
 
     <h2 class="mb-3">Counter Closing</h2>
-    <br>
 
-    <form class="counter-form" method="post" action="counter-post.php">
-        <div class="row w-50">
+    <?php
 
-            <div class="col-12 col-md-6">
-                <div class="form-group">
-                    <label>Branch</label>
-                    <select name="branch" id="" class="form-control">
-                        <?php foreach ($b_data as $row): ?>
-                            <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-            </div>
+    if ($counterData) {
+        echo "<div class='table-responsive'>";
+        echo "<table class='table table-hover'>";
+        echo "<thead> <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Branch</th>
+            <th>Shortage</th>
+            <th>Excess</th>
+            <th>Accounts</th>
+            <th>Status</th>
+            <th>Action</th>
 
-            <div class="col-12 col-md-6">
-                <div class="form-group">
-                    <label>Date</label>
-                    <input type="date" name="date" class="form-control">
-                </div>
-            </div>
+        </tr> </thead>";
 
-            <div class="col-12 col-md-6 ">
-                <div class="form-group">
-                    <label for="exampleInputPassword4">500</label>
-                    <input type="number" class="form-control" name="five_h">
-                </div>
-            </div>
-            <div class="col-12 col-md-6 ">
-                <div class="form-group">
-                    <label>Total 500</label>
-                    <input type="number" disabled class="form-control" name="five_h_t">
-                </div>
-            </div>
+        foreach ($counterData as $row) {
+            echo "<tbody> <tr>";
+            echo "<td>" . $row['id'] . "</td>";
+            echo "<td>" . $row['date'] . "</td>";
+            echo "<td>" . $row['branch'] . "</td>";
+            echo "<td>" . $row['shortage'] . "</td>";
+            echo "<td>" . $row['excess'] . "</td>";
+            echo "<td>" . $row['acc_dep'] . "</td>";
+            echo "<td>" . $row['status'] . "</td>";
+            echo "<td>
+            <a href='counter_edit.php?id=" . $row['id'] . "'><i class=' typcn typcn-edit'></i></i></a> |
+            <a href='counter_delete.php?delete_id=" . $row['id'] . "' class='text-danger' onclick='return confirmDelete()'><i class='  typcn typcn-trash'></i></a>
+        </td>";
+            echo "</tr> </tbody>";
+        }
 
-            <div class="col-12 col-md-6 ">
-                <div class="form-group">
-                    <label for="exampleInputPassword4">200</label>
-                    <input type="number" class="form-control" name="two_h">
-                </div>
-            </div>
-            <div class="col-12 col-md-6 ">
-                <div class="form-group">
-                    <label>Total 200</label>
-                    <input type="number" disabled class="form-control" name="two_h_t">
-                </div>
-            </div>
-
-            <div class="col-12 col-md-6 ">
-                <div class="form-group">
-                    <label for="exampleInputPassword4">100</label>
-                    <input type="number" class="form-control" name="one_h">
-                </div>
-            </div>
-            <div class="col-12 col-md-6 ">
-                <div class="form-group">
-                    <label>Total 100</label>
-                    <input type="number" disabled class="form-control" name="one_h_t">
-                </div>
-            </div>
-
-            <div class="col-12 col-md-6 ">
-                <div class="form-group">
-                    <label for="exampleInputPassword4">50</label>
-                    <input type="number" class="form-control" name="fifty">
-                </div>
-            </div>
-            <div class="col-12 col-md-6 ">
-                <div class="form-group">
-                    <label>Total 50</label>
-                    <input type="number" disabled class="form-control" name="fifty_t">
-                </div>
-            </div>
-
-            <div class="col-12 col-md-6 ">
-                <div class="form-group">
-                    <label for="exampleInputPassword4">20</label>
-                    <input type="number" class="form-control" name="twenty">
-                </div>
-            </div>
-            <div class="col-12 col-md-6 ">
-                <div class="form-group">
-                    <label>Total 20</label>
-                    <input type="number" disabled class="form-control" name="twenty_t">
-                </div>
-            </div>
-
-            <div class="col-12 col-md-6 ">
-                <div class="form-group">
-                    <label for="exampleInputPassword4">10</label>
-                    <input type="number" class="form-control" name="ten">
-                </div>
-            </div>
-            <div class="col-12 col-md-6 ">
-                <div class="form-group">
-                    <label>Total 10</label>
-                    <input type="number" disabled class="form-control" name="ten_t">
-                </div>
-            </div>
-
-            <div class="col-12 col-md-6 ">
-                <div class="form-group">
-                    <label for="exampleInputPassword4">5</label>
-                    <input type="number" class="form-control" name="five">
-                </div>
-            </div>
-            <div class="col-12 col-md-6 ">
-                <div class="form-group">
-                    <label>Total 5</label>
-                    <input type="number" disabled class="form-control" name="five_t">
-                </div>
-            </div>
-
-            <div class="col-12 col-md-6 ">
-                <div class="form-group">
-                    <label for="exampleInputPassword4">Cash</label>
-                    <input disabled type="number" class="form-control" value="" name="cash">
-                </div>
-            </div>
-            <div class="col-12 col-md-6 ">
-                <div class="form-group">
-                    <label>Card</label>
-                    <input type="number" class="form-control" name="card">
-                </div>
-            </div>
-
-            <div class="col-12 col-md-6 ">
-                <div class="form-group">
-                    <label for="exampleInputPassword4">Petty Cash</label>
-                    <input type="number" class="form-control" name="petty_cash">
-                </div>
-            </div>
-            <div class="col-12 col-md-6 ">
-                <div class="form-group">
-                    <label>Due Amount</label>
-                    <input type="number" class="form-control" name="due_amt">
-                </div>
-            </div>
-
-            <div class="col-12 col-md-6 ">
-                <div class="form-group">
-                    <label>Due Payment</label>
-                    <input type="number" class="form-control" name="due_payment">
-                </div>
-            </div>
-            <div class="col-12 col-md-6">
-                <div class="form-group">
-                    <label for="exampleInputPassword4">Net Total</label>
-                    <input disabled type="number" class="form-control" name="net_total">
-                </div>
-            </div>
-
-            <div class="col-12  col-md-6">
-                <div class="form-group">
-                    <label for="exampleInputPassword4">Total Sales</label>
-                    <input type="number" class="form-control" name="total_sales">
-                </div>
-            </div>
-            <div class="col-12  col-md-6">
-                <div class="form-group">
-                    <label for="exampleInputPassword4">Online Sales</label>
-                    <input type="number" class="form-control" name="delivery_sales">
-                </div>
-            </div>
-            <div class="col-12  col-md-6">
-                <div class="form-group">
-                    <label for="exampleInputPassword4">Expenses</label>
-                    <input type="number" class="form-control" name="expenses">
-                </div>
-            </div>
-            <div class="col-12  col-md-6">
-                <div class="form-group">
-                    <label for="exampleInputPassword4">Outdoor Sale</label>
-                    <input type="number" class="form-control" name="outdoor_sale">
-                </div>
-            </div>
-            <div class="col-12  col-md-6">
-                <div class="form-group">
-                    <label for="exampleInputPassword4">Next Day Petty Cash</label>
-                    <input type="number" class="form-control" name="nd_petty_cash">
-                </div>
-            </div>
-            <div class="col-12  col-md-6">
-                <div class="form-group">
-                    <label for="">Status</label>
-                    <select class="form-control" name="status" id="">
-                        <option value="pending" class="text-danger">Pending</option>
-                        <option value="received" class="text-success">Received</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-12  col-md-6">
-                <div class="form-group">
-                    <label for="exampleInputPassword4">shortage</label>
-                    <input disabled type="number" class="form-control" name="shortage">
-                </div>
-            </div>
-            <div class="col-12  col-md-6">
-                <div class="form-group">
-                    <label for="exampleInputPassword4">Excess</label>
-                    <input disabled type="number" class="form-control" name="excess">
-                </div>
-            </div>
-            <div class="col-12">
-                <div class="form-group">
-                    <label for="exampleInputPassword4">To Accounts Department</label>
-                    <input disabled type="number" class="form-control" name="acc_dep">
-                </div>
-            </div>
-        </div>
-
-        <button type="submit" class="btn btn-primary mr-2">Submit</button>
-    </form>
+        echo "</table>";
+        echo "</div>";
+    } else {
+        echo "Error fetching data";
+    }
+    ?>
 
 </div>
-
-<script>
-    let five_h = document.querySelector('input[name=five_h]');
-    let five_h_t = document.querySelector('input[name=five_h_t]');
-    let two_h = document.querySelector('input[name=two_h]');
-    let two_h_t = document.querySelector('input[name=two_h_t]');
-    let one_h = document.querySelector('input[name=one_h]');
-    let one_h_t = document.querySelector('input[name=one_h_t]');
-    let fifty = document.querySelector('input[name=fifty]');
-    let fifty_t = document.querySelector('input[name=fifty_t]');
-    let twenty = document.querySelector('input[name=twenty]');
-    let twenty_t = document.querySelector('input[name=twenty_t]');
-    let ten = document.querySelector('input[name=ten]');
-    let ten_t = document.querySelector('input[name=ten_t]');
-    let five = document.querySelector('input[name=five]');
-    let five_t = document.querySelector('input[name=five_t]');
-
-    let cash = document.querySelector('input[name=cash]');
-    let card = document.querySelector('input[name=card]');
-    let p_cash = document.querySelector('input[name=petty_cash]');
-    let due_amt = document.querySelector('input[name=due_amt]');
-    let due_pay = document.querySelector('input[name=due_payment]');
-    let net = document.querySelector('input[name=net_total]');
-    
-    let totalSales = document.querySelector('input[name=total_sales]');
-    let deliverySales = document.querySelector('input[name=delivery_sales]');
-    let expenses = document.querySelector('input[name=expenses]');
-    let outdoorSales = document.querySelector('input[name=outdoor_sale]');
-    let nextPetty = document.querySelector('input[name=nd_petty_cash]');
-    let shortage = document.querySelector('input[name=shortage]');
-    let excess = document.querySelector('input[name=excess]');
-    let accDep = document.querySelector('input[name=acc_dep]');
-
-
-
-    cash.value = 0; // Initialize the cash input with 0
-
-    function calc(input, amt, total) {
-        var inputVal = parseInt(input.value, 10); // Parse input value as an integer
-        var sum = inputVal * amt;
-        total.value = sum;
-        updateCashTotal(); // Update the running total
-    }
-
-    function updateCashTotal() {
-        let total = 0;
-
-        // Calculate the total based on individual denominations
-        total += parseInt(five_h_t.value, 10) || 0;
-        total += parseInt(two_h_t.value, 10) || 0;
-        total += parseInt(one_h_t.value, 10) || 0;
-        total += parseInt(fifty_t.value, 10) || 0;
-        total += parseInt(twenty_t.value, 10) || 0;
-        total += parseInt(ten_t.value, 10) || 0;
-        total += parseInt(five_t.value, 10) || 0;
-
-        // Update the "cash" input with the new total
-        cash.value = total;
-        net.value = total;
-        accDep.value = total;
-    }
-
-    five_h.addEventListener('input', () => {
-        calc(five_h, 500, five_h_t);
-    });
-
-    two_h.addEventListener('input', () => {
-        calc(two_h, 200, two_h_t);
-    });
-
-    one_h.addEventListener('input', () => {
-        calc(one_h, 100, one_h_t);
-    });
-
-    fifty.addEventListener('input', () => {
-        calc(fifty, 50, fifty_t);
-    });
-
-    twenty.addEventListener('input', () => {
-        calc(twenty, 20, twenty_t);
-    });
-
-    ten.addEventListener('input', () => {
-        calc(ten, 10, ten_t);
-    });
-
-    five.addEventListener('input', () => {
-        calc(five, 5, five_t);
-    });
-
-    function updateNetTotal() {
-        let total = 0;
-
-        // Calculate the total based on individual denominations
-        total += parseInt(cash.value, 10) || 0;
-        total += parseInt(card.value, 10) || 0;
-        total -= parseInt(p_cash.value, 10) || 0;
-
-        // Update the "cash" input with the new total
-        net.value = total;
-    }
-
-    card.addEventListener('input', () => {
-        updateNetTotal();
-    });
-    p_cash.addEventListener('input', () => {
-        updateNetTotal();
-    });
-
-    function updateBalance(){
-        let total = 0;
-
-        // Calculate the total based on individual denominations
-        total += parseInt(totalSales.value, 10) || 0;
-        total -= parseInt(deliverySales.value, 10) || 0;
-        total -= parseInt(expenses.value, 10) || 0;
-        total -= parseInt(due_amt.value, 10) || 0;
-        total += parseInt(due_pay.value, 10) || 0;
-
-        if(total <= 0){
-            excess.value = total;
-            shortage.value = 0;
-        }else{
-            shortage.value = total;
-            excess.value = 0;
-        }
-    }
-    
-    function updateAccDep() {
-        let total = parseInt(cash.value, 10) || 0;
-        
-        total -= parseInt(nextPetty.value, 10) || 0;
-        total += parseInt(outdoorSales.value, 10) || 0;
-        total += parseInt(due_pay.value, 10) || 0;
-        
-        accDep.value = total;
-    }
-
-
-    
-    totalSales.addEventListener('input', () => {
-        updateBalance();
-    });
-    deliverySales.addEventListener('input', () => {
-        updateBalance();
-    });
-    expenses.addEventListener('input', () => {
-        updateBalance();
-    });
-    due_amt.addEventListener('input', () => {
-        updateBalance();
-    });
-    due_pay.addEventListener('input', () => {
-        updateBalance();
-        updateAccDep();
-    });
-
-    nextPetty.addEventListener('input', () => {
-        updateAccDep();
-    });
-    outdoorSales.addEventListener('input', () => {
-        updateAccDep();
-    });
-</script>
 
 <?php
 include('footer.php');
 ?>
+<script>
+function confirmDelete() {
+    return confirm("Are you sure you want to delete this order?");
+}
+</script>
