@@ -59,7 +59,7 @@ $logUser = $_SESSION['user'];
         </tr> </thead>";
 
         foreach ($branchData as $row) {
-            echo "<tbody> <tr>";
+            echo "<tr>";
             echo "<td>" . $row['id'] . "</td>";
             echo "<td>" . $row['name'] . "</td>";
             echo "<td>" . $row['address'] . "</td>";
@@ -70,7 +70,7 @@ $logUser = $_SESSION['user'];
             <a href='delete-branch.php?delete_id=" . $row['id'] . "' class='text-danger' onclick='return confirmDelete()'><i class='  typcn typcn-trash'></i></a>
         </td>";
 
-            echo "</tr> </tbody>";
+            echo "</tr>";
         }
 
         echo "</table>";
