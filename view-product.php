@@ -47,7 +47,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         echo "<li>ID: " . $productData['id'] . "</li>";
         echo "<li>Name: " . $productData['name'] . "</li>";
         echo "<li>Unit: " . $productData['unit'] . "</li>";
-        // echo "<li>Stock Quantity: " . $productData['stock_qty'] . "</li>";
+        echo "<li>Stock Quantity: " . $productData['stock_qty'] . "</li>";
         echo "<li>Price: " . $productData['price'] . "</li>";
         echo "<li>Type: " . $typeData['name'] . "</li>";
         echo "<li>Category: " . $categoryData['name'] . "</li>";

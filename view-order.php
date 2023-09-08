@@ -1,13 +1,14 @@
 <?php
-
-include('header.php');
-include('menu.php');
-
-require('db.php');
+session_start();
 if (!isset($_SESSION['user'])) {
     header("Location: index.php");
     exit();
 }
+include('header.php');
+include('menu.php');
+
+require('db.php');
+
 
 // Get the order ID from the query string
 if (isset($_GET['id']) && !empty($_GET['id'])) {
@@ -21,18 +22,11 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     $orderData = $orderStmt->fetch(PDO::FETCH_ASSOC);
 
     if ($orderData) {
-        $branchSql = "SELECT name FROM `branch` WHERE id = :branchid";
-        $branchStmt = $pdo->prepare($branchSql);
-        $branchStmt->bindParam(':branchid', $orderData['branchid']);
-        $branchStmt->execute();
-        $branchData = $branchStmt->fetch(PDO::FETCH_ASSOC);
         // Display the order details
         echo "<h2 class='orderdetails'>Order Details</h2>";
         echo "<ul>";
         echo "<li class='orderdetails'>ID: " . $orderData['id'] . "</li>";
-        echo "<li class='orderdetails'>Order Name: " . $orderData['order_name'] . "</li>";
-        echo "<li class='orderdetails'>Order Type: " . $orderData['ordertype'] . "</li>";
-        echo "<li class='orderdetails'>Branch: " . $branchData['name'] . "</li>";
+        echo "<li class='orderdetails'>Branch: " . $orderData['branchid'] . "</li>";
         echo "<li class='orderdetails'>Order Date: " . $orderData['orderdate'] . "</li>";
         echo "<li class='orderdetails'>Delivery Date: " . $orderData['deliverydate'] . "</li>";
         echo "<li class='orderdetails'>Priority: " . $orderData['priority'] . "</li>";
@@ -42,7 +36,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         // Fetch and display the order items associated with the order
         echo "<h3>Ordered Products</h3>";
         echo "<table>";
-        echo "<tr><th>Cuisine</th><th>Category</th><th>Product</th><th>Quantity</th></tr>";
+        echo "<tr><th>Type</th><th>Cuisine</th><th>Category</th><th>Product</th><th>Quantity</th></tr>";
 
         $orderItemSql = "SELECT * FROM `orderitem` WHERE order_id = :order_id";
         $orderItemstmt = $pdo->prepare($orderItemSql);
@@ -81,6 +75,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                 $productData = $productStmt->fetch(PDO::FETCH_ASSOC);
         
                 echo "<tr>";
+                echo "<td><div>{$typeData['name']}</div></td>";
                 echo "<td><div>{$cuisineData['name']}</div></td>";
                 echo "<td><div>{$categoryData['name']}</div></td>";
                 echo "<td><div>{$productData['name']}</div></td>";
@@ -107,14 +102,7 @@ include('footer.php');
 <script>
 // JavaScript code for printing
 document.getElementById("printButton").addEventListener("click", function() {
-    // Hide the Print button
-    document.getElementById("printButton").style.display = "none";
-    
-    // Print the page
     window.print();
-    
-    // Restore the Print button after printing
-    document.getElementById("printButton").style.display = "block";
 });
 </script>
 <style>
@@ -132,22 +120,13 @@ table th, table td {
 table th {
     background-color: #f2f2f2;
 }
-
+.orderdetails {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 /* Style for the Print button */
 #printButton {
     margin-top: 20px;
 }
     </style>
-<style media="print">
-    /* Hide menu and other non-essential elements when printing */
-    header, nav, footer, .menu {
-        display: none;
-    }
-    @media print {
-        /* Increase font size for printed page */
-        body {
-            font-size: 100px; /* Adjust the font size as needed */
-        }
-    }
-    
-</style>

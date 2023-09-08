@@ -16,11 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $deliveryDate = $_POST['deliverydate']; // Updated Delivery Date
     $priority = $_POST['priority']; // Updated Priority
     $status = $_POST['status']; // Updated Status
-    $des = $_POST['des'];
-    $orderName = $_POST['orderName'];
 
     // Update data in the order table
-    $updateSql = "UPDATE `order` SET branchid = :branchid, orderdate = :orderdate, deliverydate = :deliverydate, priority = :priority, status = :status, description = :description, status = :status, order_name = :order_name WHERE id = :id";
+    $updateSql = "UPDATE `order` SET branchid = :branchid, orderdate = :orderdate, deliverydate = :deliverydate, priority = :priority, status = :status WHERE id = :id";
     $stmt = $pdo->prepare($updateSql);
     $stmt->bindParam(':id', $orderID);
     $stmt->bindParam(':branchid', $branchID);
@@ -28,9 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bindParam(':deliverydate', $deliveryDate);
     $stmt->bindParam(':priority', $priority);
     $stmt->bindParam(':status', $status);
-    $stmt->bindParam(':description', $des);
-    $stmt->bindParam(':order_name', $orderName); 
-    
+
     if (!$stmt->execute()) {
         header("Location: " . $u2 . urlencode('Something went wrong. Please try again later'));
         exit();
@@ -50,11 +46,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $categoryID = $_POST['ca'][$i];
         $quantity = $_POST['qt'][$i];
         $priorityy = $_POST['pr'][$i];
-        $quantitys = $_POST['deliveryqt'][$i];
-        $quantit = $_POST['receivedqt'][$i];
+        
 
 
-        $orderItemSql = "INSERT INTO `orderitem` (order_id, productid, cuisineid, typeid, order_qty, categoryid, priority, delivery_qty, received_qty) VALUES (:order_id, :productid, :cuisineid, :typeid, :order_qty, :categoryid, :priority, :delivery_qty, :received_qty)";
+        $orderItemSql = "INSERT INTO `orderitem` (order_id, productid, cuisineid, typeid, order_qty, categoryid, priority) VALUES (:order_id, :productid, :cuisineid, :typeid, :order_qty, :categoryid, :priority)";
         $orderItemStmt = $pdo->prepare($orderItemSql);
         $orderItemStmt->bindParam(':order_id', $orderID);
         $orderItemStmt->bindParam(':productid', $productID);
@@ -63,8 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $orderItemStmt->bindParam(':categoryid', $categoryID);
         $orderItemStmt->bindParam(':order_qty', $quantity);
         $orderItemStmt->bindParam(':priority', $priorityy);
-        $orderItemStmt->bindParam(':received_qty', $quantit);
-        $orderItemStmt->bindParam(':delivery_qty', $quantitys);
 
         $orderItemStmt->execute();
     }
