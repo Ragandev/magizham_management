@@ -27,7 +27,6 @@ if (isset($_GET['id'])) {
     $cuisinedata = $pdo->query("SELECT * FROM `cuisine`WHERE status = 'Active'")->fetchAll(PDO::FETCH_ASSOC);
     $categorydata = $pdo->query("SELECT * FROM `category`WHERE status = 'Active'")->fetchAll(PDO::FETCH_ASSOC);
     $productdata = $pdo->query("SELECT * FROM `product`WHERE status = 'Active'")->fetchAll(PDO::FETCH_ASSOC);
-    $currentDate = date('Y-m-d');
 } else {
     header("Location: orders.php");
     exit();
@@ -41,12 +40,6 @@ if (isset($_GET['id'])) {
     <div class="row">
 
         <input type="hidden" name="orderID" value="<?php echo $orderData['id']; ?>">
-        <div class="col-12 col-md-6 col-lg-3">
-    <div class="form-group">
-        <label for="orderName">Order Name</label>
-        <input type="text" class="form-control" name="orderName" id="orderName"  value="<?php echo $orderData['order_name']; ?>" >
-    </div>
-</div>
         <div class="col-12 col-md-6 col-lg-3">
 
         <div class="form-group">
@@ -63,7 +56,7 @@ if (isset($_GET['id'])) {
         <div class="col-12 col-md-6 col-lg-3">
         <div class="form-group">
             <label for="orderdate">Order Date</label>
-            <input type="date" class="form-control" name="orderdate" id="orderdate" value="<?php echo $orderData['orderdate']; ?>" value="<?= $currentDate ?>" readonly>
+            <input type="date" class="form-control" name="orderdate" id="orderdate" value="<?php echo $orderData['orderdate']; ?>">
         </div>
         </div>
         <div class="col-12 col-md-6 col-lg-3">
@@ -96,12 +89,10 @@ if (isset($_GET['id'])) {
                     </select>
                 </div>
             </div>
-            
             <div class="col-12 ">
                     <label for="">Description</label>
-                    <textarea class="form-control mb-2" name="des" ><?php echo $orderData['description']; ?></textarea>
+                    <textarea class="form-control mb-2" name="des" value="<?php echo $orderData['description']; ?>" ></textarea>
                 </div>
-                
                 </div>
 
 
@@ -121,7 +112,7 @@ if (isset($_GET['id'])) {
                         </select>
                     </div>
                 </div>
-                    <!-- <div class="col-12 col-md-6 col-lg-2">
+                    <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
                         <label for="exampleInputStatus">Type</label>
                         <select class="form-control mb-2" name="ty[]">
@@ -130,8 +121,7 @@ if (isset($_GET['id'])) {
                             <?php endforeach; ?>
                         </select>
                     </div>
-                </div> -->
-                
+                </div>
                  <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
                         <label for="exampleInputStatus">Category</label>
@@ -170,20 +160,10 @@ if (isset($_GET['id'])) {
 
     </div>
     <div class="col-12 col-md-6 col-lg-2">
-                    <label for="">Order_Qty</label>
-                    <input class="form-control mb-2" name="qt[]"  value="<?php echo $od['order_qty']; ?>"readonly>
+                    <label for="">Qty</label>
+                    <input class="form-control mb-2" name="qt[]"  value="<?php echo $od['order_qty']; ?>">
                 </div>
-                <div class="col-12 col-md-6 col-lg-2">
-                    <label for="">Delivery_Qty</label>
-                    <input class="form-control mb-2" name="deliveryqt[]">
-                </div>
-                <div class="col-12 col-md-6 col-lg-2">
-                    <label for="">Received_Qty</label>
-                    <input class="form-control mb-2" name="receivedqt[]">
-                </div>
-                <div class="col-12 col-md-6 col-lg-2">
-    <input type="hidden" name="ty[]" value="11">   
-</div>
+
             </div>
                 <?php } ?>
         </div >
@@ -220,7 +200,16 @@ document.addEventListener('DOMContentLoaded', function() {
                         </select>
                     </div>
                 </div>
-        
+        <div class="col-12 col-md-6 col-lg-2">
+                    <div class="form-group">
+                        <label for="exampleInputStatus"></label>
+                        <select class="form-control mb-2" name="ty[]">
+                            <?php foreach ($typedata as $row): ?>
+                                <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
                 <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
                         <label for="exampleInputStatus"></label>
@@ -259,17 +248,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     <label for=""></label>
                     <input class="form-control mb-2" name="qt[]">
                 </div>
-                <div class="col-12 col-md-6 col-lg-2">
-                    <label for="">Delivery_Qty</label>
-                    <input class="form-control mb-2" name="deliveryqt[]">
-                </div>
-                <div class="col-12 col-md-6 col-lg-2">
-                    <label for="">Received_Qty</label>
-                    <input class="form-control mb-2" name="receivedqt[]">
-                </div>
-                <div class="col-12 col-md-6 col-lg-2">
-    <input type="hidden" name="ty[]" value="11">   
-</div>
             </div>`;
         const newInput = document.createElement('div');
         newInput.innerHTML = inputEle;

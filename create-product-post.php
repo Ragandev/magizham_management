@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // User Data 
     $productname = $_POST['product'];
     $unit = $_POST['unit'];
-    // $stock_qty = $_POST['stock_qty'];
+    $stock_qty = $_POST['stock_qty'];
 
     $price = $_POST['price'];
     $typeid = $_POST['type'];
@@ -60,12 +60,12 @@ if (!empty($img1FileName)) {
     
 
     // Insert data into product table
-    $sql = "INSERT INTO product (name, unit, price, typeid, categoryid, cuisineid, status,  img ) VALUES (:name, :unit,  :price, :typeid, :categoryid, :cuisineid, :status, :img )";
+    $sql = "INSERT INTO product (name, unit, stock_qty, price, typeid, categoryid, cuisineid, status,  img ) VALUES (:name, :unit, :stock_qty,  :price, :typeid, :categoryid, :cuisineid, :status, :img )";
     $stmt = $pdo->prepare($sql);
 
     $stmt->bindParam(':name', $productname);
     $stmt->bindParam(':unit', $unit);
-    // $stmt->bindParam(':stock_qty', $stock_qty);
+    $stmt->bindParam(':stock_qty', $stock_qty);
 
     $stmt->bindParam(':price', $price);
 
@@ -81,19 +81,6 @@ if (!empty($img1FileName)) {
         header("Location: " . $u2 . urlencode('Something Wrong please try again later'));
     } else {
         header("Location: " . $u1 . urlencode('Product Successfully Created'));
-    }
-    if ($typeid == 11) {
-        // Redirect to foodcatalog.php if typeid is 11
-        header("Location: foodcatalog.php");
-        exit();
-    } elseif ($typeid == 12) {
-        // Redirect to products.php if typeid is 12
-        header("Location: products.php");
-        exit();
-    } else {
-        // Handle other typeid values or provide a default redirection
-        header("Location: default-page.php");
-        exit();
     }
 }
 ?>
