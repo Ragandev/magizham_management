@@ -12,6 +12,7 @@ if (!isset($_SESSION['user'])) {
 include('header.php');
 include('menu.php');
 require('db.php');
+
 $orderSql = "SELECT * FROM `order`";
 $orderData = $pdo->query($orderSql);
 
