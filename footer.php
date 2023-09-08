@@ -26,6 +26,17 @@
 <!-- Custom js for this page-->
 <script src="js/dashboard.js"></script>
 <!-- End custom js for this page-->
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/v/dt/dt-1.13.6/datatables.min.js"></script>
+
+
+<script>
+         $(document).ready(function() {
+         $('.table').DataTable();
+    });
+</script>
+
 </body>
 
 </html>
