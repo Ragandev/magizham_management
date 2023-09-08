@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $selectedCategory = $_POST['selectedCategory'];
 
    $query = "SELECT o.id as stock_id, o.date_created as date_created, 
-          b.name as branch_name, t.name as type_name,
+          b.name as branch_name, p.name as product_name, t.name as type_name,
           c.name as cuisine_name, cat.name as category_name
           FROM `stock` o
           JOIN `stockitem` oi ON o.id = oi.stock_id
@@ -19,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           LEFT JOIN `type` t ON oi.type_id = t.id
           LEFT JOIN `cuisine` c ON oi.cuisine_id = c.id
           LEFT JOIN `category` cat ON oi.category_id = cat.id
+          LEFT JOIN `product` p ON oi.product_id = p.id 
           WHERE o.date_created BETWEEN :startDate AND :endDate
           AND t.name = 'Raw Material'"; // Filter for raw material type
 
@@ -65,6 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <th>Stock ID</th>
                 <th>Stock Date</th>
                 <th>Branch Name</th>
+                <th>product Name</th>
                 <th>Type Name</th>
                 <th>Cuisine Name</th>
                 <th>Category Name</th>
@@ -76,6 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <td><?= $row['stock_id'] ?></td>
                     <td><?= $row['date_created'] ?></td>
                     <td><?= $row['branch_name'] ?></td>
+                    <td><?= $row['product_name'] ?></td>
                     <td><?= $row['type_name'] ?></td>
                     <td><?= $row['cuisine_name'] ?></td>
                     <td><?= $row['category_name'] ?></td>
@@ -85,6 +88,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
         </tbody>
     </table>
+    <!-- Export Buttons for All Formats -->
+    <form method="post" action="export-report.php">
+        <input type="hidden" name="csv_data" value="<?= base64_encode(json_encode($reportData)) ?>">
+        <button type="submit" class="btn btn-success">Export</button>
+    </form>
     <?php if(count($reportData) <= 0){ echo "<br> <b class='text-danger'>No Orders Found</b>";} ?>
 </div>
 

@@ -12,6 +12,11 @@ if (!isset($_SESSION['user'])) {
 include('header.php');
 include('menu.php');
 require('db.php');
+
+$orderSql = "SELECT * FROM `order`  WHERE ordertype = 'Food' ";
+$orderData = $pdo->query($orderSql);
+
+
 $logUser = $_SESSION['user'];
 ?>
 <div class="main-box">
@@ -21,6 +26,25 @@ $logUser = $_SESSION['user'];
         </a>
     </div>
     <?php if (!empty($_GET['succ'])): ?>
+
+					  
+                      <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong><?php  echo $_GET['succ'] ?></strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                                        <?php endif ?>
+                                        <?php if (!empty($_GET['err'])): ?>
+                                          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong><?php  echo $_GET['err'] ?></strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>  
+                                        <?php endif ?>
+    <h2 class="mb-3">Food Orders</h2>
+
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <strong><?php  echo $_GET['succ'] ?></strong>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -37,6 +61,7 @@ $logUser = $_SESSION['user'];
         </div>
     <?php endif ?>
     <h2 class="mb-3">Orders</h2>
+
 
 
     <!-- Table for Orders -->
@@ -105,6 +130,8 @@ $logUser = $_SESSION['user'];
     } else {
         echo "Error fetching data";
     }
+
+    
     ?>
 
             if ($orderData) {

@@ -8,6 +8,7 @@ $typedata = $pdo->query("SELECT * FROM `type`WHERE status = 'Active'")->fetchAll
 $cuisinedata = $pdo->query("SELECT * FROM `cuisine`WHERE status = 'Active'")->fetchAll(PDO::FETCH_ASSOC);
 $categorydata = $pdo->query("SELECT * FROM `category`WHERE status = 'Active'")->fetchAll(PDO::FETCH_ASSOC);
 $productdata = $pdo->query("SELECT * FROM `product`WHERE status = 'Active'")->fetchAll(PDO::FETCH_ASSOC);
+$currentDate = date('Y-m-d');
 ?>
 
 <div class="main-box">
@@ -16,7 +17,12 @@ $productdata = $pdo->query("SELECT * FROM `product`WHERE status = 'Active'")->fe
     <form class="forms-sample" method="post" action="create-order-post.php">
         <!-- Branch, Order Date, Delivery Date, Priority, Status fields ... -->
         <div class="row">
-        
+        <div class="col-12 col-md-6 col-lg-3">
+    <div class="form-group">
+        <label for="orderName">Order Name</label>
+        <input type="text" class="form-control" name="orderName" id="orderName">
+    </div>
+</div>
         <div class="col-12 col-md-6 col-lg-3">
                 <div class="form-group">
                     <label for="exampleInputStatus">Branch</label>
@@ -32,7 +38,7 @@ $productdata = $pdo->query("SELECT * FROM `product`WHERE status = 'Active'")->fe
             <div class="col-12 col-md-6 col-lg-3">
                 <div class="form-group">
                     <label for="exampleInputDate">Order Date</label>
-                    <input type="date" class="form-control" name="orderDate" id="exampleInputDate">
+                    <input type="date" class="form-control" name="orderDate" id="exampleInputDate" value="<?= $currentDate ?>" readonly>
                 </div>
             </div>
 <div class="col-12 col-md-6 col-lg-3">
@@ -42,7 +48,7 @@ $productdata = $pdo->query("SELECT * FROM `product`WHERE status = 'Active'")->fe
     </div>
 </div>
 
- 
+
         
          
 <div class="col-12 col-md-6 col-lg-3">
@@ -74,6 +80,15 @@ $productdata = $pdo->query("SELECT * FROM `product`WHERE status = 'Active'")->fe
                     <label for="">Description</label>
                     <textarea class="form-control mb-2" name="des" id="description"></textarea>                </div>
             </div>
+            <div class="col-12 col-md-6 col-lg-3">
+    <div class="form-group">
+        <select class="form-control" name="orderType"  id="orderType" hidden>
+            <option value="Food" selected>Food Order</option>
+            <option value="Raw Material" >Stock Order</option>
+            <!-- Add more options as needed -->
+        </select>
+    </div>
+</div>
           
 
             
@@ -90,7 +105,7 @@ $productdata = $pdo->query("SELECT * FROM `product`WHERE status = 'Active'")->fe
                         </select>
                     </div>
                 </div>
-            <div class="col-12 col-md-6 col-lg-2">
+            <!-- <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
                         <label for="exampleInputStatus">Type</label>
                         <select class="form-control mb-2" name="ty[]">
@@ -99,7 +114,8 @@ $productdata = $pdo->query("SELECT * FROM `product`WHERE status = 'Active'")->fe
                             <?php endforeach; ?>
                         </select>
                     </div>
-                </div>
+                </div> -->
+                
                 <div class="col-12 col-md-6 col-lg-2">
                     <div class="form-group">
                         <label for="exampleInputStatus">Category</label>
@@ -140,6 +156,9 @@ $productdata = $pdo->query("SELECT * FROM `product`WHERE status = 'Active'")->fe
                     <label for="">Qty</label>
                     <input class="form-control mb-2" name="qt[]">
                 </div>
+                <div class="col-12 col-md-6 col-lg-2">
+    <input type="hidden" name="ty[]" value="11">   
+</div>
             </div>
         </div>
         <!-- End of additional product details rows -->
