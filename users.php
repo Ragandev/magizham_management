@@ -57,9 +57,8 @@ $logUser = $_SESSION['user'];
             <th>Actions</th>
             
         </tr> </thead>";
-
         foreach ($userData as $row) {
-            echo "<tbody> <tr>";
+            echo "<tr>";
             echo "<td>" . $row['id'] . "</td>";
             echo "<td>" . $row['name'] . "</td>";
             echo "<td>" . $row['username'] . "</td>";
@@ -69,9 +68,9 @@ $logUser = $_SESSION['user'];
                 <a href='edit-user.php?id=" . $row['id'] . "'><i class=' typcn typcn-edit'></i></a> |
                 <a href='delete-user.php?delete_id=" . $row['id'] . "' class='text-danger' onclick='return confirmDelete()'><i class='  typcn typcn-trash'></i></a>
                 </td>";
-            echo "</tr> </tbody>";
+            echo "</tr>";
         }
-
+        
         echo "</table>";
         echo "</div>";
     } else {

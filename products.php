@@ -67,7 +67,7 @@ $logUser = $_SESSION['user'];
             $catee = $catee->fetch(PDO::FETCH_ASSOC);
             $cusiee = $pdo->query('SELECT name FROM `cuisine` WHERE id="'.$row["cuisineid"].'"');
             $cusiee = $cusiee->fetch(PDO::FETCH_ASSOC);
-            echo "<tbody> <tr>";
+            echo "<tr>";
             echo "<td>" . $row['id'] . "</td>";
             echo "<td>" . $row['name'] . "</td>";
             echo "<td>" . $row['unit'] . "</td>";
@@ -80,7 +80,7 @@ $logUser = $_SESSION['user'];
             echo "<td><a href='view-product.php?id=" . $row['id'] . "'><i class=' typcn typcn-eye '></i></a>";
             echo "<a href='edit-product.php?id=" . $row['id'] . "'><i class=' typcn typcn-edit'></i></a>";
             echo "<a href='delete-product.php?id=" . $row['id'] . "' class='text-danger'><i class='  typcn typcn-trash'></a></td>";
-            echo "</tr> </tbody>";
+            echo "</tr>";
         }
 
         echo "</table>";
