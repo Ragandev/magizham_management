@@ -12,7 +12,7 @@ if (!isset($_SESSION['user'])) {
 include('header.php');
 include('menu.php');
 require('db.php');
-$orderSql = "SELECT * FROM `order`";
+$orderSql = "SELECT * FROM `order`  WHERE ordertype = 'Food' ";
 $orderData = $pdo->query($orderSql);
 
 $logUser = $_SESSION['user'];
@@ -40,7 +40,7 @@ $logUser = $_SESSION['user'];
                     </button>
                   </div>  
                                         <?php endif ?>
-    <h2 class="mb-3">Orders</h2>
+    <h2 class="mb-3">Food Orders</h2>
 
     <?php
 
@@ -89,6 +89,8 @@ $logUser = $_SESSION['user'];
     } else {
         echo "Error fetching data";
     }
+
+    
     ?>
 
 </div>

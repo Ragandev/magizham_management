@@ -5,7 +5,7 @@ require('db.php');
 
 $branchsql = "SELECT * FROM `branch` WHERE status = 'Active'";
 $branchdata = $pdo->query($branchsql);
-
+$productdata = $pdo->query("SELECT * FROM `product`")->fetchAll(PDO::FETCH_ASSOC);
 $typedata = $pdo->query("SELECT * FROM `type`")->fetchAll(PDO::FETCH_ASSOC);
 $categorydata = $pdo->query("SELECT * FROM `category`")->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -50,6 +50,7 @@ $categorydata = $pdo->query("SELECT * FROM `category`")->fetchAll(PDO::FETCH_ASS
                     <?php endforeach; ?>
                 </select>
             </div>
+           
             <div class="form-group">
     <label for="inputStatus">Select Status</label>
     <select class="form-control" name="selectedStatus" id="inputStatus">
@@ -62,6 +63,7 @@ $categorydata = $pdo->query("SELECT * FROM `category`")->fetchAll(PDO::FETCH_ASS
         <option value="Rejected">Rejected</option>
     </select>
 </div>
+
         </div>
         <button type="submit" class="btn btn-primary mr-2">Generate Report</button>
     </form>

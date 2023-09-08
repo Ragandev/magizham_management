@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $selectedCategory = $_POST['selectedCategory'];
 
    $query = "SELECT o.id as waste_id, o.date as date_created, 
-          b.name as branch_name, t.name as type_name,
+          b.name as branch_name, p.name as product_name, t.name as type_name,
           c.name as cuisine_name, cat.name as category_name
           FROM `waste` o
           JOIN `wasteitem` oi ON o.id = oi.waste_id
@@ -19,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           LEFT JOIN `type` t ON oi.type_id = t.id
           LEFT JOIN `cuisine` c ON oi.cuisine_id = c.id
           LEFT JOIN `category` cat ON oi.category_id = cat.id
+          LEFT JOIN `product` p ON oi.product_id = p.id 
           WHERE o.date BETWEEN :startDate AND :endDate";
 
 $params = [':startDate' => $startDate, ':endDate' => $endDate];
@@ -74,6 +75,10 @@ $reportData = $stmt->fetchAll(PDO::FETCH_ASSOC);
             
         </tbody>
     </table>
+    <form method="post" action="export-report.php">
+        <input type="hidden" name="csv_data" value="<?= base64_encode(json_encode($reportData)) ?>">
+        <button type="submit" class="btn btn-success">Export</button>
+    </form>
     <?php if(count($reportData) <= 0){ echo "<br> <b class='text-danger'>No Orders Found</b>";} ?>
 </div>
 

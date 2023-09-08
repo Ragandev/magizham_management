@@ -9,6 +9,7 @@ if (!isset($_SESSION['user'])) {
     header("Location: index.php");
     exit();
 }
+
 include('header.php');
 include('menu.php');
 require('db.php');
@@ -82,6 +83,7 @@ $logUser = $_SESSION['user'];
     } else {
         echo "Error fetching data";
     }
+    
     ?>
 
 </div>
