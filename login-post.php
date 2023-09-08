@@ -3,6 +3,10 @@
     require('db.php');
 
     if (isset($_POST)) {
+
+        $u1 = "counter.php?succ=";
+        $u2 = "counter.php?err=";
+
         $username = $_POST['username'];
         $pass = $_POST['password'];
         
@@ -19,10 +23,10 @@
             session_start();
             $_SESSION['user'] = $user;
 
-            header("Location: users.php");
+            header("Location: dashboard1.php");
             exit();
         } else {
-            echo "Login failed. Invalid username or password.";
+           header("Location: index.php?err=" . urlencode('Invalid Username or Password'));
         }
     }
 ?>

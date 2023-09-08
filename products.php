@@ -58,8 +58,8 @@ $logUser = $_SESSION['user'];
             <th>Cuisine</th>
             <th>Status</th>
             <th>Actions</th>
-        </tr> </thead>";
-
+        </tr> </thead> <tbody>";
+        
         foreach ($productData as $row) {
             $typee = $pdo->query('SELECT name FROM `type` WHERE id="'.$row["typeid"].'"');
             $typee = $typee->fetch(PDO::FETCH_ASSOC);
@@ -67,7 +67,9 @@ $logUser = $_SESSION['user'];
             $catee = $catee->fetch(PDO::FETCH_ASSOC);
             $cusiee = $pdo->query('SELECT name FROM `cuisine` WHERE id="'.$row["cuisineid"].'"');
             $cusiee = $cusiee->fetch(PDO::FETCH_ASSOC);
-            echo "<tr>";
+
+            echo " <tr>";
+
             echo "<td>" . $row['id'] . "</td>";
             echo "<td>" . $row['name'] . "</td>";
             echo "<td>" . $row['unit'] . "</td>";
@@ -80,10 +82,12 @@ $logUser = $_SESSION['user'];
             echo "<td><a href='view-product.php?id=" . $row['id'] . "'><i class=' typcn typcn-eye '></i></a>";
             echo "<a href='edit-product.php?id=" . $row['id'] . "'><i class=' typcn typcn-edit'></i></a>";
             echo "<a href='delete-product.php?id=" . $row['id'] . "' class='text-danger'><i class='  typcn typcn-trash'></a></td>";
-            echo "</tr>";
+
+            echo "</tr> ";
+
         }
 
-        echo "</table>";
+        echo "</tbody></table>";
         echo "</div>";
     } else {
         echo "Error fetching data";

@@ -38,6 +38,7 @@ $logUser = $_SESSION['user'];
     <?php endif ?>
     <h2 class="mb-3">Orders</h2>
 
+
     <!-- Table for Orders -->
     <table id="orderTable" class="table table-hover">
         <thead>
@@ -55,6 +56,56 @@ $logUser = $_SESSION['user'];
             <?php
             $orderSql = "SELECT * FROM `order`";
             $orderData = $pdo->query($orderSql);
+
+    <?php
+
+    if ($orderData) {
+        echo "<div class='table-responsive'>";
+        echo "<table class='table table-hover'>";
+        echo "<thead> <tr>
+            <th> ID</th>
+            <th> Branch</th>
+            <th> Order Date</th>
+            <th> Delivery Date</th>
+            <th>priority</th>
+            <th>Status</th>
+            <th>Action</th>
+            <th></th>
+        </tr> </thead>";
+
+        foreach ($orderData as $row) {
+            $branchee = $pdo->query('SELECT name FROM `branch` WHERE id="'.$row["branchid"].'"');
+            $branchee = $branchee->fetch(PDO::FETCH_ASSOC);
+            echo "<tbody> <tr>";
+            echo "<td>" . $row['id'] . "</td>";
+            echo "<td>" . $branchee['name']. "</td>";
+
+            echo "<td>" . $row['orderdate'] . "</td>";
+            echo "<td>" . $row['deliverydate'] . "</td>";
+            echo "<td>" . $row['priority'] . "</td>";
+            echo "<td>" . $row['status'] . "</td>";
+            
+            echo "<td>
+            <a href='edit-order.php?id=" . $row['id'] . "'><i class=' typcn typcn-edit'></i></a> | 
+            <a href='delete-order.php?delete_id=" . $row['id'] . "' class='text-danger' onclick='return confirmDelete()'><i class='  typcn typcn-trash'></i></a>
+            <a href='view-order.php?id=" . $row['id'] . "'><i class='typcn typcn-eye'></i></a>
+        </td>";
+        echo "<td>
+                <a href='print-order.php?id=" . $row['id'] . "' target='_blank'><i class='typcn typcn-print'></i></a>
+            </td>";
+    
+
+
+
+            echo "</tr> </tbody>";
+        }
+
+        echo "</table>";
+        echo "</div>";
+    } else {
+        echo "Error fetching data";
+    }
+    ?>
 
             if ($orderData) {
                 foreach ($orderData as $row) {
